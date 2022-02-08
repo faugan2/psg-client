@@ -1,0 +1,55 @@
+.forget_login_details{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    font-size: 0.8rem;
+    justify-content:center;
+    position:relative;
+
+    >.btn_close{
+        position:absolute;
+        bottom:0;
+        
+    }
+    
+    >p{
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    >h2{
+        text-align: center;
+    }
+    >.line{
+        margin-top: 1rem;
+        >label{
+            font-weight: bold;
+        }
+        >p{
+            text-align: center;
+            font-weight: bold;
+        }
+        >div{
+            display:flex;
+            align-items:center;
+            background-color:#e8e8e8;
+            >input{
+                padding:0.5rem;
+                border:none;
+                outline:none;
+                background-color:#e8e8e8;
+                flex:1;
+            }
+        }
+
+        >button{
+            padding:0.5rem;
+            width:120px;
+            background-color:indianred;
+            color:white;
+            border:none;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+    }
+}

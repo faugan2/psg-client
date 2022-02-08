@@ -1,0 +1,101 @@
+.line_join{
+    min-height: 50vh;
+    max-height: 80vh;
+    overflow:auto;
+    display:flex;
+    flex-direction:column;
+
+   .a_line{
+        >p{
+            font-size: 0.7rem;
+            background-color:black;
+            width:80px;
+            margin:auto;
+            color:white;
+            padding:0.3rem;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-weight: bold;
+
+        }
+   }
+
+    >button{    
+        width:100px;
+        margin:auto;
+    }
+
+    >.info{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-direction:column;
+        font-size: 0.8rem;
+        font-weight:bold;
+    }
+
+    >.line_join_bottom{
+        position:fixed;
+        bottom:0;
+        background-color:black;
+        opacity:0.8;
+        width:100%;
+        height: 50px;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        >button{
+            margin:0.5rem;
+            background-color:whitesmoke;
+            padding:0.3rem;
+            font-size: 0.7rem;
+            font-weight:600;
+            border:1px solid silver;
+            border-radius: 3px;
+        }
+
+        >button:first-child{
+            
+            width:30px;
+            height:30px;
+            border-radius: 50%;
+            border:none;
+            padding:0;
+            background-color:indianred;
+            color:white;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+
+        >button:nth-child(2){
+            background-color:transparent;
+            color:white;
+            border:none;
+        }
+
+        >button:nth-child(3){
+            background-color:transparent;
+            color:white;
+            
+        }
+
+        >button:nth-child(4){
+            width:40px;
+            height:40px;
+            border-radius: 50%;
+            border:none;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background-color:green;
+            color:white;
+        }
+    }
+
+    .match:last-child{
+        margin-bottom: 60px;
+        border-bottom: none;
+    }
+}

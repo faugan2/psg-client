@@ -1,0 +1,16 @@
+.challenge_date_line{
+    display:flex;
+    padding:0 1rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    background-color: white;
+    >p{
+        font-size: 0.7rem;
+    }
+
+    > button{
+        border:none;
+        background-color: white;
+    }
+}

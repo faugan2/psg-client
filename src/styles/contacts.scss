@@ -1,0 +1,11 @@
+.contacts{
+    background-color:#e8e8e8;
+    >.info{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        font-weight:bold;
+    }
+}

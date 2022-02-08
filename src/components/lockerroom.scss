@@ -1,0 +1,42 @@
+.lockerroom_bottom{
+    position:fixed;
+    bottom:0;
+    background-color:black;
+    height:60px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    button{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex:1;
+        margin:0.5rem;
+        font-size: 0.7rem;
+        color:gray;
+        background-color: black;
+        border:none;
+        border-bottom: 1px solid silver;
+
+        
+    }
+
+    button.active{
+        border-bottom: 1px solid whitesmoke;
+        font-weight: bold;
+        color:whitesmoke;
+    }
+    
+}
+
+.lockerroom_stats{
+    position:fixed;
+    top:40px;
+    background-color: white;
+    width: 100%;
+    border-bottom: 1px solid silver;
+    
+}

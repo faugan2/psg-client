@@ -1,0 +1,74 @@
+.game_item{
+    height:260px;
+    background-color:white;
+    border:none;
+    border-radius:5px;
+    font-size: 0.8rem;
+   
+
+    >button{
+        
+        border:none;
+        background-color:black;
+        width:1.6rem;
+        height:1.6rem;
+        color:white;
+        border-radius: 50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        margin:auto;
+        margin-top: 1rem;
+
+        
+    }
+
+    >.head{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        text-align: center;
+        border-bottom: 1px solid silver;
+        padding-bottom: 0.2rem;
+        >h1{
+            font-size:0.8rem;
+            margin-top: 0.5rem;
+        }
+        >p{
+            font-size:0.7rem;
+            color:gray;
+        }
+
+        >img{
+            width:100%;
+            height:100px;
+            margin:0;
+        }
+    }
+
+    >.body{
+        margin-top: 1rem;
+        padding:0.2rem;
+        >div{
+            display:flex;
+            align-items:center;
+            justify-content: space-between;
+            margin-bottom:0.2rem;
+            >p:first-child{
+                font-size:0.7rem;
+                font-weight: 500;
+            }
+
+            >p:last-child{
+                font-size: 0.7rem;
+            }
+
+            >p.entry{
+                color:green;
+            }
+        }
+
+      
+    }
+}

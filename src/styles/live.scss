@@ -1,0 +1,38 @@
+.live{
+    background-color:#e8e8e8;
+   >.info{
+       display:flex;
+       align-items:center;
+       justify-content:center;
+       padding:0.5rem;
+       font-size: 0.8rem;
+       font-weight:bold;
+   }
+   >.live_body{
+       margin-bottom: 100px;
+       >div{
+           
+           display:flex;
+           flex-direction:column;
+           margin-bottom: 0;
+
+           >p{
+               text-align: center;
+               font-size: 0.7rem;
+               font-weight: bold;
+               background-color:black;
+               color:whitesmoke;
+               width:80px;
+               margin:auto;
+               margin-top: 1rem;
+               padding:0.3rem;
+           }
+       }
+
+       >div:last-child{
+           
+           margin-bottom: 90px;
+       }
+   }
+}
+

@@ -1,0 +1,31 @@
+.date_picker{
+    >div{
+        >div:first-child{
+            display:none;
+        }
+
+        >div:last-child{
+            display:none;
+        }
+        >div{
+           
+            >div{
+                >span{
+                    display:none;
+                }
+                >div{
+                    
+                    >div{
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        >div{
+                            font-size: 0.7rem;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+.game_liste{
+    display:flex;
+    justify-content:center;
+    margin-top: 1rem;
+    flex-direction: column;
+    align-items: center;
+
+    >h1{
+        font-size: 1rem;
+        text-align: center;
+        margin-bottom: 0.8rem;
+    }
+    
+    
+    >.empty{
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight:bold;
+    }
+   >.games{
+       display:grid;
+       grid-template-columns: 150px 150px;
+       grid-gap:1rem;
+   }
+}
