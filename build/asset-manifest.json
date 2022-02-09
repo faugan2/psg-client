@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.90c1705a.chunk.css",
+    "main.css": "/static/css/main.280470a0.chunk.css",
     "main.js": "/static/js/main.1f7ab261.chunk.js",
     "main.js.map": "/static/js/main.1f7ab261.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.7545a8a1.js",
@@ -10,7 +10,7 @@
     "static/js/2.208a3b30.chunk.js.map": "/static/js/2.208a3b30.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.3f2d425d.chunk.css.map": "/static/css/2.3f2d425d.chunk.css.map",
-    "static/css/main.90c1705a.chunk.css.map": "/static/css/main.90c1705a.chunk.css.map",
+    "static/css/main.280470a0.chunk.css.map": "/static/css/main.280470a0.chunk.css.map",
     "static/js/2.208a3b30.chunk.js.LICENSE.txt": "/static/js/2.208a3b30.chunk.js.LICENSE.txt",
     "static/media/baseball.e8ec0703.png": "/static/media/baseball.e8ec0703.png",
     "static/media/basketball.10dd6782.png": "/static/media/basketball.10dd6782.png",
@@ -23,7 +23,7 @@
     "static/js/runtime-main.7545a8a1.js",
     "static/css/2.3f2d425d.chunk.css",
     "static/js/2.208a3b30.chunk.js",
-    "static/css/main.90c1705a.chunk.css",
+    "static/css/main.280470a0.chunk.css",
     "static/js/main.1f7ab261.chunk.js"
   ]
 }

@@ -47,7 +47,7 @@ const FavoriteItem=({favorite,click})=>{
                     <p>{type}</p>
                 </div>
                 <div>
-                    <p>MW</p>
+                    <p>Mode</p>
                     <p>{mode}</p>
                 </div>
                 <div>
