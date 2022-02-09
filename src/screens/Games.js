@@ -15,13 +15,19 @@ import Live from "../components2/Live";
 import History from "../components2/History";
 import Contacts from "../components2/Contacts";
 import Chat from "../components2/Chat"
+import { BottomSheet } from 'react-spring-bottom-sheet'
 const Games=()=>{
     const [sport,set_sport]=useState(null);
     const [page,set_page]=useState(1);
+    const [open,set_open]=useState(false);
 
     const history=useHistory();
     const dispatch=useDispatch();
     const s=useSelector(selectSport);
+
+    const close_modal=()=>{
+        set_open(false);
+    }
     
 
     useEffect(()=>{
@@ -41,6 +47,10 @@ const Games=()=>{
     },[])
 
     const change_page=(index)=>{
+        if(index==5){
+            set_open(true);
+            return;
+        }
         const btns=document.querySelectorAll(".games_btn");
         for(var i=0; i<btns.length; i++){
             const btn=btns[i];
@@ -48,7 +58,10 @@ const Games=()=>{
         }
         btns[index-1].classList.add("active");
         set_page(index);
+
+       
     }
+    
     return(
         <div className="games">
             <div className="head">
@@ -99,6 +112,10 @@ const Games=()=>{
                     
                 </div>
             </div>
+
+            <BottomSheet open={open}>
+                <Chat click={close_modal}/>
+            </BottomSheet>
         </div>
     );
 }

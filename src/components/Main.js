@@ -167,9 +167,10 @@ const Main=()=>{
 		history.push("/challenge-friend");
 	}
 
-    return(
-        
+  
 
+    //console.log("here we go then h");
+    return(
 <div style={{position:"relative",backgroundColor:"#e8e8e8"}}>
 <Header onGames_drawer_closed={onGames_drawer_closed} index={index} />
 <SwipeableViews enableMouseEvents index={index} onChangeIndex={handleChangeIndex}>

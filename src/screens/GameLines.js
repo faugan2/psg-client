@@ -6,7 +6,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {baseball,basketball,hockey,football} from "../components/data";
 import {useHistory} from "react-router-dom";
 import Line from "../components2/Line";
-import DatePicker from "../components/DatePicker";
+import DatePicker from "../components2/DatePicker";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import firebase from "firebase";
 import {db} from "../firebase_file";
@@ -83,7 +83,7 @@ const GameLines=()=>{
 
 
     useEffect(()=>{
-        if(line==null || t==null) return;
+        if(line==null) return;
         const game_type=line.type;
         const game_mode=line.mode;
         const game_entry=line.entry;
@@ -150,6 +150,7 @@ const GameLines=()=>{
         delete new_line.fee;
         console.log("creating...");
         set_creating(true);
+        
         db.collection("psg_challenges").add(new_line).then(()=>{
             console.log("created");
             set_create(false);
@@ -161,7 +162,7 @@ const GameLines=()=>{
         })
 
         
-      },[create,creating])
+      },[create])
 
      
 

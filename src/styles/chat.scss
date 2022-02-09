@@ -32,6 +32,12 @@
             background-color: green;
             margin-right: 0.5rem;
         }
+
+        >button:first-child{
+            background-color:indianred;
+            color:white;
+            margin-left: 0.5rem;
+        }
     }
 
     >.chat_content{
