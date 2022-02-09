@@ -35,8 +35,9 @@ const Leagues=()=>{
     useEffect(()=>{
         if(auth.currentUser==null){
             history.replace("/");
+            return;
         }
-        set_username(auth?.currentUser.displayName);
+        set_username(auth?.currentUser?.displayName);
     },[auth])
     return (
         <div className="container">
