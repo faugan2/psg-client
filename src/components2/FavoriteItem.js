@@ -18,7 +18,7 @@ const FavoriteItem=({favorite,click})=>{
         entry=favorite.entry;
     }
     return (
-        <div className="favorite_item" onClick={click}>
+        <div className="favorite_item" >
             <div className="top">
                 <div>
                     {favorite.sport=="6" && <img src={baseball} />}
@@ -30,12 +30,15 @@ const FavoriteItem=({favorite,click})=>{
                         <p>{favorite?.league_name}</p>
                     </div>
                 </div>
-                <button>
-                    Go Public
-                </button>
-                <button>
-                    Invite
-                </button>
+                <div>
+                    <button onClick={click}>
+                        Play Public
+                    </button>
+                    <button>
+                        Invite Friends
+                    </button>
+                </div>
+                
                
             </div>
             <div className="bottom">

@@ -10,7 +10,9 @@ import FavoriteGames from "./FavoriteGames";
 const Leagues=()=>{
     const l=useSelector(selectLeagues);
     const s=useSelector(selectSports);
+
     const [leagues,set_leagues]=useState([]);
+    const [username,set_username]=useState("");
 
     const dispatch=useDispatch();
     const history=useHistory();
@@ -34,10 +36,11 @@ const Leagues=()=>{
         if(auth.currentUser==null){
             history.replace("/");
         }
+        set_username(auth?.currentUser.displayName);
     },[auth])
     return (
         <div className="container">
-            <h1>Hello, {auth?.currentUser.displayName}</h1>
+            <h1>Hello, {username}</h1>
             <p>Which game do you want to play in?</p>
         <div className="leagues">
             {

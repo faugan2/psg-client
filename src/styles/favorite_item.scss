@@ -26,6 +26,22 @@
     
             }
         }
+
+        >div:last-child{
+           
+            >button{
+                border:1px solid silver;
+                font-size: 0.7rem;
+                width:90px;
+                display:flex;
+                align-items: center;
+                justify-content: center;
+                padding:0.5rem;
+                border-radius: 3px;
+                margin-bottom: 0.2rem;
+                background-color: white;
+            }
+        }
         
 
         

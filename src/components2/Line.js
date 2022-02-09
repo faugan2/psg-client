@@ -79,9 +79,7 @@ const Line=({line,click})=>{
                 click(e,line)
             }}>{join}</button>
 
-        <button ref={ref} onClick={e=>{
-                click(e,line)
-            }}>Friend</button>
+        
         </div>
     )
 }
