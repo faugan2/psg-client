@@ -2,20 +2,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectActiveTab, selectTournaments, selectTab,setTab, setActiveTab, setPage,setHeaderTab,selectHeaderTab, selectUsers, setSelectedPlayer, setScreenHeight, setHeaderHeight,setInvitedFriends,setFriendChallenged, selectSports } 
 from "../features/counterSlice";
 import { auth } from "../firebase_file";
-import Footer from "./Footer";
 import { useEffect, useState } from "react";
-import Lobby from "./Lobby";
-import Games from "./Games";
-import Live from "./Live";
-import Friends from "./Friends";
-import Profile from "./Profile";
+import Lobby from "../components/Lobby";
+import Games from "../components/Games";
+import Live from "../components/Live";
+import Friends from "../components/Friends";
+import Profile from "../components/Profile";
 import { useHistory } from "react-router-dom";
 
-import Nav from "./Nav";
-import Top from "./Top";
+import Nav from "../components/Nav";
+import Top from "../components/Top";
 import '@fontsource/roboto';
 
-import Header from "./Header2";
+import Header from "../components/Header2";
 import SwipeableViews from 'react-swipeable-views';
 
 import Fab from '@material-ui/core/Fab';

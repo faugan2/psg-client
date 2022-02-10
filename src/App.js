@@ -6,7 +6,7 @@ import { selectPage } from './features/counterSlice';
 
 import Splash from "./components/Splash";
 import Login from "./components/Login";
-import Main from "./components/Main";
+import Main from "./screens/Main";
 import SignIn from "./components/SignIn";
 import PlayerPicks from "./components/PlayerPicks";
 

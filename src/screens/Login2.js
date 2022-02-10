@@ -9,6 +9,7 @@ import ForgetLoginDetails from "../components/ForgetLoginDetails";
 import {useHistory} from "react-router-dom";
 import {db,auth} from "../firebase_file";
 import firebase from "firebase";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 // here we go with thi updates in the login page
 const Login=()=>{
@@ -17,7 +18,10 @@ const Login=()=>{
     const ref_pw=useRef(null);
     const [open,set_open]=useState(false)
     const [alerte,set_alerte]=useState("");
+    const [progressing,set_progressing]=useState(false);
+
     const history=useHistory();
+    
 
 
     const close_modal=()=>{
@@ -86,6 +90,7 @@ const Login=()=>{
        const btn=e.target;
        btn.disabled=true;
        btn.innerHTML="Please wait...";
+       
 
        auth.signInWithEmailAndPassword(email,password).then(()=>{
             history.replace("/");
@@ -97,6 +102,7 @@ const Login=()=>{
     }
 
     const login_with_google=(e)=>{
+        set_progressing(true);
         const btn=e.target;
         var provider = new firebase.auth.GoogleAuthProvider();
         auth.signInWithPopup(provider).then(async (res)=>{
@@ -113,12 +119,13 @@ const Login=()=>{
                 await auth.currentUser.delete();
                 await auth.signOut();
                 history.replace("/");
+                
             }
             
         }).catch((err)=>{
             btn.disabled=false;
             btn.style.opacity="1";
-            
+            set_progressing(false);
             set_alerte(err.message)
         })
     }
@@ -174,6 +181,7 @@ const Login=()=>{
                     </div>
 
                     <div className="provider_zone">
+                        {progressing==true && <CircularProgress size={15} style={{color:"black"}} />}
                         <button onClick={login_with_google}>
                             <GoogleIcon />
                             Log In with Google

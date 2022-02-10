@@ -12,7 +12,7 @@ import {auth, db } from "../firebase_file";
 import firebase from "firebase";
 import {useDispatch, useSelector} from "react-redux";
 import {setRegisterInfo} from "../features/counterSlice";
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 const Login=()=>{
     const ref_email=useRef(null);
     const ref_pw=useRef(null);
@@ -20,6 +20,8 @@ const Login=()=>{
     const [open,set_open]=useState(false)
     const history=useHistory();
     const [alerte,set_alerte]=useState("");
+    const [progressing,set_progressing]=useState(false);
+
     const dispatch=useDispatch();
 
     const close_modal=()=>{
@@ -137,7 +139,7 @@ const Login=()=>{
         btn.disabled=true;
         btn.style.opacity="0.6";
        
-
+        set_progressing(true);
         try{
             const res=await auth.signInWithPopup(provider);
            
@@ -150,6 +152,7 @@ const Login=()=>{
                 
                 btn.disabled=false;
                 btn.style.opacity="1";
+                set_progressing(false);
             }else{
 
                 await db.collection("psg_users").add({
@@ -177,6 +180,7 @@ const Login=()=>{
             btn.disabled=false;
             btn.style.opacity="1";
             set_alerte(err.message)
+            set_progressing(false);
         }
     }
 
@@ -232,6 +236,7 @@ const Login=()=>{
                     </div>
 
                     <div className="provider_zone">
+                        {progressing===true && <CircularProgress size={15} style={{color:"black"}} />}
                         <button onClick={register_with_google}>
                             <GoogleIcon />
                             Sign Up with Google
