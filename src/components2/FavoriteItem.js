@@ -43,20 +43,23 @@ const FavoriteItem=({favorite,click})=>{
             </div>
             <div className="bottom">
                 <div>
-                    <p>Heads Up</p>
                     <p>{type}</p>
+                    <p>Type</p>
+                    
                 </div>
                 <div>
-                    <p>Mode</p>
+                    
                     <p>{mode}</p>
+                    <p>Mode</p>
                 </div>
                 <div>
                     <p>{favorite.number_game}</p>
                     <p>#Games</p>
                 </div>
                 <div>
-                    <p>Free</p>
+                    
                     <p>{entry}</p>
+                    <p>Entry</p>
                 </div>
             </div>
         </div>
