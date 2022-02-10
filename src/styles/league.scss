@@ -1,14 +1,17 @@
 .league{
     background-color:white;
     
-    height:150px;
+    height:180px;
     font-size: 0.8rem;
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
+    
+    
     border:none;
     border-radius:5px;
+    position:relative;
+   
 
     >img{
         width:60px;
@@ -30,5 +33,29 @@
         justify-content:center;
         margin-top:1rem;
 
+    }
+
+    >.bottom{
+        position:absolute;
+        bottom:0.1rem;
+       
+        width:100%;
+        height: 30px;
+        display:flex;
+        align-items: center;
+        border-top: 1px solid silver;
+        padding-top: 0.3rem;
+        
+        >button{
+            flex:1;
+            
+            font-size: 0.6rem;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-items: center;
+            background-color: transparent;
+            border:none;
+        }
     }
 }

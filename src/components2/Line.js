@@ -7,7 +7,7 @@ import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const moment=require("moment-timezone");
 const Line=({line,click,no_games})=>{
-    console.log("no games is ",no_games)
+    console.log("no games is ",line.key,no_games)
     //console.log(line.key);
 
     const picks=useSelector(selectPicks);
@@ -17,12 +17,13 @@ const Line=({line,click,no_games})=>{
    const [total_players,set_total_players]=useState("");
    const [players,set_players]=useState("");
    const [btn_disabled,set_btn_disabled]=useState(false);
-   const [status,set_status]=useState("Open");
+   const [status,set_status]=useState(no_games==true?"Open":"Closed");
    const [join,set_join]=useState("Join");
    const [joined,set_joined]=useState(false);
 
    const key=line.key;
    const type=line.type;
+   
    
 
    useEffect(()=>{
@@ -69,18 +70,18 @@ const Line=({line,click,no_games})=>{
         }
    },[total_players])
 
-   useEffect(()=>{
+   /*useEffect(()=>{
     if(no_games==true){
         set_status("Closed");
         
         if(joined==false){
-            console.log("oh here we go")
-            const btn=document.querySelectorAll(".line_join2 button");
+            console.log("oh here we go",ref.current);
+            //ref.current.disabled=true; 
            // btn[1].style.border="1px solid red";
         }
         
     }
-   },[joined])
+   },[joined,no_games])*/
 
   
    
@@ -99,7 +100,7 @@ const Line=({line,click,no_games})=>{
             
             
             <button 
-             className={`${joined==true? "joined_game":""}`}
+             className={`${joined==true? "joined_game":"not_joined"} ${no_games==true?"no_games_true":"no_games_false"}`}
              data-joined={joined}
 
             ref={ref} onClick={e=>{
@@ -109,6 +110,8 @@ const Line=({line,click,no_games})=>{
                
                style={{fontSize:"1.2rem"}}/>}
                 {joined == false && join }
+               
+                
             </button>
 
         

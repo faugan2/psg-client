@@ -5,7 +5,7 @@ import { selectTournaments,selectPicks,selectUsers } from "../features/counterSl
 import {auth, db} from "../firebase_file";
 import Contact from "./Contact";
 
-const Contacts=()=>{
+const Contacts=({click})=>{
     const t=useSelector(selectTournaments);
     const picks=useSelector(selectPicks);
     const u=useSelector(selectUsers);
@@ -65,7 +65,7 @@ const Contacts=()=>{
                 contacts.length>0 && <div>
                     {
                         contacts.map((item,i)=>{
-                            return <Contact key={i} user={item} />
+                            return <Contact key={i} user={item} click={click}/>
                         })
                     }
                 </div>

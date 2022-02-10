@@ -41,4 +41,8 @@
         border:none;
     }
 
+    >button.not_joined.no_games_true{
+        opacity: 0;
+    }
+
 }

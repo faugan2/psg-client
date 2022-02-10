@@ -39,6 +39,16 @@ const Leagues=()=>{
         }
         set_username(auth?.currentUser?.displayName);
     },[auth])
+
+    const go_to_invites=(e)=>{
+        e.stopPropagation();
+        console.log("going to invites")
+    }
+
+    const go_to_messages=(e)=>{
+        e.stopPropagation();
+        console.log("going to messages");
+    }
     return (
         <div className="container">
             <h1>Hello, {username}</h1>
@@ -47,7 +57,13 @@ const Leagues=()=>{
             {
                 leagues.map((league)=>{
                     return(
-                        <League league={league} key={league.key} click={go_to_games.bind(this,league)} />
+                        <League 
+                        league={league} 
+                        key={league.key} 
+                        click={go_to_games.bind(this,league)}
+                        go_to_invites={go_to_invites}
+                        go_to_messages={go_to_messages}
+                        />
                     );
                 })
             }

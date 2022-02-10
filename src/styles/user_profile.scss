@@ -1,0 +1,32 @@
+.user_profile{
+    
+    min-height: 70vh;
+    
+    >.user_profile_bottom{
+        position:fixed;
+        bottom:0;
+        background-color: rgba($color: #000000, $alpha: 0.7);
+        width:100%;
+        display:flex;
+        align-items: center;
+        height: 50px;
+        
+        >button{
+            flex:1;
+            font-size: 0.7rem;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color:white;
+            background-color: transparent;
+            border:none;
+           
+        }
+
+        >button.active{
+            border-bottom: 2px solid white;
+            
+        }
+    }
+}

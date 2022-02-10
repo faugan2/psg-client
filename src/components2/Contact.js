@@ -1,9 +1,9 @@
 import "../styles/contact.scss";
 
-const Contact=({user})=>{
+const Contact=({user,click})=>{
     console.log("we got ",user)
     return (
-        <div className="contact">
+        <div className="contact" onClick={click.bind(this,user)}>
             <img src={user.photo} />
             <div>
                 <p>{user.username}</p>

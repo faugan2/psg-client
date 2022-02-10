@@ -16,10 +16,15 @@ import History from "../components2/History";
 import Contacts from "../components2/Contacts";
 import Chat from "../components2/Chat"
 import { BottomSheet } from 'react-spring-bottom-sheet'
+import TimelineIcon from '@material-ui/icons/Timeline';
+import LockerRoom from "../components2/LockerRoom";
+import UserProfile from "../components2/UserProfile";
+
 const Games=()=>{
     const [sport,set_sport]=useState(null);
     const [page,set_page]=useState(1);
     const [open,set_open]=useState(false);
+    const [open_profile,set_open_profile]=useState(false);
 
     const history=useHistory();
     const dispatch=useDispatch();
@@ -27,6 +32,9 @@ const Games=()=>{
 
     const close_modal=()=>{
         set_open(false);
+    }
+    const close_modal_profile=()=>{
+        set_open_profile(false);
     }
     
 
@@ -47,7 +55,7 @@ const Games=()=>{
     },[])
 
     const change_page=(index)=>{
-        if(index==5){
+        if(index==6){
             set_open(true);
             return;
         }
@@ -61,9 +69,17 @@ const Games=()=>{
 
        
     }
+
+    const set_open_modal_profile=(user)=>{
+        console.log("the user is ",user.email);
+        set_open_profile(true);
+    }
     
     return(
         <div className="games">
+             <button  className="chat_btn" onClick={change_page.bind(this,6)}>
+                <ForumIcon style={{color:"white",fontSize:"1.2rem"}} />
+            </button>
             <div className="head">
                 <div>
                     <button onClick={go_back}>
@@ -84,8 +100,9 @@ const Games=()=>{
                 {page==1 && <GameListe />}
                 {page==2 && <Live />}
                 {page==3 && <History />}
-                {page==4 && <Contacts />}
-                {page==5 && <Chat />}
+                {page==4 && <LockerRoom />}
+                {page==5 && <Contacts click={set_open_modal_profile}/>}
+                
             </div>
             <div className="games_footer">
                 <div className="menu">
@@ -101,20 +118,29 @@ const Games=()=>{
                         <HistoryIcon style={{color:"gray",fontSize:"1.2rem"}} />
                         History
                     </button>
-                    <button  className="games_btn" onClick={change_page.bind(this,4)}>
+
+                    <button  className="games_btn"  onClick={change_page.bind(this,4)}>
+                        <TimelineIcon style={{color:"gray",fontSize:"1.2rem"}} />
+                        Locker Room
+                    </button>
+
+                    <button  className="games_btn" onClick={change_page.bind(this,5)}>
                         <PermContactCalendarIcon style={{color:"gray",fontSize:"1.2rem"}} />
                         Contacts
                     </button>
-                    <button  className="games_btn" onClick={change_page.bind(this,5)}>
-                        <ForumIcon style={{color:"gray",fontSize:"1.2rem"}} />
-                        Chat
-                    </button>
+                    
                     
                 </div>
             </div>
 
+           
+
             <BottomSheet open={open}>
                 <Chat click={close_modal}/>
+            </BottomSheet>
+
+            <BottomSheet open={open_profile}>
+                <UserProfile click={close_modal_profile}/>
             </BottomSheet>
         </div>
     );

@@ -1,0 +1,13 @@
+.locker_room{
+    font-size: 0.8rem;
+
+    >.info{
+        display:flex;
+        align-items: center;
+        justify-content:center;
+        text-align: center;
+        font-weight: bold;
+
+        margin-top: 0.5rem;
+    }
+}

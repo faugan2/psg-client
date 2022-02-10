@@ -60,12 +60,13 @@ const GameLines=()=>{
 
         const res2=res.filter((item)=>{
             const start=moment.tz(item.commence,tz);
-            const today=moment.tz(new Date(),tz);
+            const today=moment.tz(game_date,tz);
             const diff=start.diff(today,"seconds");
             
             const str_start=start.format("ll");
             const str_today=today.format("ll");
-            console.log(str_start,str_today);
+            console.log("today is ",str_today);
+            //console.log(str_start,str_today);
             return diff >=0 && str_start==str_today;
 
         })
@@ -73,10 +74,12 @@ const GameLines=()=>{
         console.log("RES",res2);
         if(res2.length==0){
             set_no_games(true);
+        }else{
+            set_no_games(false);
         }
         
        
-    },[games])
+    },[games,game_date])
 
     useEffect(()=>{
         set_date(game_date);
@@ -321,6 +324,13 @@ const GameLines=()=>{
                     <p>Please wait...</p>
                     <CircularProgress size={15} style={{color:"black"}}/>
                 </div>
+            }
+
+
+            {
+                no_games==true && <div className="no_games">
+                        <p>No games available for this date</p>
+                    </div>
             }
 
 

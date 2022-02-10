@@ -11,6 +11,8 @@ import EqualizerIcon from '@material-ui/icons/Equalizer';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import JoinedResults from "./JoinedResults";
 import JoinedChat from "./JoinedChat";
+import JoinedConfiguration from "./JoinedConfiguration";
+import SettingsIcon from '@material-ui/icons/Settings';
 const Joined=({click})=>{
 
     const id_challenge=useSelector(selectViewChallenge);
@@ -23,6 +25,7 @@ const Joined=({click})=>{
     const [selected_user,set_selected_user]=useState(null);
     const [user_picks,set_user_picks]=useState(null);
     const [page,set_page]=useState(1);
+    const [results,set_results]=useState(false);
 
 
     useEffect(()=>{
@@ -51,6 +54,16 @@ const Joined=({click})=>{
         })
         
         set_users(res_users);
+
+        console.log("the challenge is ",challenge);
+        if(challenge==null){
+            return;
+        }
+        if(challenge?.winners==undefined){
+            set_results(false)
+        }else{
+            set_results(true);
+        }
         
 
     },[id_challenge,tournaments,picks])
@@ -107,7 +120,8 @@ const Joined=({click})=>{
             </div>}
             
             {(page==1 && user_picks!=null) && <div className="bottom"><UserPicks user_picks={user_picks} /></div>}
-                {(page==2) && <JoinedResults  />}
+                {(page==2 && results==false) && <JoinedConfiguration />}
+                {(page==2 && results==true) && <JoinedResults />}
                 {(page==3) && <JoinedChat  />}
 
             <div className="joined_footer">
@@ -129,8 +143,10 @@ const Joined=({click})=>{
                 onClick={change_page.bind(this,2)}
                 className="joined_action"
             >
-                <EqualizerIcon style={{fontSize:"1.2rem"}}/>
-                Results
+                {results==false && <SettingsIcon style={{fontSize:"1.2rem"}}/>}
+                {results==true && <EqualizerIcon style={{fontSize:"1.2rem"}}/>}
+
+                {results==false? "Settings":"Results"}
             </button>
 
             <button
