@@ -210,8 +210,12 @@ const LineJoin=({click})=>{
 
    
    const quick_picks=(e)=>{
+        dispatch(setSelectedPicks([]));
+        set_picks([]);
        const btns=document.querySelectorAll(".match  button");
-       
+       for(var i=0; i<btns.length; i++){
+           btns[i].classList.remove("active");
+       }
        
       id_inter= setInterval(()=>{
         var index=Math.floor(Math.random()*btns.length);

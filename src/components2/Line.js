@@ -8,6 +8,8 @@ import {auth, db} from "../firebase_file";
 const moment=require("moment-timezone");
 const Line=({line,click})=>{
 
+    console.log(line.key);
+
     const picks=useSelector(selectPicks);
 
     const ref=useRef();

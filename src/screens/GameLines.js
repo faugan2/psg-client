@@ -89,6 +89,7 @@ const GameLines=()=>{
         const game_entry=line.entry;
         const game_number=line.number_game;
         const game_league=line.league;
+        const game_sport=line.sport;
 
         const res=t.filter((item)=>{
             const line_date=moment.tz(item.date?.seconds*1000,tz);
@@ -101,6 +102,7 @@ const GameLines=()=>{
                 item.number_game==game_number && 
                 item.parent==false  &&
                 item.league==game_league && 
+                item.sport==game_sport && 
                 item.challenged!=true   && 
                 item.winners==undefined   && 
                 diff==0   
@@ -110,6 +112,7 @@ const GameLines=()=>{
         
         
 
+        console.log("the res is ",res);
         
         set_data(res);
         set_create(false);
