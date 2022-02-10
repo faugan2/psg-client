@@ -3,7 +3,7 @@ import {useEffect, useState,useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {selectGameDate,selectTimeZone,selectPicks} from "../features/counterSlice";
 import {auth, db} from "../firebase_file";
-
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const moment=require("moment-timezone");
 const Line=({line,click})=>{
@@ -19,6 +19,7 @@ const Line=({line,click})=>{
    const [btn_disabled,set_btn_disabled]=useState(false);
    const [status,set_status]=useState("Open");
    const [join,set_join]=useState("Join");
+   const [joined,set_joined]=useState(false);
 
    const key=line.key;
    const type=line.type;
@@ -45,11 +46,12 @@ const Line=({line,click})=>{
         return item.user;
     })
     if(res2.indexOf(auth?.currentUser.email)>=0){
-        set_join("Joined");
-        ref.current.dataset.joined=true;
+        set_join("View");
+        set_joined(true);
+        //ref.current.dataset.joined=true;
         ref.current.dataset.id_challenge=line.key;
     }else{
-        ref.current.dataset.joined=false;
+       // ref.current.dataset.joined=false;
         ref.current.dataset.id_challenge=line.key;
     }
    },[line,picks])
@@ -58,7 +60,8 @@ const Line=({line,click})=>{
         if(total_players=="" || players=="") return;
         const tp=parseInt(total_players.replace("/",""));
         const p=parseInt(players);
-        if(tp<p){
+
+        if(tp==p){
             set_players(tp);
             set_status("Closed");
         }else{ 
@@ -71,15 +74,23 @@ const Line=({line,click})=>{
         <div className="line_join2" >
             <div>
                 <p>{line?.name}</p>
-                <p>{status}</p>
+                <p className={status.toLowerCase()}>{status}</p>
             </div>
             <div>
                 <p>Players</p>
                 <p>{players}{total_players}</p>
             </div>
-            <button ref={ref} onClick={e=>{
-                click(e,line)
-            }}>{join}</button>
+            <button 
+             className={`${joined==true? "joined_game":""}`}
+             data-joined={joined}
+            ref={ref} onClick={e=>{
+                click(joined,line)
+            }}>
+               {joined==true && <VisibilityIcon 
+               
+               style={{fontSize:"1.2rem"}}/>}
+                {joined == false && join }
+            </button>
 
         
         </div>

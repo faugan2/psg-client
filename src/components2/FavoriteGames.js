@@ -75,15 +75,51 @@ const FavoriteGames=()=>{
 
         })
         
-        if(res4.length>5){
-            const res5=res4.slice(0,5);
+        
+       
+        const res5=res4.map((item)=>{
+            const entry=item.entry;
+            const league=item.league;
+            const type=item.type;
+            const mode=item.mode;
+            const number_game=item.number_game;
+
+           // console.log({entry,league,type,mode,number_game});
+            const res_ch=challenges.map((id)=>{
+                const ch_content=t.filter((j)=>{
+                    return j.key==id;
+                })[0];
+                //console.log(ch_content);
+                if(ch_content.entry==entry && ch_content.league==league && ch_content.type==type && ch_content.mode==mode && ch_content.number_game==number_game){
+                    return id;
+                }
+            })
+
+            const new_res_ch=res_ch.filter((i)=>{
+                return i!=undefined;
+            })
+            return {...item,total:new_res_ch.length};
+        })
+
+        
+
+        res5.sort((a,b)=>(a.total <b.total) ? 1:-1);
+        set_favorites(res5);
+
+        res5.map((item)=>{
+            console.log(item);
+        })
+        /*if(res4.length>5){
+            const res5=res4.slice(0,res4.length);
             set_favorites(res5);
         }else{
             set_favorites(res4);
-        }
+        }*/
         
         
     },[picks,t])
+
+
     const go_to_games=(favorite)=>{
         const res=s.filter((item)=>{
             return item.id==favorite.sport;

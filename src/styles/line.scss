@@ -16,6 +16,10 @@
             font-size: 0.7rem;
             color:green;
         }
+
+        >p.closed{
+            color:indianred;
+        }
     }
     >div:nth-child(2){
         display:flex;
@@ -30,6 +34,11 @@
     >button{
         padding:0.3rem;
         width:60px;
+    }
+
+    >button.joined_game{
+        background-color: transparent;
+        border:none;
     }
 
 }

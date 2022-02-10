@@ -237,11 +237,10 @@ const GameLines=()=>{
       const closed_joined=()=>{
           set_open_joined(false);
       }
-      const join=(e,line)=>{
-        const btn=e.target;
-        const joined=btn.dataset.joined;
-       
-        if(joined=="true"){
+      const join=(joined,line)=>{
+        console.log(joined)
+        
+        if(joined==true){
             dispatch(setViewChallenge(line.key))
             set_open_joined(true);
 
