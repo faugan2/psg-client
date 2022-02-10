@@ -1,6 +1,7 @@
 import "../styles/game_lines.scss";
 import {useSelector,useDispatch} from "react-redux";
-import {selectLine, selectTournaments, selectTimeZone, setGameDate,selectGameDate, setJoin, setSelectedPicks, selectSendingPicks, setViewChallenge} from "../features/counterSlice";
+import {selectLine, selectTournaments, selectTimeZone, setGameDate,selectGameDate, setJoin,
+     setSelectedPicks, selectSendingPicks, setViewChallenge,selectPicks} from "../features/counterSlice";
 import {useEffect, useState,useRef} from "react";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {baseball,basketball,hockey,football} from "../components/data";
@@ -25,7 +26,7 @@ const GameLines=()=>{
     const t=useSelector(selectTournaments);
     const tz=useSelector(selectTimeZone);
     const game_date=useSelector(selectGameDate);
-
+    const picks=useSelector(selectPicks);
    
 
 
@@ -113,17 +114,63 @@ const GameLines=()=>{
         
 
         console.log("the res is ",res);
+        const res2=res.map((item)=>{
+            const id_challenge=item.key;
+            const r=picks.filter((i)=>{
+                return i.id_challenge==id_challenge;
+            })
+            if(r.length==0){
+                return item;
+            }else{
+                return null;
+            }
+        })
         
-        set_data(res);
+        const res3=res2.filter((item)=>{
+            return item!=null;
+        })
+
+        console.log("the res3",res3);
+
+        const res4=res.map((item)=>{
+            const r2=picks.filter((i)=>{
+                return i.id_challenge==item.key;
+            })
+            if(r2.length==0){
+                return item;
+            }
+        }).filter((item)=>{
+            return item!=undefined;
+        })
+
+
+        const res5=res.map((item)=>{
+            const r2=picks.filter((i)=>{
+                return i.id_challenge==item.key;
+            })
+            if(r2.length>0){
+                return item;
+            }
+        }).filter((item)=>{
+            return item!=undefined;
+        })
+
+        
+
+        console.log("element with no picks",res4);
+        console.log("element with picks",res5);
+        const res6=[...res4,...res5];
+        
+        set_data(res6);
         set_create(false);
         set_creating(false);
-        if(res.length==0){
+        if(res3.length==0){
             set_create(true);
         }
 
 
         
-    },[t,line,date]);
+    },[t,line,date,picks]);
 
 
 

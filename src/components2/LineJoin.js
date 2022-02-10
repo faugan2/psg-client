@@ -66,9 +66,27 @@ const LineJoin=({click})=>{
             
             const diff=start.diff(today,"seconds");
             const diff_end=end.diff(today,"seconds");
+            //console.log(start.format("ll"),today.format("ll"),diff,);
             
+            const str_start=start.format("ll");
+            const str_today=today.format("ll");
+           
+            if(str_start==str_today){
+                console.log(str_start,str_today,diff);
+               
+                if(diff>=0){
+                    return true;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+            
+
             return diff>=0 && diff<=diff_end;
         })
+        console.log("all games",res2);
         
         set_data(res2);
         set_loading(false);
