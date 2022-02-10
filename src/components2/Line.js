@@ -6,9 +6,9 @@ import {auth, db} from "../firebase_file";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const moment=require("moment-timezone");
-const Line=({line,click})=>{
-
-    console.log(line.key);
+const Line=({line,click,no_games})=>{
+    console.log("no games is ",no_games)
+    //console.log(line.key);
 
     const picks=useSelector(selectPicks);
 
@@ -69,8 +69,24 @@ const Line=({line,click})=>{
         }
    },[total_players])
 
+   useEffect(()=>{
+    if(no_games==true){
+        set_status("Closed");
+        
+        if(joined==false){
+            console.log("oh here we go")
+            const btn=document.querySelectorAll(".line_join2 button");
+           // btn[1].style.border="1px solid red";
+        }
+        
+    }
+   },[joined])
+
   
+   
     return(
+
+        
         <div className="line_join2" >
             <div>
                 <p>{line?.name}</p>
@@ -80,9 +96,12 @@ const Line=({line,click})=>{
                 <p>Players</p>
                 <p>{players}{total_players}</p>
             </div>
+            
+            
             <button 
              className={`${joined==true? "joined_game":""}`}
              data-joined={joined}
+
             ref={ref} onClick={e=>{
                 click(joined,line)
             }}>

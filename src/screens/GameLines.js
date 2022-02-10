@@ -1,7 +1,7 @@
 import "../styles/game_lines.scss";
 import {useSelector,useDispatch} from "react-redux";
 import {selectLine, selectTournaments, selectTimeZone, setGameDate,selectGameDate, setJoin,
-     setSelectedPicks, selectSendingPicks, setViewChallenge,selectPicks} from "../features/counterSlice";
+     setSelectedPicks, selectSendingPicks, setViewChallenge,selectPicks,selectGames,selectLeagues} from "../features/counterSlice";
 import {useEffect, useState,useRef} from "react";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {baseball,basketball,hockey,football} from "../components/data";
@@ -27,6 +27,8 @@ const GameLines=()=>{
     const tz=useSelector(selectTimeZone);
     const game_date=useSelector(selectGameDate);
     const picks=useSelector(selectPicks);
+    const games=useSelector(selectGames);
+    const l=useSelector(selectLeagues);
    
 
 
@@ -42,9 +44,39 @@ const GameLines=()=>{
     const [open,set_open]=useState(false);
     const [open_sending,set_open_sending]=useState(false);
     const [open_joined,set_open_joined]=useState(false);
+    const [no_games,set_no_games]=useState(false);
     
     const history=useHistory();
     const dispatch=useDispatch();
+
+    useEffect(()=>{
+        const res=games.filter((item)=>{
+            const league=item.league;
+            const league_name=l.filter((i)=>{
+                return i.id==line.league;
+            })[0]?.name;
+            return league==league_name;
+        })
+
+        const res2=res.filter((item)=>{
+            const start=moment.tz(item.commence,tz);
+            const today=moment.tz(new Date(),tz);
+            const diff=start.diff(today,"seconds");
+            
+            const str_start=start.format("ll");
+            const str_today=today.format("ll");
+            console.log(str_start,str_today);
+            return diff >=0 && str_start==str_today;
+
+        })
+
+        console.log("RES",res2);
+        if(res2.length==0){
+            set_no_games(true);
+        }
+        
+       
+    },[games])
 
     useEffect(()=>{
         set_date(game_date);
@@ -157,14 +189,14 @@ const GameLines=()=>{
 
         
 
-        console.log("element with no picks",res4);
-        console.log("element with picks",res5);
+       // console.log("element with no picks",res4);
+        //console.log("element with picks",res5);
         const res6=[...res4,...res5];
         
         set_data(res6);
         set_create(false);
         set_creating(false);
-        if(res3.length==0){
+        if(res3.length==0 && no_games==false){
             set_create(true);
         }
 
@@ -291,10 +323,12 @@ const GameLines=()=>{
                 </div>
             }
 
+
+
             {
                 data.map((item)=>{
                     return(
-                        <Line key={item.key} line={item} click={join}/>
+                        <Line key={item.key} line={item} click={join} no_games={no_games}/>
                     );
                 })
             }
