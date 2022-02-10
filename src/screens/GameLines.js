@@ -129,9 +129,18 @@ const GameLines=()=>{
     }
 
     const selectedDay = (val) =>{
+        
+       const today=moment.tz(new Date(),tz);
+       const converted_val=moment.tz(val,tz);
+       if(today.format("ll")==converted_val.format("ll")){
+            set_date(today);
+            dispatch(setGameDate(today))
+       }else{
+            set_date(val);
+            dispatch(setGameDate(val))
+       }
        
-       set_date(val);
-       dispatch(setGameDate(val))
+      
       };
 
       useEffect(()=>{
