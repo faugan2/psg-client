@@ -1,13 +1,15 @@
 import "../styles/line_join.scss";
 import CircularProgress from '@material-ui/core/CircularProgress';
-import {useEffect, useState} from "react";
+import {useEffect, useState,useRef} from "react";
 import { useDispatch, useSelector} from "react-redux";
-import {selectJoin,selectLeagues,selectGames,selectDefaultValues,selectTimeZone, setSelectedPicks, setSendingPicks, selectGameDate} from "../features/counterSlice";
+import {selectJoin,selectLeagues,selectGames,selectDefaultValues,selectTimeZone, setSelectedPicks, 
+    setSendingPicks, selectGameDate,setGames} from "../features/counterSlice";
 import Match from "./Match";
 import {auth, db} from "../firebase_file";
 import firebase from "firebase";
 import ClearIcon from '@material-ui/icons/Clear';
 import NearMeIcon from '@material-ui/icons/NearMe';
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 const moment=require("moment-timezone");
 let id_inter=0;
@@ -28,6 +30,9 @@ const LineJoin=({click})=>{
     const [show_ml_spread,set_ml_spread]=useState(null);
     const [loading,set_loading]=useState(false);
     const [picks,set_picks]=useState([]);
+    const [game_loading,set_game_loading]=useState("");
+
+    const btn_loading_games=useRef(null);
 
 
     useEffect(()=>{
@@ -240,6 +245,28 @@ const LineJoin=({click})=>{
         btns[index].click();
        },100)
    }
+
+   const load_games=()=>{
+       set_game_loading("Loading...");
+       btn_loading_games.current.disabled=true;
+       db.collection("psg_games").get().then((snap)=>{
+           const g=[];
+           snap.docs.map((doc)=>{
+               const key=doc.id;
+               const data=doc.data();
+               data.key=key;
+               g.push(data);
+           })
+
+           dispatch(setGames(g));
+           //console.log("all games are now ",g.length);
+           btn_loading_games.current.disabled=false;
+           set_game_loading("");
+       })
+
+
+   }
+
     return (
         <div className="line_join">
 
@@ -253,6 +280,13 @@ const LineJoin=({click})=>{
                 (loading==false && data.length==0) && 
                     <div className="info">
                         <p>No data found</p>
+
+                        <button onClick={load_games} ref={btn_loading_games}>
+                            <RefreshIcon style={{fontSize:"1.2rem"}} />
+                            Refresh
+                        </button>
+
+                        <label>{game_loading}</label>
                     </div> 
             }
 
