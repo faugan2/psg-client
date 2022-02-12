@@ -7,6 +7,7 @@ import {selectTournaments,selectLeagues,selectPicks} from "../features/counterSl
 const LiveItem=({pick,click})=>{
 
   const {id_challenge}=pick;
+  console.log("the id challenge is ",id_challenge);
 
   const t=useSelector(selectTournaments);
   const leagues=useSelector(selectLeagues);
@@ -81,7 +82,7 @@ const LiveItem=({pick,click})=>{
 
 
     return(
-        <div className="live_item" onClick={click}>
+        <div className="live_item" onClick={click.bind(this,id_challenge)}>
             <div className="top">
                 {live?.sport==2 && <img src={basketball} />}
                 {live?.sport==6 && <img src={baseball} />}

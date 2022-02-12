@@ -87,12 +87,9 @@ const Live=()=>{
     },[picks,tournaments,sport,l]);
 
     const live_detail=(key)=>{
-        const all_picks=key.picks;
-        if(all_picks.length>0){
-            const id_challenge=all_picks[0].id_challenge
-            dispatch(setViewChallenge(id_challenge));
-            set_open_detail(true);
-        }
+        
+        dispatch(setViewChallenge(key));
+        set_open_detail(true);
     }
 
     const [open_detail,set_open_detail]=useState(false);
@@ -123,7 +120,8 @@ const Live=()=>{
                                     {
                                         picks.map((pick,j)=>{
                                             return(
-                                                <LiveItem pick={pick} key={j} click={live_detail.bind(this,line)}/>
+                                                <LiveItem pick={pick} 
+                                                key={j} click={live_detail}/>
                                             )
                                         })
                                     }
