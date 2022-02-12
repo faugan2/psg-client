@@ -1,7 +1,7 @@
 import "../styles/game_lines.scss";
 import {useSelector,useDispatch} from "react-redux";
 import {selectLine, selectTournaments, selectTimeZone, setGameDate,selectGameDate, setJoin,
-     setSelectedPicks, selectSendingPicks, setViewChallenge,selectPicks,selectGames,selectLeagues} from "../features/counterSlice";
+     setSelectedPicks, selectSendingPicks, setViewChallenge,selectPicks,selectGames,selectLeagues, setGames} from "../features/counterSlice";
 import {useEffect, useState,useRef} from "react";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {baseball,basketball,hockey,football} from "../components/data";
@@ -16,6 +16,7 @@ import 'react-spring-bottom-sheet/dist/style.css'
 import LineJoin from "../components2/LineJoin";
 import SendingPicks from "../components/SendingPicks";
 import Joined from "../components2/Joined";
+import {load_games} from "../functions/load_games";
 
 const moment=require("moment-timezone");
 const GameLines=()=>{
@@ -49,7 +50,23 @@ const GameLines=()=>{
     const history=useHistory();
     const dispatch=useDispatch();
 
+    const lg=async()=>{
+         const g= await load_games();
+        dispatch(setGames(g));
+    }
+
     useEffect(()=>{
+            if(games==null || games.length==0){
+                lg();
+            }
+    },[])
+
+    useEffect(()=>{
+       
+        if(games==null || games.length==0){
+            return;
+        }
+
         const res=games.filter((item)=>{
             const league=item.league;
             const league_name=l.filter((i)=>{

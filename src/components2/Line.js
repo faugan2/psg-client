@@ -17,7 +17,7 @@ const Line=({line,click,no_games})=>{
    const [total_players,set_total_players]=useState("");
    const [players,set_players]=useState("");
    const [btn_disabled,set_btn_disabled]=useState(false);
-   const [status,set_status]=useState(no_games==true?"Open":"Closed");
+   const [status,set_status]=useState("Open");
    const [join,set_join]=useState("Join");
    const [joined,set_joined]=useState(false);
 

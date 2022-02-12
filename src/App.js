@@ -4,7 +4,7 @@ import "./App.css";
 import { useSelector } from 'react-redux';
 import { selectPage } from './features/counterSlice';
 
-import Splash from "./components/Splash";
+import Splash from "./screens/Splash";
 import Login from "./components/Login";
 import Main from "./screens/Main";
 import SignIn from "./components/SignIn";

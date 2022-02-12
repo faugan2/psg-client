@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import {auth,db} from "../firebase_file";
 import {get_pick_key, get_user_status, load_user_picks} from "../functions";
 import {get_today_time} from "../functions";
-import logo from "./img/logo.png";
+import logo from "../components/img/logo.png";
 import ReactLoading from 'react-loading';
 import { useDispatch, useSelector } from "react-redux";
 import { selectPicks, setActiveTab, setLeagues, setUsersStats,setPage, setPageName, selectRegistration,
@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 import { challenged_closed } from "../functions";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import "../styles/splash.scss";
-import Footer from "./Footer2";
+import Footer from "../components/Footer2";
 
 const moment=require("moment-timezone");
 
