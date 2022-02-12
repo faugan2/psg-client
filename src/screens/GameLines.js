@@ -249,12 +249,16 @@ const GameLines=()=>{
         if(create==false) return;
         if(creating==true) return;
         
-
+        if(date==undefined){
+            return;
+        }
+        console.log("the date is ",date._d);
         const new_line={
             ...line,
-            date:firebase.firestore.Timestamp.fromDate(date),
+            date:firebase.firestore.Timestamp.fromDate(date._d),
             parent:false,
         };
+        console.log("the new line is ",new_line);
         delete new_line.key;
         delete new_line.wins;
         delete new_line.winners;

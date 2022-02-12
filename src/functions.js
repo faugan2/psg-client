@@ -59,6 +59,10 @@ const challenged_closed=(key,type,nb_player,res,gm )=>{
         })
     })
 
+    if(gm==undefined || gm==null){
+        return;
+    }
+
     let game_started=false;
     all_games.forEach((id)=>{
         const rp=gm.filter((item)=>{
