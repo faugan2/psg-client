@@ -26,14 +26,20 @@ const Joined=({click})=>{
     const [user_picks,set_user_picks]=useState(null);
     const [page,set_page]=useState(1);
     const [results,set_results]=useState(false);
-
+    const [id_ch,set_id_ch]=useState(null);
 
     useEffect(()=>{
         if(id_challenge==null) return;
+        set_id_ch(id_challenge);
+    },[id_challenge])
+
+
+    useEffect(()=>{
+        if(id_ch==null) return;
         if(tournaments==null || tournaments.length==0) return;
 
         const res=tournaments.filter((item)=>{
-            return item.key==id_challenge;
+            return item.key==id_ch;
         })
 
         if(res.length>0){
@@ -41,7 +47,7 @@ const Joined=({click})=>{
         }
 
         const res2=picks.filter((item)=>{
-            return item.id_challenge==id_challenge;
+            return item.id_challenge==id_ch;
         })
 
         //get list of users
@@ -66,7 +72,7 @@ const Joined=({click})=>{
         }
         
 
-    },[id_challenge,tournaments,picks])
+    },[id_ch,tournaments,picks])
 
     const user_selected=(e,user,index)=>{
         

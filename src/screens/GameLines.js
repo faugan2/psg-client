@@ -146,8 +146,15 @@ const GameLines=()=>{
 
         const res=t.filter((item)=>{
             const line_date=moment.tz(item.date?.seconds*1000,tz);
-            const diff=line_date.diff(moment.tz(date,tz),"days");
+            const selected_date=moment.tz(date,tz);
             
+            const str_line_date=line_date.format("ll");
+            const str_selected_date=selected_date.format("ll");
+
+            
+
+            const diff=line_date.diff(moment.tz(date,tz),"days");
+            console.log(str_line_date," and ",str_selected_date,diff);
 
             return item.type==game_type && 
                 item.mode==game_mode && 
@@ -158,7 +165,9 @@ const GameLines=()=>{
                 item.sport==game_sport && 
                 item.challenged!=true   && 
                 item.winners==undefined   && 
-                diff==0   
+                diff==0  &&
+                str_line_date==str_selected_date
+                
             ;
         })
 
@@ -252,10 +261,15 @@ const GameLines=()=>{
         if(date==undefined){
             return;
         }
-        console.log("the date is ",date._d);
+        console.log("the date is ",date);
+        console.log("the date is 2",date._d);
+        let new_date=date;
+        if(date._d!=undefined){
+            new_date=date._d;
+        }
         const new_line={
             ...line,
-            date:firebase.firestore.Timestamp.fromDate(date._d),
+            date:firebase.firestore.Timestamp.fromDate(new_date),
             parent:false,
         };
         console.log("the new line is ",new_line);

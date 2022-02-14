@@ -196,6 +196,8 @@ const LineJoin=({click})=>{
 
    const send_picks=(e)=>{
 
+    
+
     if(picks.length!=parseInt(join.number_game)){
         alert("You must pick "+join.number_game+" games before submit");
         return;
@@ -205,8 +207,10 @@ const LineJoin=({click})=>{
         picks,
         id_challenge:join?.key,
         type_challenge:join?.type,
-        date:new firebase.firestore.FieldValue.serverTimestamp()
+        date:new firebase.firestore.Timestamp.fromDate(game_date)
     };
+    console.log("we are using the date",game_date);
+    console.log("the new object is ",obj)
 
     dispatch(setSendingPicks(true))
 
