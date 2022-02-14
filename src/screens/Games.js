@@ -124,10 +124,10 @@ const Games=()=>{
                         Locker Room
                     </button>
 
-                    <button  className="games_btn" onClick={change_page.bind(this,5)}>
+                    {/*<button  className="games_btn" onClick={change_page.bind(this,5)}>
                         <PermContactCalendarIcon style={{color:"gray",fontSize:"1.2rem"}} />
                         Contacts
-                    </button>
+                    </button>*/}
                     
                     
                 </div>

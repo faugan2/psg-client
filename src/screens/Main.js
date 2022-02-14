@@ -24,6 +24,10 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import { Avatar } from "@material-ui/core";
 import SettingsIcon from '@material-ui/icons/Settings';
 import Leagues from "../components2/Leagues";
+import MainFooter from "../components2/MainFooter";
+import Live2 from "../components2/Live";
+import History2 from "../components2/History";
+import LockerRoom2 from "../components2/LockerRoom";
 
 const styles = {
     slide: {
@@ -52,6 +56,8 @@ const Main=()=>{
     const [photo,setPhoto]=useState("foo.jpg");
     const u=useSelector(selectUsers);
     const s=useSelector(selectSports)
+
+    const [page,set_page]=useState(1);
 
     useEffect(()=>{
         if(s==null || s.length==0) {
@@ -167,6 +173,9 @@ const Main=()=>{
 	}
 
   
+    const change_page=(index)=>{
+        set_page(index);
+    }
 
     //console.log("here we go then h");
     return(
@@ -176,7 +185,10 @@ const Main=()=>{
     <div style={Object.assign({}, styles.slide, styles.slide1,{display:"flex",justifyContent:"center",})} className="slide" id="slide1">
         {/*<Games drawer={games_drawer} onClose={onGames_drawer_closed} />*/}
         
-        <Leagues />
+        {page==1 && <Leagues />}
+        {page==2 && <Live2 />}
+        {page==3 && <History2 />}
+        {page==4 && <LockerRoom2 />}
     </div>
     <div style={Object.assign({}, styles.slide, styles.slide2,{height:h})} className="slide" id="slide2">
        <Live />
@@ -198,6 +210,8 @@ display:"none",flexDirection:"column",gap:"1rem"}}>
   
     
     </div>
+
+    <MainFooter click={change_page} page={page} />
     </div>
     );
 }

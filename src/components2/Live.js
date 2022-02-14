@@ -103,7 +103,7 @@ const Live=()=>{
             {
                 my_picks.length==0 && 
                 <div className="info">
-                    <p>No data found</p>
+                    <p>No data found in live</p>
                 </div>
             }
 

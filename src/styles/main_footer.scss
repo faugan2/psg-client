@@ -1,0 +1,30 @@
+.main_footer{
+    position:fixed;
+    bottom:0;
+    width:100vw;
+    height: 50px;
+    background-color: black;
+    display:flex;
+    align-items: center;
+    >.menu{
+        display:flex;
+        align-items: center;
+        width:100%;
+        >button{
+            flex:1;
+            font-size: 0.7rem;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            color:white;
+            border:none;
+        }
+
+        >button:active{
+            border-bottom: 1px solid whitesmoke;
+            font-weight: bold;
+        }
+    }
+}
