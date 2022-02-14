@@ -1,0 +1,17 @@
+.main{
+   position: relative;
+   background-color: #e8e8e8;
+    >.chat_btn{
+        background-color: indianred;
+        position:fixed;
+        bottom:80px;
+        right:1rem;
+        z-index: 1;
+        width:2.5rem;
+        height: 2.5rem;
+        color:white;
+        border-radius: 50%;
+        border:none;
+        opacity: 1;
+    }
+}

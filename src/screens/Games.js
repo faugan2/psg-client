@@ -6,7 +6,7 @@ import HistoryIcon from '@material-ui/icons/History';
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
 import ForumIcon from '@material-ui/icons/Forum';
 import {useHistory} from "react-router-dom";
-import {selectSport, setGameDate} from "../features/counterSlice";
+import {selectSport, setGameDate,setSport} from "../features/counterSlice";
 import {useSelector,useDispatch} from "react-redux";
 import {useEffect, useState,useRef} from "react";
 import {baseball,basketball,hockey,football} from "../components/data";
@@ -47,7 +47,9 @@ const Games=()=>{
     },[s]);
 
     const go_back=()=>{
+        dispatch(setSport(null))
         history.goBack();
+
     }
 
     useEffect(()=>{

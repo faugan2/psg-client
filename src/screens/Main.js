@@ -1,5 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectActiveTab, selectTournaments, selectTab,setTab, setActiveTab, setPage,setHeaderTab,selectHeaderTab, selectUsers, setSelectedPlayer, setScreenHeight, setHeaderHeight,setInvitedFriends,setFriendChallenged, selectSports } 
+import { selectActiveTab, selectTournaments, setSport, 
+    selectTab,setTab, setActiveTab, setPage,setHeaderTab,selectHeaderTab, selectUsers, 
+    setSelectedPlayer, setScreenHeight, setHeaderHeight,setInvitedFriends,setFriendChallenged, selectSports
+ } 
 from "../features/counterSlice";
 import { auth } from "../firebase_file";
 import { useEffect, useState } from "react";
@@ -28,6 +31,10 @@ import MainFooter from "../components2/MainFooter";
 import Live2 from "../components2/Live";
 import History2 from "../components2/History";
 import LockerRoom2 from "../components2/LockerRoom";
+import ForumIcon from '@material-ui/icons/Forum';
+import Chat from "../components2/Chat"
+import { BottomSheet } from 'react-spring-bottom-sheet'
+import "../styles/main.scss";
 
 const styles = {
     slide: {
@@ -58,6 +65,11 @@ const Main=()=>{
     const s=useSelector(selectSports)
 
     const [page,set_page]=useState(1);
+    const [open,set_open]=useState(false);
+
+    const close_modal=()=>{
+        set_open(false);
+    }
 
     useEffect(()=>{
         if(s==null || s.length==0) {
@@ -178,8 +190,12 @@ const Main=()=>{
     }
 
     //console.log("here we go then h");
+
+    useEffect(()=>{
+        dispatch(setSport(null))
+    },[])
     return(
-<div style={{position:"relative",backgroundColor:"#e8e8e8"}}>
+<div  className="main">
 <Header onGames_drawer_closed={onGames_drawer_closed} index={index} />
 <SwipeableViews enableMouseEvents index={index} onChangeIndex={handleChangeIndex}>
     <div style={Object.assign({}, styles.slide, styles.slide1,{display:"flex",justifyContent:"center",})} className="slide" id="slide1">
@@ -212,6 +228,15 @@ display:"none",flexDirection:"column",gap:"1rem"}}>
     </div>
 
     <MainFooter click={change_page} page={page} />
+
+    <button  className="chat_btn" onClick={e=>set_open(true)}>
+         <ForumIcon style={{color:"white",fontSize:"1.2rem"}} />
+    </button>
+
+    <BottomSheet open={open}>
+                <Chat click={close_modal}/>
+            </BottomSheet>
+
     </div>
     );
 }

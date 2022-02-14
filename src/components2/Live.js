@@ -4,7 +4,7 @@ import {useSelector,useDispatch} from "react-redux";
 import {selectPicks, setViewChallenge} from "../features/counterSlice";
 import {auth, db} from "../firebase_file";
 import LiveItem from "./LiveItem";
-import { selectSport,selectTournaments,selectLeagues,selectTimeZone } from "../features/counterSlice";
+import { selectSport,selectTournaments,selectLeagues,selectTimeZone,selectSports } from "../features/counterSlice";
 import { BottomSheet,BottomSheetRef } from 'react-spring-bottom-sheet'
 import Joined from "./Joined";
 
@@ -14,6 +14,7 @@ const Live=()=>{
 
     const picks=useSelector(selectPicks);
     const sport=useSelector(selectSport);
+    const sports=useSelector(selectSports);
     const tournaments=useSelector(selectTournaments);
     const l=useSelector(selectLeagues);
     const tz=useSelector(selectTimeZone);
@@ -30,21 +31,32 @@ const Live=()=>{
             const user=item.user;
             return user==auth?.currentUser.email;
         })
+
+        
         
         
         const id_sport=sport?.id;
         const res_league=l.filter((item)=>{
             return item.id_sport==id_sport;
         })
-       const all_leagues=res_league.map((item)=>{
+       let all_leagues=res_league.map((item)=>{
            return item.id;
        });
+
+     if(sport==null && all_leagues.length==0){
+         all_leagues=l.map((item)=>{
+             return item.id;
+         });
+     }
+
+     console.log("all leagues are ",all_leagues);
 
       
       
 
        const res2=res.filter((item)=>{
            const id_challenge=item.id_challenge;
+          
            const challenge_info=tournaments.filter((item2)=>{
                
                return item2.key==id_challenge && item2.winners ==undefined;
@@ -54,6 +66,7 @@ const Live=()=>{
            
            if(challenge_info.length>0){
                const challenge_league=challenge_info[0].league;
+               console.log(challenge_league);
                
                return all_leagues.indexOf(challenge_league)>=0;
            }else{

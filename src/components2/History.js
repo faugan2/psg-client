@@ -40,6 +40,11 @@ const Live=()=>{
            return item.id;
        });
 
+       if(sport==null && all_leagues.length==0){
+            all_leagues=l.map((item)=>{
+                return item.id;
+            });
+        }
       
       
 

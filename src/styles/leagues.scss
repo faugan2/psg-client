@@ -21,9 +21,11 @@
     }
 
     >.favorite_leagues{
-        margin-top: 1rem;
+       
         font-size: 0.8rem;
-        width:100%;
+        width:100vw;
+        background-color: #e8e8e8;
+        margin-top: 1rem;
         >.head{
             display: flex;
             align-items:center;
