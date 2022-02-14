@@ -36,7 +36,7 @@ const Live=()=>{
         const res_league=l.filter((item)=>{
             return item.id_sport==id_sport;
         })
-       const all_leagues=res_league.map((item)=>{
+       let all_leagues=res_league.map((item)=>{
            return item.id;
        });
 

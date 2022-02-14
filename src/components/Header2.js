@@ -19,7 +19,7 @@ import { Badge } from '@material-ui/core';
 import logo from "./img/psg2.png";
 import DatePicker from "react-horizontal-datepicker";
 
-import "./header2.scss";
+//import "../styles/header2.scss";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -134,7 +134,7 @@ const go_to_home=()=>{
 
 
 const go_to_lobby=()=>{
-  history.push("/lobby");
+  //history.push("/lobby");
 }
 
 const go_to_friends=()=>{
@@ -220,7 +220,7 @@ useEffect(()=>{
             Material-UI
           </Typography>
          
-          {index==0 && 
+          {index==-1 && 
          <IconButton aria-label="search" color="inherit" onClick={onGames_drawer_closed}>
           <SettingsIcon style={{color:"white"}} /> 
           </IconButton>
@@ -233,9 +233,9 @@ useEffect(()=>{
         
           <IconButton aria-label="display more actions" edge="end" color="inherit" onClick={handleClick}>
             {/*<MoreIcon style={{color:"white"}} /> */}
-            {photo =="foo.jpg" && <Avatar style={{width:"40px",height:"40px",borderRadius:"50%"}}>
+            {photo =="foo.jpg" && <Avatar style={{width:"30px",height:"30px",borderRadius:"50%"}}>
               {auth?.currentUser?.displayName[0].toLowerCase() }</Avatar>}
-            {photo != "foo.jpg" && <img src={photo} style={{width:"40px",height:"40px",borderRadius:"50%"}} />}
+            {photo != "foo.jpg" && <img src={photo} style={{width:"30px",height:"30px",borderRadius:"50%"}} />}
           </IconButton>
 
          
@@ -258,7 +258,7 @@ useEffect(()=>{
 
 
         </Toolbar>
-        <div className={classes.bottom} id="top_btns">
+        <div className={classes.bottom} id="top_btns" style={{display:"none"}}>
            <button onClick={(e)=>{handle_set_tab(0)}}>Games</button>
            <button onClick={(e)=>{handle_set_tab(1)}} style={{
              display:"flex",
