@@ -1,0 +1,51 @@
+.create_challenge_date{
+    color:gray;
+    >.line{
+        margin:1rem;
+        display: flex;
+        align-items: center;
+        gap:0.5rem;
+        
+        >button{
+            padding:0.5rem;
+            border:none;
+            background-color: transparent;
+            font-size: 0.7rem;
+            display:flex;
+            align-items: center;
+            gap:0.5rem;
+            color:whitesmoke;
+        }
+    }
+
+    >.line_selected_dates{
+        margin:1rem;
+        font-size: 0.7rem;
+        border-top:1px solid silver;
+
+        >.dates{
+            
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 0.5rem;
+
+            >.date{
+                display:flex;
+                padding:0.5rem;
+                flex-direction: column;
+                align-items: center;
+                font-size: 0.6rem;
+                font-weight: bold;
+               
+                
+                >button{
+                    border:none;
+                    background-color: transparent;
+                    display:flex;
+                    
+
+                }
+            }
+        }
+    }
+}

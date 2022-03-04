@@ -13,6 +13,9 @@ import JoinedResults from "./JoinedResults";
 import JoinedChat from "./JoinedChat";
 import JoinedConfiguration from "./JoinedConfiguration";
 import SettingsIcon from '@material-ui/icons/Settings';
+import HeaderBottomSheet from "./HeaderBottomSheet";
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import JoinedInviteUser from "./JoinedInviteUser";
 const Joined=({click})=>{
 
     const id_challenge=useSelector(selectViewChallenge);
@@ -127,22 +130,18 @@ const Joined=({click})=>{
             
             {(page==1 && user_picks!=null) && <div className="bottom"><UserPicks user_picks={user_picks} /></div>}
                 {(page==2 && results==false) && <JoinedConfiguration />}
-                {(page==2 && results==true) && <JoinedResults />}
-                {(page==3) && <JoinedChat  />}
+                {(page==2 && results==true) && <JoinedConfiguration />}
+                {(page==3) && <JoinedInviteUser click={change_page} />}
 
             <div className="joined_footer">
-            <button
-                onClick={click}
-            >
-                <CloseIcon style={{fontSize:"1.2rem"}} />
-            </button>
+           
 
             <button
                 onClick={change_page.bind(this,1)}
                 className="joined_action active"
             >
                 <PeopleOutlineIcon style={{fontSize:"1.2rem"}} />
-                Users
+                Players
             </button>
 
             <button
@@ -150,8 +149,8 @@ const Joined=({click})=>{
                 className="joined_action"
             >
                 {results==false && <SettingsIcon style={{fontSize:"1.2rem"}}/>}
-                {results==true && <EqualizerIcon style={{fontSize:"1.2rem"}}/>}
-
+                {results==true && <SettingsIcon style={{fontSize:"1.2rem"}}/>}
+                   
                 {results==false? "Settings":"Results"}
             </button>
 
@@ -159,12 +158,21 @@ const Joined=({click})=>{
                 onClick={change_page.bind(this,3)}
                 className="joined_action"
             >
-                <ForumIcon style={{fontSize:"1.2rem"}}/>
-                Chat
+                <PersonAddIcon style={{fontSize:"1.2rem"}}/>
+                Invites
             </button>
 
            
             </div>
+
+            <HeaderBottomSheet title="Joined">
+                <button 
+                    className="joined_footer_close_btn"
+                    onClick={click}
+                >
+                    <CloseIcon style={{fontSize:"1.2rem"}} />
+                </button>
+            </HeaderBottomSheet>
             
         </div>
     )

@@ -5,18 +5,19 @@ import { useSelector } from 'react-redux';
 import { selectPage } from './features/counterSlice';
 
 import Splash from "./screens/Splash";
-import Login from "./components/Login";
+//import Login from "./components/Login";
 import Main from "./screens/Main";
-import SignIn from "./components/SignIn";
-import PlayerPicks from "./components/PlayerPicks";
+//import SignIn from "./components/SignIn";
+//import PlayerPicks from "./components/PlayerPicks";
 
-import ChallengeContent from "./components/ChallengeContent";
+//import ChallengeContent from "./components/ChallengeContent";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+/*
 import Join from './components/Join';
 import PlayerProfile from './components/PlayerProfile';
 import ResumeBuyPick from './components/ResumeBuyPick';
@@ -35,13 +36,26 @@ import Debug from "./Debug.js";
 import Today from "./components/TodaysGame";
 import Lockerroom from "./components/LockerRoom";
 import Trophyroom from "./components/TrophyRoom";
-import History from "./components/History";
+import History from "./components/History";*/
 
 import Login2 from "./screens/Login2";
 import SignUp from "./screens/SignUp";
 import ProfilePhoto from "./screens/ProfilePhoto";
 import Games from "./screens/Games";
 import GameLines from "./screens/GameLines";
+import LeaguePage from "./screens/LeaguePage";
+import Search from "./screens/Search";
+import Settings from "./screens/Settings";
+import ProfileEdit from "./screens/ProfileEdit";
+import Coins from "./screens/Coins";
+import MyClub from "./screens/MyClub";
+import Chat from "./screens/Chat";
+import Profile from "./screens/Profile";
+import PrivateProfile from "./screens/PrivateProfile";
+import TermsConditions from "./screens/TermsConditions";
+import PrivatePolicy from "./screens/PrivatePolicy";
+import Help from "./screens/Help";
+import Debug from "./screens/Debug";
 
 function App() {
   const [page,setPage]=useState(0);
@@ -61,9 +75,7 @@ function App() {
             <Splash />
           </Route>
 
-          <Route path="/login">
-            <Login /> 
-          </Route>
+         
 
           <Route path="/login2">
             <Login2 /> 
@@ -77,9 +89,9 @@ function App() {
             <ProfilePhoto /> 
           </Route>
 
-          <Route path="/register">
+          {/*<Route path="/register">
             <SignIn />
-          </Route>
+  </Route>*/}
 
           <Route path="/games">
             <Games />
@@ -89,12 +101,64 @@ function App() {
             <GameLines />
           </Route>
 
+          <Route path="/league-page">
+            <LeaguePage />
+          </Route>
+
 
           <Route path="/main">
             <Main />
           </Route>
 
-          <Route path="/challenge">
+          <Route path="/search">
+            <Search />
+          </Route>
+
+          <Route path="/settings">
+            <Settings />
+          </Route>
+
+          <Route path="/profile-edit">
+            <ProfileEdit />
+          </Route>
+
+          <Route path="/coins">
+            <Coins />
+          </Route>
+
+          <Route path="/my-club">
+            <MyClub />
+          </Route>
+
+          <Route path="/chat">
+            <Chat />
+          </Route>
+
+          <Route path="/profile">
+            <Profile />
+          </Route>
+
+          <Route path="/private-profile">
+            <PrivateProfile />
+          </Route>
+
+          <Route path="/terms-conditions">
+            <TermsConditions />
+          </Route>
+
+          <Route path="/private-policy">
+            <PrivatePolicy />
+          </Route>
+
+          <Route path="/help">
+            <Help />
+          </Route>
+
+          <Route path="/debug">
+            <Debug />
+          </Route>
+
+          {/*<Route path="/challenge">
             <ChallengeContent />
           </Route>
 
@@ -177,6 +241,7 @@ function App() {
           <Route path="/history" exact>
             <History />
           </Route>
+		*/}
 
         </Switch>
 

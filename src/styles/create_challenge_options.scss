@@ -1,0 +1,27 @@
+.create_challenge_options{
+    margin-bottom:60px;
+    color:whitesmoke;
+    >.line{
+        margin:1rem;
+        margin-bottom: 2rem;
+        >h2{
+            font-size: 0.7rem;
+        }
+        >div{
+            display: flex;
+            align-items: center;
+            gap:0.5rem;
+            >button{
+                font-size: 0.7rem;
+                padding:0.5rem;
+                padding-left: 0;
+                border:none;
+                background-color: transparent;
+                display:flex;
+                align-items: center;
+                gap:0.5rem;
+                color:whitesmoke;
+            }
+        }
+    }
+}

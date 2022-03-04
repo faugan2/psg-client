@@ -1,0 +1,23 @@
+.game_options_mode{
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+    padding:2rem;
+    margin-top:35px;
+   
+    >.line{
+        font-size: 0.8rem;
+        display:flex;
+        align-items: center;
+        gap:0.5rem;
+
+        >button{
+            width:150px;
+            display:flex;
+            border:none;
+            background-color: transparent;
+            font-size: 0.7rem;
+            color:whitesmoke;
+        }
+    }
+}

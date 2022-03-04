@@ -1,44 +1,56 @@
 .joined{
-    min-height:70vh;
-
+    min-height:60vh;
+    max-height: 60vh;
+    overflow: auto;
     >.top{
-        background-color:#e8e8e8;
-        margin:0 0.5rem;
-        height:70px;
+        border-bottom: 1px solid gray;
+        height:60px;
         display:flex;
         align-items:center;
+        position:fixed;
+        top:35px;
+        width:100%;
+        background-color:gray;
+        z-index:1;
 
     }
     
     >.bottom{
        
         margin-top: 0.5rem;
-        min-height: calc(70vh - 140px);
-        max-height: calc(70vh - 140px);
-        overflow:scroll;
+        min-height: calc(60vh - 50px - 60px);
+        max-height: calc(60vh - 50px - 60px);
+        overflow:auto;
+        position:fixed;
+        width:100%;
+        top:60px;
     }
 
     >.joined_footer{
-        background-color:black;
-        opacity:0.7;
+        background-color:indianred;
         position:fixed;
         bottom:0;
         width: 100%;
         height:50px;
         display:flex;
         align-items:center;
-        justify-content:space-between;
+        
+		
 
         >button{
+            flex:1;
             margin:0.5rem;
             display:flex;
             align-items:center;
             justify-content:center;
             flex-direction: column;
             font-size: 0.7rem;
+            background-color: transparent;
+            border:none;
+            color:silver;
         }
 
-        >button:first-child{
+       /* >button:first-child{
             width: 30px;
             height:30px;
             border-radius: 50%;
@@ -53,16 +65,25 @@
             color:white;
             border:none;
             border-bottom: 1px solid transparent;
-        }
+        }*/
 
         >button.active{
             font-weight: bold;
-            border-bottom: 1px solid white;
+            border-bottom: 1px solid whitesmoke;
+            color:whitesmoke;      
         }
 
        
     }
     
+    
 
     
+}
+
+.joined_footer_close_btn{
+    position:fixed;
+    right:0;
+    top:0;
+    z-index: 999;
 }

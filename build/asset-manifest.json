@@ -1,29 +1,36 @@
 {
   "files": {
-    "main.css": "/static/css/main.2318f98c.chunk.css",
-    "main.js": "/static/js/main.94603d05.chunk.js",
-    "main.js.map": "/static/js/main.94603d05.chunk.js.map",
+    "main.css": "/static/css/main.c9fad9e4.chunk.css",
+    "main.js": "/static/js/main.ecfcf229.chunk.js",
+    "main.js.map": "/static/js/main.ecfcf229.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.7545a8a1.js",
     "runtime-main.js.map": "/static/js/runtime-main.7545a8a1.js.map",
-    "static/css/2.3f2d425d.chunk.css": "/static/css/2.3f2d425d.chunk.css",
-    "static/js/2.934ebe2f.chunk.js": "/static/js/2.934ebe2f.chunk.js",
-    "static/js/2.934ebe2f.chunk.js.map": "/static/js/2.934ebe2f.chunk.js.map",
+    "static/css/2.1778d813.chunk.css": "/static/css/2.1778d813.chunk.css",
+    "static/js/2.8fdf5f3f.chunk.js": "/static/js/2.8fdf5f3f.chunk.js",
+    "static/js/2.8fdf5f3f.chunk.js.map": "/static/js/2.8fdf5f3f.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/2.3f2d425d.chunk.css.map": "/static/css/2.3f2d425d.chunk.css.map",
-    "static/css/main.2318f98c.chunk.css.map": "/static/css/main.2318f98c.chunk.css.map",
-    "static/js/2.934ebe2f.chunk.js.LICENSE.txt": "/static/js/2.934ebe2f.chunk.js.LICENSE.txt",
+    "static/css/2.1778d813.chunk.css.map": "/static/css/2.1778d813.chunk.css.map",
+    "static/css/main.c9fad9e4.chunk.css.map": "/static/css/main.c9fad9e4.chunk.css.map",
+    "static/js/2.8fdf5f3f.chunk.js.LICENSE.txt": "/static/js/2.8fdf5f3f.chunk.js.LICENSE.txt",
     "static/media/baseball.e8ec0703.png": "/static/media/baseball.e8ec0703.png",
     "static/media/basketball.10dd6782.png": "/static/media/basketball.10dd6782.png",
+    "static/media/counter_strike.06678573.png": "/static/media/counter_strike.06678573.png",
+    "static/media/csgo.ced13477.png": "/static/media/csgo.ced13477.png",
+    "static/media/dota2.51220ebe.png": "/static/media/dota2.51220ebe.png",
     "static/media/football.24c2f14e.png": "/static/media/football.24c2f14e.png",
     "static/media/hockey.925522b6.png": "/static/media/hockey.925522b6.png",
+    "static/media/league_of_legend.97463209.png": "/static/media/league_of_legend.97463209.png",
+    "static/media/ncaab.bb246159.png": "/static/media/ncaab.bb246159.png",
+    "static/media/overwatch.519c8ae5.png": "/static/media/overwatch.519c8ae5.png",
     "static/media/psg2.e828c635.png": "/static/media/psg2.e828c635.png",
-    "static/media/index.css": "/static/media/roboto-vietnamese-400-normal.c0bec65d.woff2"
+    "static/media/index.css": "/static/media/roboto-vietnamese-400-normal.c0bec65d.woff2",
+    "static/media/ufc.1a7c1ea7.png": "/static/media/ufc.1a7c1ea7.png"
   },
   "entrypoints": [
     "static/js/runtime-main.7545a8a1.js",
-    "static/css/2.3f2d425d.chunk.css",
-    "static/js/2.934ebe2f.chunk.js",
-    "static/css/main.2318f98c.chunk.css",
-    "static/js/main.94603d05.chunk.js"
+    "static/css/2.1778d813.chunk.css",
+    "static/js/2.8fdf5f3f.chunk.js",
+    "static/css/main.c9fad9e4.chunk.css",
+    "static/js/main.ecfcf229.chunk.js"
   ]
 }

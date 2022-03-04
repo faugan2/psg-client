@@ -1,6 +1,6 @@
 import "../styles/league.scss";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import {baseball,basketball,hockey,football} from "../components/data";
+import {baseball,basketball,hockey,football} from "../components2/data";
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ForumIcon from '@material-ui/icons/Forum';
 const League=({league,click,go_to_invites,go_to_messages})=>{

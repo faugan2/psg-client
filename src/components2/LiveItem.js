@@ -1,8 +1,9 @@
 import "../styles/live_item.scss";
-import {baseball,basketball,hockey,football} from "../components/data";
+import {baseball,basketball,hockey,football} from "../components2/data";
 import {useState,useEffect} from "react";
 import {useSelector,useDispatch} from "react-redux";
 import {selectTournaments,selectLeagues,selectPicks} from "../features/counterSlice";
+import {useTransition,animated} from "react-spring";
 
 const LiveItem=({pick,click})=>{
 
@@ -80,9 +81,31 @@ const LiveItem=({pick,click})=>{
     set_winning(tp*e);
   },[live,total_players,entry]);
 
+  const [show,set_show]=useState([1]);
+  const transition=useTransition(show,{
+      from:{
+          opacit:0,
+          x:0,
+          y:500,
+          
+      },
+      enter:{
+          opacity:1,
+          x:0,
+          y:0
+      },
+      leave:{}
+  })
+
 
     return(
-        <div className="live_item" onClick={click.bind(this,id_challenge)}>
+
+        transition((style,item)=>{
+            if(item){
+                return(
+                    <animated.div className="live_item" 
+                    style={style}
+                    onClick={click.bind(this,id_challenge)}>
             <div className="top">
                 {live?.sport==2 && <img src={basketball} />}
                 {live?.sport==6 && <img src={baseball} />}
@@ -111,7 +134,11 @@ const LiveItem=({pick,click})=>{
                     <p>Players</p>
                 </div>
             </div>
-        </div>
+        </animated.div>
+                )
+            }
+        })
+        
     )
 }
 

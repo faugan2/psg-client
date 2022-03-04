@@ -1,0 +1,84 @@
+.today_game_item{
+    display: flex;
+    align-items: center;
+    margin:0.5rem;
+    border-bottom: 1px solid gray;
+    padding-top:0.5rem;
+    margin-bottom:1rem;
+    color:whitesmoke;
+    
+
+    >img{
+        width:25px;
+        height: 25px;
+        margin-right:0.5rem;
+    }
+
+    >div{
+        font-size: 0.8rem;
+        display:flex;
+        flex-direction: column;
+    }
+
+    >.teams{
+        flex:1;
+        >p.active{
+            color: green;
+        }
+        
+    }
+
+    >.scores{
+        width:50px;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+
+        >p{
+            color:gray;
+            font-size:0.7rem;
+            &:first-child{
+                color:white;
+            }
+        }
+    }
+
+    >.odds{
+        
+        flex:none;
+        width:50px;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        
+        >p{
+            color:gray;
+            font-size:0.7rem;
+            &:first-child{
+                color:white;
+            }
+        }
+        
+    }
+    >.date{
+        flex:none;
+        width: 80px;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        >p{
+            color:gray;
+            font-size:0.7rem;
+            &:first-child{
+                color:white;
+            }
+        }
+    }
+
+    
+    
+}
+
+.today_game_item.do_not_show{
+    border:1px solid red;
+}

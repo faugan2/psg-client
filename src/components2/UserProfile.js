@@ -4,18 +4,53 @@ import TimelineIcon from '@material-ui/icons/Timeline';
 import LocalCafeIcon from '@material-ui/icons/LocalCafe';
 import HistoryIcon from '@material-ui/icons/History';
 import InfoIcon from '@material-ui/icons/Info';
+import {useSelector,useDispatch} from "react-redux";
+import {selectUserProfile,setUserProfile,selectUsersStats,selectPicks,selectTransactions} from "../features/counterSlice";
+import CloseIcon from '@material-ui/icons/Close';
+import { useState,useEffect } from "react";
+import UserProfileInfo from "./UserProfileInfo";
+import UserProfileTodaysGame from "./UserProfileTodaysGame";
+import UserProfileLockerRoom from "./UserProfileLockerRoom";
+import UserProfileHistory from "./UserProfileHistory";
+import HeaderBottomSheet from "./HeaderBottomSheet";
+import {user_stats,user_matches_picks,user_coins} from "./data";
+
+
 const UserProfile=({click})=>{
 
+
+    const email=useSelector(selectUserProfile);
+    const us=useSelector(selectUsersStats);
+    const picks=useSelector(selectPicks);
+    const all_transactions=useSelector(selectTransactions);
+    const stats=user_stats(email,us);
+    const nb_matches_picks=user_matches_picks(email,picks);
+    const coins=user_coins(email,all_transactions)
+    
+    const [page,set_page]=useState(1);
+
     const btn_clicked=(index)=>{
+        set_page(index);
         const btns=document.querySelectorAll(".user_profile_bottom>button");
         for(var i=0; i<btns.length; i++){
             btns[i].classList.remove("active");
         }
         btns[index-1].classList.add("active");
     }
+    
     return(
         <div className="user_profile">
-            <button onClick={click}>Close</button>
+
+            {page==1 && <UserProfileInfo 
+                stats={stats} 
+                nb_matches_picks={nb_matches_picks}
+                coins={coins}
+                />}
+            {page==2 && <UserProfileTodaysGame />}
+            {page==3 && <UserProfileLockerRoom  nb_matches_picks={nb_matches_picks}/>}
+            {page==4 && <UserProfileHistory />}
+           
+           
 
             <div className="user_profile_bottom">
                 <button className="active" onClick={btn_clicked.bind(this,1)}>
@@ -28,17 +63,19 @@ const UserProfile=({click})=>{
                 </button>
                 <button  onClick={btn_clicked.bind(this,3)}>
                     <TimelineIcon style={{fontSize:"1.2rem"}}/>
-                    Locker Room
+                    Loc.Room
                 </button>
                 <button  onClick={btn_clicked.bind(this,4)}>
-                    <LocalCafeIcon style={{fontSize:"1.2rem"}}/>
-                    Trophy Room
-                </button>
-                <button  onClick={btn_clicked.bind(this,5)}>
                     <HistoryIcon style={{fontSize:"1.2rem"}}/>
                     History
                 </button>
             </div>
+
+            <HeaderBottomSheet title="User profile">
+                <button onClick={click} className="user_profile_close_btn">
+                    <CloseIcon style={{fontSize:"1.2rem"}} />
+                </button>
+            </HeaderBottomSheet>
         </div>
     )
 }

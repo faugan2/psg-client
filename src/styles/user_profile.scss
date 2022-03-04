@@ -1,11 +1,43 @@
 .user_profile{
+    background-color: black;
+    height:100vh;
+    overflow: auto;
+    color:white;
+
+    >.top{
+        display:flex;
+        position:fixed;
+        width:100%;
+        top:0;
+        height:60px;
+        background-color:var(--sub_black);
+        align-items: center;
+        z-index: 1;
+        >button{
+            padding:0.5rem;
+            background-color: transparent;
+            color:whitesmoke;
+            border:none;
+        }
+        >h2{
+            font-size: 0.9rem;
+        }
+    }
     
-    min-height: 70vh;
+    >.content{
+        position:fixed;
+        width:100%;
+        top:60px;
+        min-height: calc(100vh - 110px);
+        max-height: calc(100vh - 110px);
+        overflow:auto;
+        background-color:black;
+    }
     
     >.user_profile_bottom{
         position:fixed;
         bottom:0;
-        background-color: rgba($color: #000000, $alpha: 0.7);
+        background-color: var(--sub_black);
         width:100%;
         display:flex;
         align-items: center;
@@ -18,7 +50,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            color:white;
+            color:gray;
             background-color: transparent;
             border:none;
            
@@ -26,7 +58,27 @@
 
         >button.active{
             border-bottom: 2px solid white;
-            
+            color:whitesmoke;
         }
     }
+
+    >.user_profile_close_btn{
+        position:fixed;
+        top:0;
+        right:0.5rem;
+        z-index: 999;
+        width:30px;
+        height: 30px;
+        background-color: indianred;
+        border:none;
+        color:white;
+        border-radius: 50%;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+
+
+    }
+
+  
 }

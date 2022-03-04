@@ -9,7 +9,7 @@ import {useHistory} from "react-router-dom";
 import {selectSport, setGameDate,setSport} from "../features/counterSlice";
 import {useSelector,useDispatch} from "react-redux";
 import {useEffect, useState,useRef} from "react";
-import {baseball,basketball,hockey,football} from "../components/data";
+import {baseball,basketball,hockey,football} from "../components2/data";
 import GameListe from "../components2/GameListe";
 import Live from "../components2/Live";
 import History from "../components2/History";

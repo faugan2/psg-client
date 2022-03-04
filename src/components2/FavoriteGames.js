@@ -90,7 +90,13 @@ const FavoriteGames=()=>{
                     return j.key==id;
                 })[0];
                 //console.log(ch_content);
-                if(ch_content.entry==entry && ch_content.league==league && ch_content.type==type && ch_content.mode==mode && ch_content.number_game==number_game){
+                if(ch_content==undefined) return undefined;
+                
+                if(ch_content?.entry==entry && 
+                    ch_content?.league==league && 
+                    ch_content?.type==type && 
+                    ch_content?.mode==mode && 
+                    ch_content?.number_game==number_game){
                     return id;
                 }
             })

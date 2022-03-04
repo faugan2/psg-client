@@ -1,0 +1,39 @@
+.not_enough_coins{
+    min-height:30vh;
+
+    >.content{
+        margin-top:35px;
+        color:whitesmoke;
+        font-size:0.9rem;
+        padding:1rem;
+        display:flex;
+        flex-direction:column;
+        
+        >p{
+            text-align:center;
+
+            >span{
+                font-weight:bold;
+                &:nth-child(1){
+                    color:indianred;
+                }
+                &:nth-child(2){
+                    color:green;
+                }
+            }
+        }
+
+        >button{
+            margin:auto;
+            margin-top:2rem;
+            padding:0.7rem;
+            font-size:0.8rem;
+            background-color:gray;
+            border:1px solid gray;
+            border-radius:5px;
+            color:white;
+            font-weight:bold;
+            width:min(200px,80vw);
+        }
+    }
+}

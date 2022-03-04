@@ -1,5 +1,5 @@
 import "../styles/favorite_item.scss";
-import {basketball, football, hockey,baseball} from "../components/data";
+import {basketball, football, hockey,baseball} from "../components2/data";
 
 const FavoriteItem=({favorite,click})=>{
     let mode="MW";

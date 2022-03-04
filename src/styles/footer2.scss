@@ -1,5 +1,5 @@
 .footer2{
-    background-color:white !important;
+    background-color:black;
     position:fixed;
     bottom:0;
     width:100%;
@@ -8,17 +8,16 @@
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
 
     >p{
         font-size: 0.8rem;
     }
 
     >p:first-child{
-        color:gray;
+        color: #e8e8e8;;
     }
     >p:last-child{
         font-weight: bold;
+        color:#e8e8e8;
     }
 }

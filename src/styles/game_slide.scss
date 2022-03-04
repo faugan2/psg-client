@@ -1,0 +1,90 @@
+.game_slide{
+    
+    display:flex;
+    align-items: center;
+    font-size: 0.6rem;
+    padding:0.5rem;
+    background-color: transparent;
+    color:white;
+    border:none;
+    
+    >img{
+        width:25px;
+        height: 25px;
+    }
+
+    >.game_slide_one{
+        flex:1;
+        display:flex;
+        flex-direction: column;
+        font-size: 0.6rem;
+        align-items: flex-start;
+        margin-left: 0.5rem;
+      
+        >p{
+            font-size: 0.6rem;
+            color:white;
+            font-weight:bold;
+            width:95%;
+            white-space: nowrap; 
+            overflow: hidden;
+            text-overflow: ellipsis; 
+            text-align: center;
+            text-align: left;
+            
+        }
+        >p:nth-child(2){
+            color:white;
+            text-align: center;
+            width:40%;
+            border:none;
+        }
+    }
+    >.game_slide_two{
+        width:80px;
+        font-size: 0.6rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        >p{
+            color:gray;
+        }
+
+        >p:nth-child(2){
+            color:white;
+        }
+        
+    }
+
+    >.game_slide_ml{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        width:50px;
+        >p{
+            color:gray;
+        }
+        >p:nth-child(2){
+            color:white;
+        }
+    }
+
+    .game_slide_spread{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        width:50px;
+        >p{
+            color:gray;
+        }
+
+        >p:nth-child(2){
+            color:white;
+        }
+    }
+}
+
+.game_slide.active{
+    display:flex;
+}
+

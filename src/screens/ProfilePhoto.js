@@ -7,6 +7,7 @@ import {selectRegisterInfo} from "../features/counterSlice";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import CameraAltIcon from '@material-ui/icons/CameraAlt';
 import {auth,db, storage} from '../firebase_file'
+import DoneIcon from '@material-ui/icons/Done';
 const ProfilePhoto=()=>{
     const [alerte,set_alerte]=useState("")
     const [url,set_url]=useState(null);
@@ -115,11 +116,12 @@ const ProfilePhoto=()=>{
                         position:"absolute",
                         right:"1rem",
                         bottom:"1rem",
-                        color:"black",
+                        color:"white",
                         }} />
                 </button>
                 
                 <button className="btn_finish" onClick={finish}>
+                    <DoneIcon style={{color:"green",fontSize:"1.2rem"}}/>
                     Finish
                 </button>
 

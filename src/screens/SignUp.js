@@ -1,11 +1,11 @@
 import "../styles/login2.scss";
-import logo from "../components/img/logo.png";
+import logo from "../components2/img/logo.png";
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import GoogleIcon from "../components/GoogleIcon";
+import GoogleIcon from "../components2/GoogleIcon";
 import {useEffect, useState,useRef} from "react";
-import Modal from "../components/Modal";
-import ForgetLoginDetails from "../components/ForgetLoginDetails";
+import Modal from "../components2/Modal";
+import ForgetLoginDetails from "../components2/ForgetLoginDetails";
 import {useHistory} from "react-router-dom"
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import {auth, db } from "../firebase_file";
@@ -13,6 +13,44 @@ import firebase from "firebase";
 import {useDispatch, useSelector} from "react-redux";
 import {setRegisterInfo} from "../features/counterSlice";
 import CircularProgress from '@material-ui/core/CircularProgress';
+import DoneIcon from '@material-ui/icons/Done';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
+
+import * as firebaseui from 'firebaseui'
+import 'firebaseui/dist/firebaseui.css'
+
+
+var uiConfig = {
+    signInSuccessUrl: '/',
+    signInOptions: [
+      // Leave the lines as is for the providers you want to offer your users.
+      {
+          provider:firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      }
+      
+      
+    ],
+    
+    customParameters: {  
+        // Forces account selection even when one account
+        // is available.
+        prompt: 'select_account'
+      },
+    // tosUrl and privacyPolicyUrl accept either url string or a callback
+    // function.
+    // Terms of service url/callback.
+    tosUrl: function() {
+        window.location.assign('/terms-conditions');
+      },
+    // Privacy policy url/callback.
+    privacyPolicyUrl: function() {
+      window.location.assign('/private-policy');
+    },
+    
+  };
+
+
 const Login=()=>{
     const ref_email=useRef(null);
     const ref_pw=useRef(null);
@@ -21,6 +59,7 @@ const Login=()=>{
     const history=useHistory();
     const [alerte,set_alerte]=useState("");
     const [progressing,set_progressing]=useState(false);
+    const [show_pw,set_show_pw]=useState(false);
 
     const dispatch=useDispatch();
 
@@ -184,6 +223,17 @@ const Login=()=>{
         }
     }
 
+    const show_hide_pw=()=>{
+        set_show_pw(!show_pw);
+    }
+
+    useEffect(()=>{
+        if(show_pw==true){
+            ref_pw.current.type="text";
+        }else{
+            ref_pw.current.type="password";
+        }
+    },[show_pw])
     return (
         <div className="login2">
           
@@ -197,7 +247,7 @@ const Login=()=>{
                         <label>Name</label>
                         <div>
                             <input type="text" ref={ref_name}/>
-                            <PermIdentityIcon styles={{color:"gray"}} />
+                            <PermIdentityIcon style={{color:"gray",marginRight:"0.5rem",fontSize:"1.2rem"}} />
                         </div>
                     </div>
 
@@ -205,7 +255,7 @@ const Login=()=>{
                         <label>Email</label>
                         <div>
                             <input type="email" ref={ref_email}/>
-                            <MailOutlineIcon styles={{color:"gray"}} />
+                            <MailOutlineIcon style={{color:"gray",marginRight:"0.5rem",fontSize:"1.2rem"}} />
                         </div>
                     </div>
 
@@ -213,12 +263,28 @@ const Login=()=>{
                         <label>Password</label>
                         <div>
                             <input type="password" ref={ref_pw} />
-                            <LockOpenIcon  styles={{color:"gray"}}/>
+                            <button style={{
+                                display:"flex",
+                                alignItems:"center",
+                                justifyContent:"center",
+                                backgroundColor:"transparent",
+                                border:"none",
+                                padding:"0",
+                                outline:"none",
+                            }}
+                            onClick={show_hide_pw}
+                            >
+                               {show_pw==false && <VisibilityIcon  style={{color:"gray",marginRight:"0.5rem",fontSize:"1.2rem"}}/>}
+                               {show_pw==true && <VisibilityOffIcon  style={{color:"gray",marginRight:"0.5rem",fontSize:"1.2rem"}}/>} 
+                            </button>
+                            
                         </div>
                     </div>
 
                     <div className="line">
-                        <button onClick={register}>Sing Up </button>
+                        <button onClick={register} id="btn_login">
+                        <DoneIcon style={{color:"green",fontSize:"1.2rem"}}/>
+                            Sing Up </button>
                     </div>
 
                    {alerte!="" && <div className="line">
@@ -236,11 +302,13 @@ const Login=()=>{
                     </div>
 
                     <div className="provider_zone">
-                        {progressing===true && <CircularProgress size={15} style={{color:"black"}} />}
+                        {progressing===true && <CircularProgress size={15} style={{color:"white"}} />}
                         <button onClick={register_with_google}>
                             <GoogleIcon />
                             Sign Up with Google
                         </button>
+
+                       
                     </div>
                 </div>
             </div>

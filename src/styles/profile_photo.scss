@@ -1,18 +1,19 @@
 .profile_photo{
-    background-color:#e8e8e8;
+    background-color:black;
     min-height: 100vh;
+    color:white;
 
     >.head{
         display:flex;
         align-items:center;
         gap:1rem;
-        background-color:black;
+        background-color:var(--sub_black);
         height: 60px;
         color:"whitesmoke";
         >button{
             padding:0.5rem;
             border:none;
-            background-color:black;
+            background-color:var(--sub_black);
             color:white;
         }
         >h2{
@@ -36,26 +37,34 @@
             width:10rem;
             height: 10rem;
             border:none;
-            background-color:#e8e8e8;
+            background-color:var(--sub_black);
             border-radius: 50%;
             align-items:center;
             justify-content:center;
+            margin-top:1rem;
 
             >img{
                 width:9rem;
                 height:9rem;
                 border-radius: 50%;
-                object-fit: contain;
+                object-fit: cover;
             }
         }
 
         >.btn_finish{
             width:150px;
-            padding:1rem;
+            padding:0.7rem;
             border:none;
-            background-color:white;
+            background-color:black;
+            color:white;
+            border:1px solid silver;
+            margin-top: 1rem;
             border-radius: 5px;
             font-weight: bold;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:0.5rem;
             
         }
 

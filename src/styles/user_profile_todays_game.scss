@@ -1,0 +1,16 @@
+.user_profile_todays_game{
+   margin-top:35px;
+    >.info{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        >p{
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+    }
+
+    >.games{
+       /* background-color: black;*/
+    }
+}

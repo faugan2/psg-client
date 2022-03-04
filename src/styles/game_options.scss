@@ -1,0 +1,118 @@
+.game_options{
+    min-height: 60vh;
+    max-height:60vh;
+    overflow:auto;
+    >.game_options_footer{
+        background-color: indianred;
+        position:fixed;
+        bottom: 0;
+        width:100%;
+        height: 50px;
+        display:flex;
+        align-items: center;
+        >button{
+            flex:1;
+            margin:0.5rem;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.7rem;
+            background-color: transparent;
+            color:white;
+            border:none;
+        }
+        >button.active{
+            border-bottom: 1px solid white;
+            font-weight: bold;
+        }
+    }
+
+    >.close_btn{
+        position:fixed;
+        right:0;
+        top:0;
+        width:40px;
+        height: 40px;
+        border-radius: 50%;
+        border:none;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        background-color: indianred;
+        color:white;
+    }
+
+    >.game_options_date{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+
+        >p{
+            font-size: 0.8rem;
+            background-color: black;
+            color:white;
+            padding:0.5rem;
+            font-weight: bold;
+        }
+    }
+
+    >.game_options_top{
+        position:fixed;
+        top:35px;
+        border-bottom: 1px solid gray;
+        color:white;
+
+        width:100%;
+        height: 35px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        display: flex;
+        align-items: center;
+
+        >button{
+            margin:0.5rem;
+            font-size: 0.7rem;
+            color:whitesmoke;
+            >p{
+                display:flex;
+                flex-direction: column;
+                font-size: 0.7rem;
+                color:gray;
+            }
+            >p:last-child{
+                font-weight: normal;
+            }
+        }
+
+        >button:first-child{
+            border:none;
+            background-color: transparent;
+            font-weight: bold;
+            border-right: 1px solid silver;
+            flex:1;
+            
+        }
+
+        >button:nth-child(2){
+            border:none;
+            background-color: transparent;
+            font-weight: bold;
+            border-right: 1px solid silver;
+            width:100px;
+            border:none;
+        }
+        >button:last-child{
+           
+           /* width:30px;
+            height: 30px;
+            border-radius: 50%;
+            border:none;
+            background-color: green;
+            color:white;
+            display:flex;
+            align-items: center;
+            justify-content: center;*/
+        }
+        
+    }
+}

@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import {auth, db} from "../firebase_file";
 import {useHistory} from "react-router-dom";
 import FavoriteGames from "./FavoriteGames";
+import QuickPlay from "./QuickPlay";
 
 const Leagues=()=>{
     const l=useSelector(selectLeagues);
@@ -51,9 +52,8 @@ const Leagues=()=>{
     }
     return (
         <div className="container">
-            <h1>Hello, {username}</h1>
-            <p>Which game do you want to play in?</p>
-        <div className="leagues">
+            
+       {/*} <div className="leagues">
             {
                 leagues.map((league)=>{
                     return(
@@ -68,9 +68,13 @@ const Leagues=()=>{
                 })
             }
             
-        </div>
+        </div>*/}
 
-        <div className="favorite_leagues">
+        <QuickPlay />
+
+        
+
+        <div className="favorite_leagues" style={{display:"none"}}>
             <div className="head">
                 <div></div>
                 <div>Favorites Games</div>

@@ -58,11 +58,23 @@ const initialState = {
 
   registerInfo:null,
   sport:null,
+  league:null,
   line:null,
   join:null,
   gameDate:new Date(),
   sendingPicks:false,
   viewChallenge:null,
+  leaguePageOptions:null,
+  createChallengeOptions:null,
+  leaguePageResult:0,
+  joinSuccess:false,
+  myInvites:null,
+  userProfile:null,
+  notEnoughCoins:false,
+  chat:null,
+  chatUnread:0,
+  chatTotal:0,
+  chatRead:0,
 
   
 };
@@ -239,12 +251,49 @@ export const appSlice = createSlice({
 
   setViewChallenge:(state,action)=>{
     state.viewChallenge=action.payload;
-  }
-    
-  }
+  },
 
-  
-});
+  setLeague:(state,action)=>{
+    state.league=action.payload;
+  },
+  setLeaguePageOptions:(state,action)=>{
+    state.leaguePageOptions=action.payload;
+  },
+  setCreateChallengeOptions:(state,action)=>{
+    state.createChallengeOptions=action.payload;
+  },
+  setLeaguePageResult:(state,action)=>{
+    state.leaguePageResult=action.payload;
+  },
+  setJoinSuccess:(state,action)=>{
+    state.joinSuccess=action.payload;
+  },
+
+  setMyInvites:(state,action)=>{
+    state.myInvites=action.payload;
+  },
+  setUserProfile:(state,action)=>{
+    state.userProfile=action.payload;
+  },
+  setNotEnoughCoins:(state,action)=>{
+    state.notEnoughCoins=action.payload;
+  },
+  setChat:(state,action)=>{
+    state.chat=action.payload;
+  },
+  setChatUnread:(state,action)=>{
+    state.chatUnread=action.payload;
+  },
+  setChatTotal:(state,action)=>{
+    state.chatTotal=action.payload;
+  },
+  setChatRead:(state,action)=>{
+    state.chatRead=action.payload;
+  },
+
+
+
+  }});
 
 export const {
   setPage,
@@ -296,7 +345,19 @@ export const {
   setGameDate,
   setJoin,
   setSendingPicks,
-  setViewChallenge
+  setViewChallenge,
+  setLeague,
+  setLeaguePageOptions,
+  setCreateChallengeOptions,
+  setLeaguePageResult,
+  setJoinSuccess,
+  setMyInvites,
+  setUserProfile,
+  setNotEnoughCoins,
+  setChat,
+  setChatUnread,
+  setChatTotal,
+  setChatRead,
 } = appSlice.actions;
 
 export const selectPage  = (state) => state.counter.page;
@@ -349,5 +410,17 @@ export const selectGameDate=(state)=> state.counter.gameDate;
 export const selectJoin=(state)=> state.counter.join;
 export const selectSendingPicks=(state)=> state.counter.sendingPicks;
 export const selectViewChallenge=(state)=> state.counter.viewChallenge;
+export const selectLeague=(state)=>state.counter.league;
+export const selectLeaguePageOptions=(state)=>state.counter.leaguePageOptions;
+export const selectCreateChallengeOptions=(state)=>state.counter.createChallengeOptions;
+export const selectLeaguePageResult=(state)=>state.counter.leaguePageResult;
+export const selectJoinSuccess=(state)=>state.counter.joinSuccess;
+export const selectMyInvites=(state)=>state.counter.myInvites;
+export const selectUserProfile=(state)=>state.counter.userProfile;
+export const selectNotEnoughCoins=(state)=>state.counter.notEnoughCoins;
+export const selectChat=(state)=>state.counter.chat;
+export const selectChatUnread=(state)=> state.counter.chatUnread;
+export const selectChatTotal=(state)=> state.counter.chatTotal;
+export const selectChatRead=(state)=> state.counter.chatRead;
 
 export default appSlice.reducer;

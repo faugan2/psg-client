@@ -1,0 +1,79 @@
+.user_profile_locker_room{
+    margin-top:1rem;
+    >.top{
+        position:fixed;
+        top:60px;
+        width:100%;
+        min-height:50px;
+        display:flex;
+        z-index:1;
+        flex-direction: column;
+        background-color:gray;
+        >.types{
+            display:flex;
+            align-items: center;
+            >button{
+                flex:1;
+                margin:0.5rem;
+                font-size: 0.7rem;
+                padding:0.5rem;
+                background-color: transparent;
+                border:none;
+                color:white;
+            }
+
+            >button.active{
+                border-bottom: 1px solid black;
+                font-weight: bold;
+            }
+        }
+        >.stats{
+            display:flex;
+            align-items: center;
+            z-index:1;
+            
+            >button{
+                flex:1;
+                margin:0.5rem;
+                margin-top: 0;
+                background-color: transparent;
+                border:none;
+                font-size: 0.6rem;
+                color:whitesmoke;
+                >p:first-child{
+                    font-weight: bold;
+                    
+                }
+            }
+        }
+    }
+
+    >.content{
+       
+        >.info{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 100px;
+            >p{
+                font-size: 0.7rem;
+                font-weight: bold;
+            }
+        }
+
+        >.challenges{
+            
+            font-size: 0.7rem;
+            position:fixed;
+            top:120px;
+            width:100%;
+            min-height:calc(100vh - 150px);
+            max-height: calc(100vh - 150px);
+            overflow: auto;
+
+            >*:last-child{
+                margin-bottom:2rem;
+            }
+        }
+    }
+}

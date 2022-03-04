@@ -1,16 +1,37 @@
 .live{
-    background-color:#e8e8e8;
+    background-color:black;
     width:100%;
+    min-height: calc(100vh - 125px - 100px );
+    margin-top:116px;
+    >.invites{
+        >h2{
+            text-align: center;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+            color:indianred;
+        }
+    }
    >.info{
        display:flex;
        align-items:center;
        justify-content:center;
-       padding:0.5rem;
-       font-size: 0.8rem;
+       padding:1rem;
+       font-size: 0.7rem;
        font-weight:bold;
+       color:white;
+
+       >p{
+           color:white;
+       }
    }
    >.live_body{
-       margin-bottom: 100px;
+      
+       >h2{
+           text-align: center;
+           font-size: 0.8rem;
+           color:green;
+           margin-top: 0.5rem;
+       }
        >div{
            
            display:flex;
@@ -21,7 +42,7 @@
                text-align: center;
                font-size: 0.7rem;
                font-weight: bold;
-               background-color:black;
+               background-color:#474f4f;
                color:whitesmoke;
                width:80px;
                margin:auto;
@@ -35,5 +56,11 @@
            margin-bottom: 90px;
        }
    }
+
+   >.margin_bottom{
+      margin-bottom: 150px;
+   }
 }
+
+
 

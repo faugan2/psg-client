@@ -1,0 +1,60 @@
+.quick_play{
+    width:100%;
+    background-color: black;
+    color:white;
+
+    >.info{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+
+        >h1{
+            font-size: 1rem;
+        }
+        >p{
+            font-size: 0.7rem;
+        }
+
+        >div{
+            font-size: 0.7rem;
+            text-align: center;
+            padding:1rem;
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+
+
+            >button{
+                margin-top: 1rem;
+                background-color: transparent;
+                color:white;
+                padding:0.7rem;
+                width:150px;
+                display:flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                border:1px solid silver;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    >.lines{
+        margin-top: 1rem;
+        >p{
+            background-color: #474f4f;
+            color:white;
+            text-align: center;
+            font-size: 0.7rem;
+            width:80px;
+            margin:auto;
+            padding:0.3rem;
+        }
+    }
+
+   
+
+  
+}
+

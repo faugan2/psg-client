@@ -1,5 +1,13 @@
+:root{
+	--sub_black:#474f4f;
+}
+
 *{
 	margin:0;
+}
+
+[data-rsbs-overlay]{
+	background-color:var(--sub_black) !important;
 }
 
 button{

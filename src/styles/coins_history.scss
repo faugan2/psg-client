@@ -1,0 +1,50 @@
+.coins_history{
+    >.info{
+        font-size:0.8rem;
+        margin:1rem;
+        >p{
+            font-weight:bold;
+            text-align:center;
+        }
+    }
+
+    >.content{
+        margin:1rem;
+        >div{
+
+            >p{
+                color:whitesmoke;
+                font-size:0.7rem;
+                background-color:var(--sub_black);
+                width:80px;
+                margin:auto;
+                margin-bottom:0.5rem;
+                text-align: center;
+                font-weight:bold;
+                padding:0.3rem;
+            }
+
+            >.line{
+                display:flex;
+                align-items: center;
+                justify-content:space-between;
+                padding:0.5rem 0;
+                margin-bottom:0.5rem;
+                >p{
+                    font-size:0.7rem;
+                    color:indianred;
+                    font-weight: bold;
+                }
+
+                >button{
+                    color:gray;
+                    border:none;
+                    display:flex;
+                    align-items: center;
+                    justify-content:flex-end;
+                    background-color:transparent;
+                }
+            }
+        }
+    }
+}

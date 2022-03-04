@@ -1,0 +1,114 @@
+.profile_edit{
+    min-height:100vh;
+    background-color:black;
+    color:whitesmoke;
+    >.top{
+        display:flex;
+        align-items:center;
+        background-color:var(--sub_black);
+        height:60px;
+        position:fixed;
+        width:100%;
+        top:0;
+        z-index:1;
+        font-size:0.8rem;
+
+        >button{
+            padding:0.5rem;
+            color:whitesmoke;
+            background-color:transparent;
+            border:none;
+        }
+        >h2{
+            font-size:0.8rem;
+        }
+    }
+    >.content{
+        position:fixed;
+        top:60px;
+        min-height:calc(100vh - 60px);
+        max-height:calc(100vh - 60px);
+        width:100%;
+        overflow:auto;
+
+        >.top{
+            width:150px;
+            height:150px;
+            margin:auto;
+            margin-top:1rem;
+            position:relative;
+            
+           
+            >img{
+                width:100%;
+                height:100%;
+                border-radius:50%;
+                border:1px solid var(--sub_black);
+                padding:0.1rem;
+                object-fit: fill;
+            }
+
+            >button{
+                width:50px;
+                height:50px;
+                border-radius:50%;
+                border:none;
+                background-color:indianred;
+                color:white;
+                position:absolute;
+                bottom:0;
+                right:0.5rem;
+
+            }
+
+            >div{
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                margin-top:0.5rem;
+            }
+
+        }
+
+        >.form{
+            margin:1rem;
+
+            >.line{
+                display:flex;
+                align-items: center;
+                position:relative;
+                padding-bottom:1.5rem;
+                >div{
+                    flex:1;
+                    margin-left: 1rem;
+                    >p{
+                        font-size:0.8rem;
+                        &:nth-child(1){
+                            color:gray;
+                        }
+
+                        &:nth-child(2){
+                            color:whitesmoke;
+                            font-weight: bold;
+                        }
+                    }
+                }
+
+                >button{
+                    background-color:transparent;
+                    color:gray;
+                    border:none;
+                    padding:0.5rem;
+                }
+
+                >p{
+                    position:absolute;
+                    bottom:0.5rem;
+                    font-size: 0.7rem;
+                    margin-left:2.5rem;
+                    color:gray;
+                }
+            }
+        }
+    }
+}

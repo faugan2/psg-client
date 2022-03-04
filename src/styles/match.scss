@@ -1,5 +1,5 @@
 .match{
-    border-bottom:1px solid silver;
+    border-bottom:1px solid gray;
     font-size: 0.7rem;
     margin:0.5rem;
     padding-bottom: 0.2rem;
@@ -13,6 +13,8 @@
 
         >p:nth-child(1){
             font-weight: bold;
+
+            color:gray;
         }
 
        
@@ -26,6 +28,11 @@
         }
         >p:nth-child(2){
             margin-bottom: 0.2rem;
+            color:whitesmoke;
+        }
+
+        >p:nth-child(3){
+            color:whitesmoke;
         }
     }
 
@@ -39,10 +46,11 @@
         >button{
             padding:0.3rem;
             width:100%;
-            border:1px solid silver;
-            background-color:white;
+            border:1px solid gray;
+            background-color:transparent;
             margin-bottom: 0.2rem;
             font-size: 0.7rem;
+            color:whitesmoke;
 
         }
 
@@ -65,10 +73,11 @@
         >button{
             padding:0.3rem;
             width:100%;
-            border:1px solid silver;
+            border:1px solid gray;
             margin-bottom: 0.2rem;
             font-size: 0.7rem;
-            background-color:white;
+            background-color:transparent;
+            color:whitesmoke;
         }
         >button:last-child{
             margin-bottom: 0;

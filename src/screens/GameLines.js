@@ -4,7 +4,7 @@ import {selectLine, selectTournaments, selectTimeZone, setGameDate,selectGameDat
      setSelectedPicks, selectSendingPicks, setViewChallenge,selectPicks,selectGames,selectLeagues, setGames} from "../features/counterSlice";
 import {useEffect, useState,useRef} from "react";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {baseball,basketball,hockey,football} from "../components/data";
+import {baseball,basketball,hockey,football} from "../components2/data";
 import {useHistory} from "react-router-dom";
 import Line from "../components2/Line";
 import DatePicker from "../components2/DatePicker";
@@ -14,7 +14,7 @@ import {db} from "../firebase_file";
 import { BottomSheet,BottomSheetRef } from 'react-spring-bottom-sheet'
 import 'react-spring-bottom-sheet/dist/style.css'
 import LineJoin from "../components2/LineJoin";
-import SendingPicks from "../components/SendingPicks";
+import SendingPicks from "../components2/SendingPicks";
 import Joined from "../components2/Joined";
 import {load_games} from "../functions/load_games";
 
@@ -313,7 +313,6 @@ const GameLines=()=>{
         if(joined==true){
             dispatch(setViewChallenge(line.key))
             set_open_joined(true);
-
             return;
         }
 

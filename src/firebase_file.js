@@ -3,6 +3,8 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
 
+import * as firebaseui from 'firebaseui'
+
 
 /*
 const firebaseConfig = {
@@ -25,12 +27,18 @@ const firebaseConfig = {
 
 
 let app;
+let ui;
 if(firebase.apps.length==0){
   app=firebase.initializeApp(firebaseConfig);
 }else{
   app=firebase.app();
 }
 
+if(firebaseui.auth.AuthUI.getInstance()==null){
+  ui=new firebaseui.auth.AuthUI(firebase.auth());
+}else{
+  ui=new firebaseui.auth.AuthUI.getInstance();
+}
 
 const auth=app.auth();
 const db=app.firestore();
@@ -39,7 +47,7 @@ const storage=app.storage();
 
 
 
-export {auth,db,storage};
+export {auth,db,storage,ui};
 
 
 

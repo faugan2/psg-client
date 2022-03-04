@@ -106,7 +106,7 @@ const Match=({match,show_ml_spread,click})=>{
                      data-pickdata={pick_data}
                      data-away={away}
                      data-home={home}
-                >{over}</button>
+                >O {total}</button>
                 <button 
                      onClick={click} 
                      data-key={key} 
@@ -115,7 +115,7 @@ const Match=({match,show_ml_spread,click})=>{
                      data-pickdata={pick_data}
                      data-away={away}
                      data-home={home}
-                >{under}</button>
+                >U {total}</button>
             </div>
         </div>
     )

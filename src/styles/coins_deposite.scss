@@ -1,0 +1,67 @@
+.coins_deposite{
+    >.top{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        border-bottom:1px solid gray;
+        margin:0 1rem;
+        margin-top:1rem;
+        padding-bottom: 0.5rem;
+        >button{
+            width:100px;
+            height:100px;
+            border-radius:50%;
+            border:none;
+            display:flex;
+            align-items: center;
+            justify-content:center;
+            font-weight:bold;
+            font-size:1.2rem;
+            background-color:var(--sub_black);
+            color:white;
+        }
+        >p{
+            color:gray;
+            font-size:0.8rem;
+            margin-top:0.5rem;
+        }
+    }
+
+    >.content{
+        margin:2rem;
+        display:flex;
+        flex-direction:column;
+        align-items: center;
+        >.line{
+            display:flex;
+            flex-direction:column;
+            margin-bottom:1rem;
+            >p{
+                font-size:0.7rem;
+                font-weight:bold;
+                color:whitesmoke;
+            }
+            >input{
+                background-color:var(--sub_black);
+                border:none;
+                padding:0.7rem;
+                font-size:0.8rem;
+                color:whitesmoke;
+                font-weight: bold;
+                margin-top:0.3rem;
+            }
+        }
+
+        >.info{
+            border-top:1px solid gray;
+            width:200px;
+            margin:auto;
+            margin-top:4rem;
+            font-size: 0.7rem;
+            color:gray;
+            font-weight:bold;
+            text-align: center;
+            padding-top:0.5rem;
+        }
+    }
+}

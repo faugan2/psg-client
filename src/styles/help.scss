@@ -1,0 +1,52 @@
+.help{
+    background-color:black;
+    height:100vh;
+    
+    >.top{
+        color:whitesmoke;
+        display:flex;
+        align-items: center;
+        height:60px;
+        background-color:var(--sub_black);
+
+        >button{
+            padding:0.5rem;
+            background-color:transparent;
+            border:none;
+            color:whitesmoke;
+        }
+        >h2{
+            font-size:0.9rem;
+        }
+    }
+
+    >.content{
+        position:fixed;
+        top:60px;
+        color:whitesmoke;
+        width:100%;
+        min-height: calc(100vh - 60px);
+        max-height:calc(100vh - 60px);
+        overflow:auto;
+
+        >.info{
+            padding:1rem;
+            font-size:0.8rem;
+            text-align:center;
+            font-weight:bold;
+            color:whitesmoke;
+            margin:0 1rem;
+            border-bottom:1px solid gray;
+        }
+        
+        >.line{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            padding:1rem;
+            text-align:center;
+            font-size:0.7rem;
+            color:gray;
+        }
+    }
+}

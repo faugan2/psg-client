@@ -1,19 +1,58 @@
 import "../styles/login2.scss";
-import logo from "../components/img/logo.png";
+import logo from "../components2/img/logo.png";
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import GoogleIcon from "../components/GoogleIcon";
+import GoogleIcon from "../components2/GoogleIcon";
 import {useEffect, useState,useRef} from "react";
-import Modal from "../components/Modal";
-import ForgetLoginDetails from "../components/ForgetLoginDetails";
+import Modal from "../components2/Modal";
+import ForgetLoginDetails from "../components2/ForgetLoginDetails";
 import {useHistory} from "react-router-dom";
-import {db,auth} from "../firebase_file";
-import firebase from "firebase";
-import CircularProgress from '@material-ui/core/CircularProgress';
 
-// here we go with thi updates in the login page
+import CircularProgress from '@material-ui/core/CircularProgress';
+import DoneIcon from '@material-ui/icons/Done';
+
+import * as firebaseui from 'firebaseui'
+import 'firebaseui/dist/firebaseui.css'
+import firebase from "firebase"
+import {db,auth,ui} from "../firebase_file";
+
+var uiConfig = {
+    signInSuccessUrl: '/',
+    signInOptions: [
+      // Leave the lines as is for the providers you want to offer your users.
+      {
+          provider:firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      }
+      
+      
+    ],
+    
+    customParameters: {  
+        // Forces account selection even when one account
+        // is available.
+        prompt: 'select_account'
+      },
+    // tosUrl and privacyPolicyUrl accept either url string or a callback
+    // function.
+    // Terms of service url/callback.
+    tosUrl: function() {
+        window.location.assign('/terms-conditions');
+      },
+    // Privacy policy url/callback.
+    privacyPolicyUrl: function() {
+      window.location.assign('/private-policy');
+    },
+    
+  };
+
 const Login=()=>{
 
+    useEffect(()=>{        
+        ui.start('#firebaseui-auth-container', uiConfig);
+    },[])
+      
+
+    console.log("the new obj",firebaseui);
     const ref_email=useRef(null);
     const ref_pw=useRef(null);
     const [open,set_open]=useState(false)
@@ -130,6 +169,8 @@ const Login=()=>{
         })
     }
 
+
+  
     return (
         <div className="login2">
             {open==true && <Modal  
@@ -147,7 +188,7 @@ const Login=()=>{
                         <label>Email</label>
                         <div>
                             <input type="email" ref={ref_email}/>
-                            <MailOutlineIcon styles={{color:"gray"}} />
+                            <MailOutlineIcon style={{color:"gray",marginRight:"0.5rem",fontSize:"1.2rem"}} />
                         </div>
                     </div>
 
@@ -155,12 +196,14 @@ const Login=()=>{
                         <label>Password</label>
                         <div>
                             <input type="password" ref={ref_pw} />
-                            <LockOpenIcon  styles={{color:"gray"}}/>
+                            <LockOpenIcon  style={{color:"gray",marginRight:"0.5rem",fontSize:"1.2rem"}}/>
                         </div>
                     </div>
 
                     <div className="line">
-                        <button onClick={login}>Log In</button>
+                        <button onClick={login} id="btn_login">
+                            <DoneIcon style={{color:"green",fontSize:"1.2rem"}}/>
+                            Log In</button>
                     </div>
 
                     <div className="line">
@@ -181,11 +224,13 @@ const Login=()=>{
                     </div>
 
                     <div className="provider_zone">
-                        {progressing==true && <CircularProgress size={15} style={{color:"black"}} />}
-                        <button onClick={login_with_google}>
+                        {progressing==true && <CircularProgress size={15} style={{color:"white"}} />}
+                        <button onClick={login_with_google} style={{display:"none"}}>
                             <GoogleIcon />
                             Log In with Google
                         </button>
+
+                        <div id="firebaseui-auth-container"></div>
                     </div>
                 </div>
             </div>

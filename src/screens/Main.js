@@ -1,23 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectActiveTab, selectTournaments, setSport, 
     selectTab,setTab, setActiveTab, setPage,setHeaderTab,selectHeaderTab, selectUsers, 
-    setSelectedPlayer, setScreenHeight, setHeaderHeight,setInvitedFriends,setFriendChallenged, selectSports
+    setSelectedPlayer, setScreenHeight, setHeaderHeight,setInvitedFriends,setFriendChallenged, selectSports,
+    setGameDate,
+    setUserProfile,
+    selectNotEnoughCoins,
+    setNotEnoughCoins,
+    selectChatUnread,
+    selectChatTotal,
+    selectChatRead,
  } 
 from "../features/counterSlice";
 import { auth } from "../firebase_file";
 import { useEffect, useState } from "react";
-import Lobby from "../components/Lobby";
+/*import Lobby from "../components/Lobby";
 import Games from "../components/Games";
 import Live from "../components/Live";
-import Friends from "../components/Friends";
-import Profile from "../components/Profile";
+import Friends from "../components/Friends";*/
 import { useHistory } from "react-router-dom";
-
+/*
 import Nav from "../components/Nav";
-import Top from "../components/Top";
+import Top from "../components/Top";*/
 import '@fontsource/roboto';
 
-import Header from "../components/Header2";
+import Header from "../components2/Header2";
 import SwipeableViews from 'react-swipeable-views';
 
 import Fab from '@material-ui/core/Fab';
@@ -34,25 +40,14 @@ import LockerRoom2 from "../components2/LockerRoom";
 import ForumIcon from '@material-ui/icons/Forum';
 import Chat from "../components2/Chat"
 import { BottomSheet } from 'react-spring-bottom-sheet'
+import Profile from "../components2/UserProfile";
+import NotEnoughCoins from "../components2/NotEnoughCoins";
+import Badge from '@material-ui/core/Badge';
 import "../styles/main.scss";
+import 'prevent-pull-refresh';
 
-const styles = {
-    slide: {
-      color: 'black',
-      overflow: "auto",
-      padding: "1rem"
-      
-    },
-    slide1: {
-     
-    },
-    slide2: {
-      
-    },
-    slide3: {
-      
-    },
-  };
+import {useTransition,animated} from "react-spring";
+
 
 const Main=()=>{
     
@@ -62,14 +57,52 @@ const Main=()=>{
     const [user,set_user]=useState(null);
     const [photo,setPhoto]=useState("foo.jpg");
     const u=useSelector(selectUsers);
-    const s=useSelector(selectSports)
+    const s=useSelector(selectSports);
+    const ne=useSelector(selectNotEnoughCoins);
+    const [chat_unread,set_chat_unread]=useState(0);
+    const chat_total=useSelector(selectChatTotal);
+    const chat_read=useSelector(selectChatRead);
 
-    const [page,set_page]=useState(1);
+    console.log("thechat unrea d is ",chat_unread);
+
+    const [page,set_page]=useState(0);
     const [open,set_open]=useState(false);
+    const [open_profile,set_open_profile]=useState(false);
+    const [open_not_enough,set_open_not_enough]=useState(false);
 
+
+    const close_not_enough=()=>{
+        //set_open_not_enough(false);
+        dispatch(setNotEnoughCoins(false))
+    }
     const close_modal=()=>{
         set_open(false);
     }
+    const close_open_profile=()=>{
+        
+        set_open_profile(false);
+
+    }
+
+    const open_modal_profile=(email)=>{
+        dispatch(setUserProfile(email))
+        history.push("/profile")
+        //set_open_profile(true);
+        
+    }
+
+    useEffect(()=>{
+        if(chat_total==null || chat_read==null) return;
+        set_chat_unread(chat_total-chat_read);
+    },[chat_total,chat_read])
+
+    useEffect(()=>{
+        set_open_not_enough(ne);
+    },[ne])
+
+    useEffect(()=>{
+        dispatch(setGameDate(new Date()));
+    },[])
 
     useEffect(()=>{
         if(s==null || s.length==0) {
@@ -194,25 +227,34 @@ const Main=()=>{
     useEffect(()=>{
         dispatch(setSport(null))
     },[])
+
+    const [show_chat_btn,set_show_chat_btn]=useState([1]);
+    const transition=useTransition(show_chat_btn,{
+        from:{x:0,y:-500,opacity:0},
+        enter:item=>async (next)=>{
+            await next({x:0,y:0,opacity:0.5,delay:1000});
+            await next({opacity:1})
+        },
+        leave:{x:0,y:-800,opacity:0}
+    })
+
+    const tab_changed=(index)=>{
+        console.log(index);
+        set_page(index);
+    }
     return(
 <div  className="main">
-<Header onGames_drawer_closed={onGames_drawer_closed} index={index} />
-<SwipeableViews enableMouseEvents index={index} onChangeIndex={handleChangeIndex}>
-    <div style={Object.assign({}, styles.slide, styles.slide1,{display:"flex",justifyContent:"center",})} className="slide" id="slide1">
-        {/*<Games drawer={games_drawer} onClose={onGames_drawer_closed} />*/}
-        
-        {page==1 && <Leagues />}
-        {page==2 && <Live2 />}
-        {page==3 && <History2 />}
-        {page==4 && <LockerRoom2 />}
-    </div>
-    <div style={Object.assign({}, styles.slide, styles.slide2,{height:h})} className="slide" id="slide2">
-       <Live />
-    </div>
-    <div style={Object.assign({}, styles.slide, styles.slide3,{height:h})} className="slide" id="slide3">
-        <Friends />
-    </div>
     
+<Header onGames_drawer_closed={onGames_drawer_closed} index={index}
+click_profile={open_modal_profile}
+/>
+<SwipeableViews enableMouseEvents={true} index={page} onChangeIndex={tab_changed} 
+style={{
+    backgroundColor:"black"
+}}>
+        {page==0 && <Leagues />}
+        {page==1 && <Live2 /> }
+        {page==2 && <History2 />}
 </SwipeableViews>
 <div style={{position:"fixed",bottom:"2rem",right:"2rem",
 display:"none",flexDirection:"column",gap:"1rem"}}>
@@ -227,15 +269,34 @@ display:"none",flexDirection:"column",gap:"1rem"}}>
     
     </div>
 
-    <MainFooter click={change_page} page={page} />
+    <MainFooter click={change_page} page={page} click_profile={open_modal_profile} />
 
-    <button  className="chat_btn" onClick={e=>set_open(true)}>
-         <ForumIcon style={{color:"white",fontSize:"1.2rem"}} />
-    </button>
+    {
+        transition((style,item)=>{
+            if(item){
+                return(
+                    <animated.button  className="chat_btn" onClick={e=>{
+                        history.push("/chat");
+                    }} style={style}>
+                        <ForumIcon style={{color:"white",fontSize:"1.2rem"}} />
+                        <Badge badgeContent={chat_unread} color="secondary"/>
+                    </animated.button>
+                )
+            }
+        })
+    }
+    
 
     <BottomSheet open={open}>
-                <Chat click={close_modal}/>
-            </BottomSheet>
+        <Chat click={close_modal}/>
+    </BottomSheet>
+    <BottomSheet open={open_profile}>
+        <Profile click={close_open_profile}/>
+    </BottomSheet>
+
+    <BottomSheet open={open_not_enough}>
+        <NotEnoughCoins click={close_not_enough}/>
+    </BottomSheet>
 
     </div>
     );

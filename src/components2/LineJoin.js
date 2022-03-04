@@ -3,25 +3,33 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import {useEffect, useState,useRef} from "react";
 import { useDispatch, useSelector} from "react-redux";
 import {selectJoin,selectLeagues,selectGames,selectDefaultValues,selectTimeZone, setSelectedPicks, 
-    setSendingPicks, selectGameDate,setGames} from "../features/counterSlice";
+    setSendingPicks, selectGameDate,setGames, setJoinSuccess,selectTournaments,
+    selectTransactions,
+    setNotEnoughCoins,
+    selectNotEnoughCoins
+} from "../features/counterSlice";
 import Match from "./Match";
 import {auth, db} from "../firebase_file";
 import firebase from "firebase";
 import ClearIcon from '@material-ui/icons/Clear';
 import NearMeIcon from '@material-ui/icons/NearMe';
 import RefreshIcon from '@material-ui/icons/Refresh';
+import HeaderBottomSheet from "./HeaderBottomSheet";
+import {user_coins} from "./data";
 
 const moment=require("moment-timezone");
 let id_inter=0;
 
-const LineJoin=({click})=>{
+const LineJoin=({click,from_main})=>{
     const join=useSelector(selectJoin);
     const leagues=useSelector(selectLeagues);
     const games=useSelector(selectGames);
     const default_values=useSelector(selectDefaultValues)
     const tz=useSelector(selectTimeZone);
     const game_date=useSelector(selectGameDate);
-    console.log("the game date is ",game_date);
+    const t=useSelector(selectTournaments);
+    const all_transactions=useSelector(selectTransactions);
+    
 
     const dispatch=useDispatch();
 
@@ -31,8 +39,13 @@ const LineJoin=({click})=>{
     const [loading,set_loading]=useState(false);
     const [picks,set_picks]=useState([]);
     const [game_loading,set_game_loading]=useState("");
+    const [dates,set_dates]=useState([]);
 
     const btn_loading_games=useRef(null);
+
+
+
+   
 
 
     useEffect(()=>{
@@ -52,7 +65,23 @@ const LineJoin=({click})=>{
         if(res2.length>0){
             set_ml_spread(res2[0]);
         }
+
+        let d=game_date._d;
+        if(d==undefined){
+            d=game_date;
+        }
+        d=moment(d,tz).format("ll");
+        console.log("the new date is ",d);
+        if(join.dates!=undefined){
+            set_dates(join.dates);
+        }else{
+            set_dates([d]);
+        }
     },[join])
+
+    useEffect(()=>{
+        console.log("the dates are ",dates);
+    },[dates])
 
     useEffect(()=>{
         if(league==null) return;
@@ -65,36 +94,48 @@ const LineJoin=({click})=>{
 
         const res2=res.filter((item)=>{
             const commence=item.commence
+            let d=game_date._d;
+            if(d==undefined){
+                d=game_date;
+            }
             const start=moment.tz(commence,tz);
-            const today=moment.tz(game_date,tz);
+            const today=moment.tz(d,tz);
             const end=moment().endOf("day");
             
             const diff=start.diff(today,"seconds");
-            const diff_end=end.diff(today,"seconds");
-            //console.log(start.format("ll"),today.format("ll"),diff,);
-            
+           
             const str_start=start.format("ll");
             const str_today=today.format("ll");
            
-            if(str_start==str_today){
-                console.log(str_start,str_today,diff);
-               
-                if(diff>=0){
-                    return true;
-                }else{
-                    return false;
-                }
-            }else{
+            if(dates.indexOf(str_start)<0){
                 return false;
             }
-            
 
-            return diff>=0 && diff<=diff_end;
+            return true;
+          
         })
-        console.log("all games",res2);
         
-        set_data(res2);
+        const res_final=[];
+        for(var i=0; i<dates.length; i++){
+            const dt=dates[i];
+            const res3=res2.filter((item)=>{
+                const a_start=moment.tz(item.commence,tz);
+                return a_start.format("ll")==dt;
+
+            })
+            if(res3.length>0){
+                res_final.push({date:dt,data:res3})
+            }
+           
+        }
+        console.log(res_final)
+       
+        
+        //set_data(res2);
+        set_data(res_final);
         set_loading(false);
+
+        console.log("the results are ",res_final)
 
     },[league,games]);
 
@@ -197,34 +238,63 @@ const LineJoin=({click})=>{
    const send_picks=(e)=>{
 
     
-
+    dispatch(setJoinSuccess(false));
     if(picks.length!=parseInt(join.number_game)){
         alert("You must pick "+join.number_game+" games before submit");
         return;
+    }
+    
+    let d=game_date._d;
+    if(d==undefined){
+        d=game_date;
     }
     const obj={
         user:auth?.currentUser?.email,
         picks,
         id_challenge:join?.key,
         type_challenge:join?.type,
-        date:new firebase.firestore.Timestamp.fromDate(game_date)
+        date:new firebase.firestore.Timestamp.fromDate(d)
     };
-    console.log("we are using the date",game_date);
-    console.log("the new object is ",obj)
+   
+   
 
+    const entry=parseFloat(join?.entry);
+    const my_coins=user_coins(auth?.currentUser?.email,all_transactions);
+   
+    
+    if((entry+100)>my_coins && entry>0){
+        click();
+        dispatch(setNotEnoughCoins(true))
+        return;
+    }
+    
     dispatch(setSendingPicks(true))
 
     db.collection("psg_picks").add(obj).then(async ()=>{
-        console.log("picks are send well");
+
+      
+        let new_entry=0;
+        if(join?.entry!="0"){
+            new_entry=parseInt(join?.entry)+100;
+        }
         const coins_info={
             user:auth?.currentUser?.email,
             id_challenge:join?.key,
             picks,
-            entry:"-"+join?.entry,
+            entry:"-"+new_entry,
             date:firebase.firestore.FieldValue.serverTimestamp()
         };
+
         await db.collection("psg_users_coins").add(coins_info);
-        dispatch(setSendingPicks(false))
+        dispatch(setJoinSuccess(true))
+        setTimeout(()=>{
+            dispatch(setSendingPicks(false))
+        },200)
+
+        if(from_main==true){
+            create_new_challenge(join?.key);
+        }
+
 
         console.log("also coins removed from user account")
     }).catch((err)=>{
@@ -235,6 +305,25 @@ const LineJoin=({click})=>{
     
    }
 
+
+   const create_new_challenge=(id_challenge)=>{
+       const res=t.filter((item)=>{
+           return item.key==id_challenge;
+       })
+
+       if(res.length>0){
+           const challenge={...res[0]};
+           delete challenge.key;
+           delete challenge.challenge_results;
+
+          db.collection("psg_challenges").add(challenge).then(()=>{
+              console.log("the new challenge created")
+          }).catch((err)=>{
+              console.log("the new erreur",err.message);
+          });
+           
+       }
+   }
    
    const quick_picks=(e)=>{
         dispatch(setSelectedPicks([]));
@@ -274,6 +363,8 @@ const LineJoin=({click})=>{
     return (
         <div className="line_join">
 
+            
+
             {loading==true && <div className="info">
                 <p>Please wait</p>
                 <CircularProgress size={15} style={{color:"black"}} />
@@ -283,7 +374,9 @@ const LineJoin=({click})=>{
             {
                 (loading==false && data.length==0) && 
                     <div className="info">
-                        <p>No data found</p>
+                        <p>It seems that there is no game playing on this date.
+                            Please click on the button below to refresh.
+                        </p>
 
                         <button onClick={load_games} ref={btn_loading_games}>
                             <RefreshIcon style={{fontSize:"1.2rem"}} />
@@ -297,11 +390,30 @@ const LineJoin=({click})=>{
             {
                 data.length>0 && 
                 <div className="a_line">
-                    <p>{
-                        moment(game_date,tz).format("ll")
-                        }</p>
+                    
                    {
-                       data.map((item)=>{
+                       data.map((item,i)=>{
+
+                        const dt=item.date;
+                        const matches=item.data;
+                        return(
+                            <div key={i}>
+                                <p>{dt}</p>
+                                {
+                                    matches.map((match)=>{
+                                        return(
+                                            <Match 
+                                                key={match.key} 
+                                                match={match}  
+                                                show_ml_spread={show_ml_spread}
+                                                click={pick}
+                                                />
+                                        )
+                                    })
+                                }
+                            </div>
+                        )
+                           
                            return(
                                <Match 
                                     key={item.key} 
@@ -315,16 +427,24 @@ const LineJoin=({click})=>{
                 </div>
             }
 
-            <div className="line_join_bottom">
-                <button onClick={click}>
-                    <ClearIcon />
-                </button>
+            {data.length>0 && <div className="line_join_bottom">
+               
                 {data.length>0 && <button>{picks.length}/{join?.number_game} picks</button>}
                 {data.length>0 && <button onClick={quick_picks}>Quick picks</button>}
-                {data.length>0 && <button onClick={send_picks}>
+                {data.length>0 && <button onClick={send_picks} 
+                className={picks.length==join?.number_game ? "active":""}>
                     <NearMeIcon />
                 </button>}
             </div>
+            }
+
+            <HeaderBottomSheet title="Make Your Picks">
+                <button onClick={click} className="line_join_close_btn">
+                    <ClearIcon />
+                </button>
+            </HeaderBottomSheet>
+
+            
            
             
         </div>

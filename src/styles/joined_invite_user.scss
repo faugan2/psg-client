@@ -1,0 +1,41 @@
+.joined_invite_user{
+    min-height: 50vh;
+    max-height: 50vh;
+    overflow: auto;
+    margin-top:1rem;
+    >div{
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    
+        >button{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            margin:0.5rem;
+            font-size: 0.7rem;
+            padding:0.5rem;
+            >img{
+                width:30px;
+                height:30px;
+                border-radius: 50%;
+            }
+        }
+    }
+    
+
+    >.joined_invite_user_close_btn{
+        position:fixed;
+        top:0;
+        right:0;
+        width:40px;
+        height: 40px;
+        border-radius: 50%;
+        border:none;
+        background-color: indianred;
+        color:white;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1;
+    }
+}

@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import {auth,db} from "../firebase_file";
 import {get_pick_key, get_user_status, load_user_picks} from "../functions";
 import {get_today_time} from "../functions";
-import logo from "../components/img/logo.png";
+import logo from "../components2/img/logo.png";
 import ReactLoading from 'react-loading';
 import { useDispatch, useSelector } from "react-redux";
-import { selectPicks, setActiveTab, setLeagues, setUsersStats,setPage, setPageName, selectRegistration,
+import { setChatTotal,selectChat,setChat,selectPicks, setActiveTab, setLeagues, setUsersStats,setPage, setPageName, selectRegistration,
     setPicks, setDefaultValues, setSports, setToday, setTodayTime,setTournaments, setUsers,
     setMyPicksBought,setPicksBought ,setFollow, setGames, selectTodayTime, setTransactions, setMainChallenges, setTimeZone} from "../features/counterSlice";
 import firebase from "firebase";
@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 import { challenged_closed } from "../functions";
 import CircularProgress from '@material-ui/core/CircularProgress';
 import "../styles/splash.scss";
-import Footer from "../components/Footer2";
+import Footer from "../components2/Footer2";
 
 const moment=require("moment-timezone");
 
@@ -21,6 +21,7 @@ const Splash=()=>{
     const dispatch=useDispatch();
     const history=useHistory();
     const r=useSelector(selectRegistration)
+   
    
     useEffect(()=>{
         window.addEventListener('popstate', function (e) {
@@ -63,7 +64,7 @@ const Splash=()=>{
     
                 }else{
 
-                    console.log("the user is ",user);
+                    
                     await load_sports(); // DONE
                     await load_leagues(); //DONE 
                     await load_users(); // DONE
@@ -77,9 +78,10 @@ const Splash=()=>{
                     await load_users_coins();// DONE
                     await load_main_challenges();
                     await load_time_zone();// DONE
-                    dispatch(setPageName("Lobby"));
-                    dispatch(setActiveTab(4));
-                     history.replace("/main");
+                    await load_chat();
+                    //dispatch(setPageName("Lobby"));
+                    //dispatch(setActiveTab(4));
+                    history.replace("/main");
                 }  
             },500);
 
@@ -101,7 +103,7 @@ const Splash=()=>{
     }
 
     const load_leagues=async ()=>{
-        const res=await db.collection("psg_leagues").get();
+        const res=await db.collection("psg_leagues").orderBy("order","asc").get();
         const sports=[];
          res.forEach((line)=>{
             const key=line.id;
@@ -579,6 +581,22 @@ const load_users_coins=async ()=>{
     })
 }
 
+const load_chat=async ()=>{
+    db.collection("psg_chat").orderBy("date","asc").onSnapshot((snap)=>{
+        const d=[];
+        snap.docs.map((doc)=>{
+            const key=doc.id;
+            const data=doc.data();
+            data.key=key;
+            d.push(data);
+        })
+       
+        dispatch(setChat(d))
+        dispatch(setChatTotal(d.length))
+        console.log("total is",d.length);
+    })
+}
+
 const load_main_challenges=async ()=>{
     db.collection("psg_challenges")
     .where("parent","==",true)
@@ -633,7 +651,7 @@ const load_main_challenges=async ()=>{
         <div className="splash">
             <div className="body">
                 <img alt="logo" src={logo} />
-                <CircularProgress size={15} style={{color:"black"}} />
+                <CircularProgress size={15} style={{color:"#e8e8e8"}} />
             </div>
             <Footer />
         </div>

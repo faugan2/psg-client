@@ -1,0 +1,48 @@
+.my_club{
+   background-color: black;
+   height:100vh;
+   color:white;
+   >.top{
+       background-color:var(--sub_black);
+       display:flex;
+       align-items: center;
+       height:60px;
+       position:fixed;
+       top:0;
+       width:100%;
+
+       >button{
+            padding:0.5rem;
+            color:white;
+            background-color:transparent;
+            border:none;
+       }
+
+       >h2{
+           font-size:0.9rem;
+       }
+   }
+
+   >.content{
+       position:fixed;
+       top:60px;
+       width:100%;
+       min-height:calc(100vh - 60px); 
+       max-height:calc(100vh - 60px);
+       overflow:auto;  
+
+       >.info{
+           margin-top: 1rem;
+           display:flex;
+           justify-content:center;
+           >p{
+               text-align: center;
+               font-size:0.8rem;
+           }
+       }
+
+       >.club_users{
+           padding:1rem;
+       }
+   }
+}

@@ -1,6 +1,7 @@
 .history{
     background-color:#e8e8e8;
     width:100%;
+    margin-top:100px;
     >.info{
         display:flex;
         align-items:center;
@@ -8,5 +9,9 @@
         font-size: 0.8rem;
         font-weight:bold;
         margin: 0.5rem;
+    }
+
+    >.margin_bottom{
+        margin-bottom: 150px;
     }
 }

@@ -1,10 +1,10 @@
 .main{
    position: relative;
-   background-color: #e8e8e8;
+   background-color: black;
     >.chat_btn{
         background-color: indianred;
         position:fixed;
-        bottom:80px;
+        bottom:120px;
         right:1rem;
         z-index: 1;
         width:2.5rem;
@@ -14,4 +14,15 @@
         border:none;
         opacity: 1;
     }
+
+ 
 }
+
+
+.quick_play{
+    margin-bottom: 100px;
+}
+
+
+
+

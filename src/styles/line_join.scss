@@ -1,17 +1,46 @@
 .line_join{
-    min-height: 50vh;
-    max-height: 80vh;
+    min-height: 60vh;
+    max-height: 60vh;
     overflow:auto;
     display:flex;
     flex-direction:column;
 
+    >.line_join_top{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        width:70%;
+        margin: auto;
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid gray;
+        position:fixed;
+        top:1rem;
+        width:100%;
+        height:20px;
+
+        >h1{
+            font-size: 0.8rem;
+            
+        }
+    }
+
    .a_line{
-        >p{
+      
+    margin-top: 2rem;
+    position:fixed;
+    top:20px;
+    width:100%;
+    min-height:calc(60vh - 20px - 50px );
+    max-height:calc(60vh - 20px - 50px );
+    overflow:auto;
+
+       >div >p{
             font-size: 0.7rem;
-            background-color:black;
+            background-color:whitesmoke;
             width:80px;
             margin:auto;
-            color:white;
+            color:gray;
             padding:0.3rem;
             display:flex;
             align-items:center;
@@ -24,6 +53,7 @@
     >button{    
         width:100px;
         margin:auto;
+       
     }
 
     >.info{
@@ -31,8 +61,14 @@
         align-items:center;
         justify-content:center;
         flex-direction:column;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         font-weight:bold;
+        padding:1rem;
+        margin-top: 2rem;
+        color:whitesmoke;
+        text-align: center;
+
+    
 
         >button{
             margin-top:1rem;
@@ -40,21 +76,23 @@
             align-items: center;
             flex-direction: column;
             width:100px;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             justify-content: center;
+            
         }
     }
 
     >.line_join_bottom{
         position:fixed;
         bottom:0;
-        background-color:black;
-        opacity:0.8;
+        background-color:indianred;
+        
         width:100%;
         height: 50px;
         display:flex;
         align-items:center;
         justify-content:space-between;
+        z-index: 9999;
         >button{
             margin:0.5rem;
             background-color:whitesmoke;
@@ -63,6 +101,7 @@
             font-weight:600;
             border:1px solid silver;
             border-radius: 3px;
+            z-index: 99999;
         }
 
         >button:first-child{
@@ -82,7 +121,7 @@
         >button:nth-child(2){
             background-color:transparent;
             color:white;
-            border:none;
+            border:1px solid whitesmoke;
         }
 
         >button:nth-child(3){
@@ -91,7 +130,7 @@
             
         }
 
-        >button:nth-child(4){
+        >button:nth-child(3){
             width:40px;
             height:40px;
             border-radius: 50%;
@@ -99,13 +138,25 @@
             display:flex;
             align-items:center;
             justify-content:center;
-            background-color:green;
-            color:white;
+            background-color:whitesmoke;
+            color:gray;
+
+            &.active{
+                color:green;
+            }
         }
+
+        
     }
 
     .match:last-child{
         margin-bottom: 60px;
         border-bottom: none;
     }
+}
+
+.line_join_close_btn{
+    position:fixed;
+    top:0;
+    right:0;
 }

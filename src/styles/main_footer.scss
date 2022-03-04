@@ -2,11 +2,40 @@
     position:fixed;
     bottom:0;
     width:100vw;
-    height: 50px;
-    background-color: black;
+    min-height: 50px;
+    background-color: #474f4f;
     display:flex;
     align-items: center;
+    flex-direction: column;
+    color:white;
+
+    >.main_footer_sliding_games{
+        border-bottom:1px solid rgba(255,255,255,0.3);
+        flex:1;
+        width:100%;
+        font-size: 0.7rem;
+        display:flex;
+        align-items: center;
+        >div{
+            
+            >div{
+                display:flex;
+                align-items: center;
+               
+                button{
+                    width:100vw;
+                    margin:0.5rem;
+                    border:none;
+
+                }
+            }
+
+          
+        }
+       
+    }
     >.menu{
+        height: 40px;
         display:flex;
         align-items: center;
         width:100%;
@@ -19,12 +48,14 @@
             justify-content: center;
             background-color: transparent;
             color:white;
+            margin:0.5rem;
             border:none;
         }
 
-        >button:active{
+        >button.active{
             border-bottom: 1px solid whitesmoke;
             font-weight: bold;
         }
     }
 }
+

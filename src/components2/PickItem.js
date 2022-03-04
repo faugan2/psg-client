@@ -75,8 +75,9 @@ const PickItem=({pick,date})=>{
                     <p>{pick_date}</p>
                 </div>
                 <div>
-                    <p>{sport_name}</p>
                     <p>Game</p>
+                    <p>{sport_name}</p>
+                    
                 </div>
                 <div>
                     <p className={s_team_away}>{pick.teams[0]}</p>

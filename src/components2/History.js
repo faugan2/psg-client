@@ -143,6 +143,8 @@ const Live=()=>{
                 <BottomSheet  open={open_detail}>
                     <Joined click={close_detail} />
                 </BottomSheet>
+
+                <div className="margin_bottom"></div>
         </div>
     )
 }
