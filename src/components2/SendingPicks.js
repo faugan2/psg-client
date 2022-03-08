@@ -11,8 +11,8 @@ const SendingPicks=()=>{
     return (
         <div className="sending_picks">
             {success==false && <p>Please wait...</p>}
-            {success==false && <CircularProgress size={15} style={{color:"black"}}/>}
-            {success==true && <CheckCircleOutlineIcon size={30} style={{color:"green",fontSize:"4rem"}}/>}
+            {success==false && <CircularProgress size={15} style={{color:"white"}}/>}
+            {success==true && <CheckCircleOutlineIcon size={30} style={{color:"white",fontSize:"4rem"}}/>}
         </div>
     )
 }

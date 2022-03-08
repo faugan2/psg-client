@@ -10,6 +10,9 @@ import ncaab from "./img/ncaab.png";
 import ncaaf from "./img/ncaaf.png";
 import overwatch from "./img/overwatch.png";
 import ufc from "./img/ufc.png";
+import {db} from "../firebase_file";
+import firebase from "firebase";
+
 
 const user_stats=(user_email,all_stats)=>{
     let loses=0;
@@ -175,6 +178,76 @@ const user_coins=(user,transactions)=>{
 }
 
 
+const create_all_main_challenges=(tournaments)=>{
+    db.collection("psg_challenges").where("parent","==",true).get().then((snap)=>{
+        const mains=[];
+        snap.docs.map((doc)=>{
+            const key=doc.id;
+            const data=doc.data();
+            //league,type,mode,entry,number_game
+
+            const league=data.league;
+            const type=data.type;
+            const entry=data.entry;
+            const number_game=data.number_game;
+            const mode=data.mode;
+            const line=league+"-"+type+"-"+entry+"-"+number_game+"-"+mode;
+
+            if(mains.indexOf(line)<0){
+                mains.push(line);
+            }
+          
+        })
+       // console.log("mains",mains);
+
+        mains.map(async (line,i)=>{
+            const [league,type,entry,number_game,mode]=line.split("-");
+            console.log(tournaments);
+           const res=tournaments.filter((item)=>{
+               return item.league==league && 
+               item.type==type &&
+               item.entry==entry && 
+               item.mode==mode &&
+               item.number_game==number_game && 
+               item.parent==true
+           })
+           
+           if(res.length>0){
+               let challenge={...res[0]};
+               delete challenge.key;
+               delete challenge.winners;
+               delete challenge.wins;
+               delete challenge.challenge_results;
+
+               challenge.parent=false;
+               challenge.date=firebase.firestore.FieldValue.serverTimestamp();
+               
+
+               await create_challenge(i,challenge);
+               /*(async ()=>{
+                console.log("creating f or",i)
+                await db.collection("psg_challenges").add(challenge);
+                console.log("done for ",i)
+               })()*/
+
+               
+              
+               
+                /*db.collection("psg_challenges").add(challenge).then(()=>{
+                    console.log("created for ",i,line)
+                });*/
+               
+           }
+        })
+    })
+}
+
+const create_challenge=async (i,challenge)=>{
+   await db.collection("psg_challenges").add(challenge);
+   console.log("creating for ",i)
+}
+
+
 export {
     baseball,
     basketball,
@@ -190,5 +263,6 @@ export {
     ufc,
     user_stats,
     user_matches_picks,
-    user_coins
+    user_coins,
+    create_all_main_challenges
 };

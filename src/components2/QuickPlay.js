@@ -13,7 +13,8 @@ import { BottomSheet } from 'react-spring-bottom-sheet'
 import LineJoin from "./LineJoin";
 import SendingPicks from "./SendingPicks";
 import {useHistory} from "react-router-dom";
-
+import {create_all_main_challenges} from "./data";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const moment=require("moment-timezone");
 
@@ -33,6 +34,8 @@ const QuickPlay=()=>{
     const [open,set_open]=useState(false);
     const [open_sending,set_open_sending]=useState(false);
     const [username,set_username]=useState("");
+    const [loading,set_loading]=useState(true);
+    const [can_create,set_can_create]=useState(false);
 
     useEffect(()=>{
         if(auth.currentUser==null || u==null){
@@ -52,6 +55,8 @@ const QuickPlay=()=>{
         if(t==null || t.length==0) return ;
         
         
+        set_loading(true);
+        set_can_create(false);
         const res=t.filter((item)=>{
             return item.parent==false;
         })
@@ -113,9 +118,21 @@ const QuickPlay=()=>{
         })
         console.log(res3)
         set_data(res3);
+        set_loading(false);
+        if(res3.length==0){
+            set_can_create(true);
+        }
+        
         
         
     },[t,p])
+
+    useEffect(()=>{
+        if(data==null) return;
+        if(can_create==true && loading==false){
+            create_all_main_challenges(t);
+        }
+    },[can_create,loading])
 
     const line_clicked=(line)=>{
         const line_sport=line.sport;
@@ -150,9 +167,11 @@ const QuickPlay=()=>{
     return(
         <div className="quick_play">
             <div className="info">
-                <h1>Hello, {username}</h1>
-                {data.length>0 &&  <p>We have quick play for you.</p>}
-                {data.length==0 && 
+                {loading==false && <h1>Hello, {username}</h1>}
+                {loading==true && <CircularProgress style={{color:"white"}} size={15} />}
+                {(data.length>0 && loading==false)&&  <p>We have quick play for you.</p>}
+                
+                {(data.length==0 && loading==false) && 
                 <div>
                     There is no Quick Play available.
                     <br />Select a Sport above or 

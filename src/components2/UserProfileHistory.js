@@ -30,7 +30,7 @@ const UserProfileTodaysGame=()=>{
                 return i.key==id_challenge;
             })[0] 
             
-            return item.user==email && challenge.winners!=undefined;
+            return item.user==email && challenge?.winners!=undefined;
         })
 
         const res2=res.map((item)=>{
