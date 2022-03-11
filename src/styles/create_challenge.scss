@@ -1,7 +1,7 @@
 .create_challenge{
     min-height: 60vh;
     max-height: 60vh;
-    overflow:auto;
+   
     >.create_top{
         position:fixed;
         top:0.5rem;
@@ -78,6 +78,11 @@
     }
 
     >.create_content{
-        margin-top: 35px;
+        position:fixed;
+        top:40px;
+        width:100%;
+        min-height:calc(60vh - 30px - 50px);
+        max-height:calc(60vh - 30px - 50px);
+        overflow:auto;
     }
 }

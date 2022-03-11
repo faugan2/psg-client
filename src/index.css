@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+[data-rsbs-overlay], [data-rsbs-backdrop], [data-rsbs-root]::after{
+  z-index: 999 !important;
+}
