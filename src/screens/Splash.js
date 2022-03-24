@@ -21,6 +21,14 @@ const Splash=()=>{
     const dispatch=useDispatch();
     const history=useHistory();
     const r=useSelector(selectRegistration)
+    const redux_picks=useSelector(selectPicks)
+
+    const [all_picks,set_all_picks]=useState([]);
+
+    useEffect(()=>{
+        set_all_picks(redux_picks);
+    },[redux_picks])
+   
    
    
     useEffect(()=>{
@@ -76,7 +84,7 @@ const Splash=()=>{
                     await load_games();
                     await load_default_values();// DONE
                     await load_users_coins();// DONE
-                    await load_main_challenges();
+                   // await load_main_challenges();
                     await load_time_zone();// DONE
                     await load_chat();
                     //dispatch(setPageName("Lobby"));
@@ -91,8 +99,11 @@ const Splash=()=>{
 
    
     const load_sports=async ()=>{
+        //const start=moment();
+        //console.log("sport start....");
         const res=await db.collection("psg_sports").get();
         const sports=[];
+        
         res.forEach((line)=>{
             const key=line.id;
             const data=line.data();
@@ -100,6 +111,10 @@ const Splash=()=>{
             sports.push(data);
         })
         dispatch(setSports(sports));
+        /*const end=moment();
+        const diff=end.diff(start,"seconds");
+        console.log("sport start we get snap of ",res.docs.length,"documents","diff is ",diff);
+        console.log("sport start end")*/
     }
 
     const load_leagues=async ()=>{
@@ -147,6 +162,7 @@ const Splash=()=>{
         });
 
         dispatch(setPicks(p));
+        set_all_picks(p);
 
         //get picks with results
 
@@ -431,7 +447,10 @@ const Splash=()=>{
                data.key=key;
                 t.push(data);
            })
+
            dispatch(setTournaments(t));
+
+           
        })
    }
 
@@ -471,7 +490,9 @@ const Splash=()=>{
    const t=useSelector(selectTodayTime);
    const load_games=async ()=>{
        
-    let today_time=await get_today_time();
+    //let today_time=await get_today_time();
+    let today_time=moment().valueOf();
+   
     db
     .collection("psg_games")
     .orderBy("time","desc")
@@ -550,7 +571,7 @@ const Splash=()=>{
 
     
 const load_today_time=async ()=>{
-    const res=await get_today_time();
+    const res=moment().valueOf();
     dispatch(setTodayTime(res));
 }
 

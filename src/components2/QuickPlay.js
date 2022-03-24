@@ -3,6 +3,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { useState,useEffect } from "react";
 import {setJoin,selectTournaments,selectLeagues,selectSports,selectPicks,selectTimeZone, 
     selectSendingPicks,
+    setTournaments,
     setSendingPicks,
     selectUsers,
     setSport, setGameDate, setLine} from "../features/counterSlice";
@@ -36,6 +37,35 @@ const QuickPlay=()=>{
     const [username,set_username]=useState("");
     const [loading,set_loading]=useState(true);
     const [can_create,set_can_create]=useState(false);
+
+
+    useEffect(()=>{
+        if(t==null || p==null) return;
+
+        const res=t?.filter((item,i)=>{
+            const date=moment(item.date?.seconds*1000).endOf("day");
+            const now=moment().endOf("day");
+            const diff=now.diff(date,"seconds");
+            if(diff<=0){
+                return true;
+            }else{
+                const key=item.key;
+                const res3=p.filter((line)=>{
+                    return line.id_challenge==key;
+                })
+                if(res3.length>0){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        })
+
+        dispatch(setTournaments(res));
+        
+
+        
+    },[]);
 
     useEffect(()=>{
         if(auth.currentUser==null || u==null){

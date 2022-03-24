@@ -35,7 +35,7 @@ export default function Debug(props) {
     },[])*/
 
     useEffect(()=>{
-        db.collection("psg_challenges").where("parent","==",false).get().then((snap)=>{
+       /* db.collection("psg_challenges").where("parent","==",false).get().then((snap)=>{
             snap.docs.map((doc)=>{
                 const key=doc.id;
                 const data=doc.data();
@@ -45,10 +45,21 @@ export default function Debug(props) {
                     db.collection("psg_challenges").doc(key).delete();
                 }
             })
-        })
+        })*/
        //create_all_main_challenges(t);
+
+       
     },[t])
 
+    useEffect(()=>{
+        console.log("getting...");
+        db.collection("psg_challenges").get().then((snap)=>{
+            snap.docs.map((doc, i)=>{
+                const id=doc.id;
+                console.log(i,"id=",id);
+            })
+        })
+    },[])
     return (
         <div>
          debug page {status}
