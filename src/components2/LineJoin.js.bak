@@ -275,7 +275,7 @@ const LineJoin=({click,from_main})=>{
       
         let new_entry=0;
         if(join?.entry!="0"){
-            new_entry=parseInt(join?.entry)+0.1;
+            new_entry=parseInt(join?.entry)+100;
         }
         const coins_info={
             user:auth?.currentUser?.email,
