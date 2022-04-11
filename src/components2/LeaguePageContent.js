@@ -138,11 +138,11 @@ const LeaguePageContent=()=>{
         }else if(entry==2){
             str_entry="0"
         }else if(entry==3){
-            str_entry="1000"
+            str_entry="1"
         }else if(entry==4){
-            str_entry="2000"
+            str_entry="2"
         }else if(entry==5){
-            str_entry="5000"
+            str_entry="5"
         }
         
         const res=t.filter((item)=>{

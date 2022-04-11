@@ -164,7 +164,7 @@ const user_matches_picks=(user,picks)=>{
 }
 
 const user_coins=(user,transactions)=>{
-    let total_coins=5000;
+    let total_coins=5;
     const res=transactions.filter((item)=>{
         return item.user==user;
     })

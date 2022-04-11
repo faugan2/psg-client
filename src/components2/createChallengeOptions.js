@@ -97,13 +97,13 @@ const CreateChallengeOptions=()=>{
                         <input type="radio" name="entry" defaultChecked/> Free
                     </button>
                     <button onClick={e=>set_entry_change(2)}>
-                        <input type="radio" name="entry"/> 1000 coins
+                        <input type="radio" name="entry"/> 1 coins
                     </button>
                     <button onClick={e=>set_entry_change(3)}>
-                        <input type="radio" name="entry"/> 2000 coins
+                        <input type="radio" name="entry"/> 2 coins
                     </button>
                     <button onClick={e=>set_entry_change(4)}>
-                        <input type="radio" name="entry"/> 5000 coins
+                        <input type="radio" name="entry"/> 5 coins
                     </button>
                 </div>
             </div>

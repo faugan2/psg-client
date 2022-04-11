@@ -292,7 +292,7 @@ const transition_right_menu=useTransition(show_right_menu,{
            transition_right_menu((style,item)=>{
              if(item){
                return(
-                 <animated.div style={style,{display:"none"}}>
+                 <animated.div style={{display:"none"}}>
                     <IconButton aria-label="search" color="inherit" onClick={go_to_friends}>
                       <SearchIcon style={{color:"white"}} />
                     </IconButton>

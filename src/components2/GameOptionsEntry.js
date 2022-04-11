@@ -36,15 +36,15 @@ const GameOptionsEntry=()=>{
             </div>
             <div className="line"  onClick={select_entry.bind(this,3)}>
                 <input type="radio" name="entry" /> 
-                <button>1000 Coins</button>
+                <button>1 Coin</button>
             </div>
             <div className="line" onClick={select_entry.bind(this,4)}>
                 <input type="radio" name="entry" /> 
-                <button >2000 Coins</button>
+                <button >2 Coins</button>
             </div>
             <div className="line" onClick={select_entry.bind(this,5)}>
                 <input type="radio" name="entry" /> 
-                <button >5000 Coins</button>
+                <button >5 Coins</button>
             </div>
         </div>
     );

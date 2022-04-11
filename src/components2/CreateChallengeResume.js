@@ -79,11 +79,11 @@ const CreateChallengeResume=({click,open_create_modal,open_join})=>{
         if(options.entry==1){
             set_game_entry("Free");
         }else if(options.entry==2){
-            set_game_entry("1000 Coins")
+            set_game_entry("1 Coin")
         }else if(options.entry==3){
-            set_game_entry("2000 Coins");
+            set_game_entry("2 Coins");
         }else if(options.entry==4){
-            set_game_entry("5000 Coins")
+            set_game_entry("5 Coins")
         }
 
         if(options.number_game==1){
@@ -112,11 +112,11 @@ const CreateChallengeResume=({click,open_create_modal,open_join})=>{
         if(entry==1){
             str_entry="0"
         }else if(entry==2){
-            str_entry="1000";
+            str_entry="1";
         }else if(entry==3){
-            str_entry="2000";
+            str_entry="2";
         }else if(entry==4){
-            str_entry="5000";
+            str_entry="5";
         }
 
         let str_type="";

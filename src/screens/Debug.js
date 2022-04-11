@@ -52,11 +52,24 @@ export default function Debug(props) {
     },[t])
 
     useEffect(()=>{
-        console.log("getting...");
+       /* console.log("getting...");
         db.collection("psg_challenges").get().then((snap)=>{
             snap.docs.map((doc, i)=>{
                 const id=doc.id;
                 console.log(i,"id=",id);
+            })
+        })*/
+    },[])
+
+    useEffect(()=>{
+        db.collection("psg_users").get().then((snap)=>{
+            snap.docs.map(async (doc)=>{
+                const key=doc.id;
+                const coins=doc.data().coins;
+                if(coins==5000){
+                    await db.collection("psg_users").doc(key).update({coins:"5"},{merge:true});
+                }
+
             })
         })
     },[])

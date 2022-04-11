@@ -4,7 +4,7 @@ import {useState,useEffect} from "react";
 import GooglePayButton from "@google-pay/button-react";
 
 const CoinsDeposite=({transactions})=>{
-    const [total,set_total]=useState(5000);
+    const [total,set_total]=useState(5);
     const [amount,set_amount]=useState(10)
 
     useEffect(()=>{
@@ -15,7 +15,7 @@ const CoinsDeposite=({transactions})=>{
             return item.user==email;
         })
 
-        let t=5000;
+        let t=5;
         res.map((item)=>{
             const el=parseFloat(item.entry);
             if(isNaN(el)) return;

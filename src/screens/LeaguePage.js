@@ -104,11 +104,11 @@ const LeaguePage=()=>{
         }else if(e==2){
             set_entry("Free");
         }else if(e==3){
-            set_entry("1000 coins");
+            set_entry("1 coin");
         }else if(e==4){
-            set_entry("2000 coins");
+            set_entry("2 coins");
         }else if(e==5){
-            set_entry("5000 coins");
+            set_entry("5 coins");
         }
     },[league_options]);
 
