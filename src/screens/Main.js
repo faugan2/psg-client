@@ -11,7 +11,7 @@ import { selectActiveTab, selectTournaments, setSport,
     selectChatRead,
  } 
 from "../features/counterSlice";
-import { auth } from "../firebase_file";
+import { auth,db } from "../firebase_file";
 import { useEffect, useState } from "react";
 /*import Lobby from "../components/Lobby";
 import Games from "../components/Games";
@@ -42,12 +42,15 @@ import Chat from "../components2/Chat"
 import { BottomSheet } from 'react-spring-bottom-sheet'
 import Profile from "../components2/UserProfile";
 import NotEnoughCoins from "../components2/NotEnoughCoins";
+import DailyBonusCoins from "../components2/DailyBonusCoins";
+
 import Badge from '@material-ui/core/Badge';
 import "../styles/main.scss";
 import 'prevent-pull-refresh';
 
 import {useTransition,animated} from "react-spring";
 
+const moment=require("moment-timezone");
 
 const Main=()=>{
     
@@ -69,11 +72,16 @@ const Main=()=>{
     const [open,set_open]=useState(false);
     const [open_profile,set_open_profile]=useState(false);
     const [open_not_enough,set_open_not_enough]=useState(false);
+    const [open_daily_bonus,set_open_daily_bonus]=useState(false);
 
 
     const close_not_enough=()=>{
         //set_open_not_enough(false);
         dispatch(setNotEnoughCoins(false))
+    }
+
+    const close_daily_bonus=()=>{
+        set_open_daily_bonus(false);
     }
     const close_modal=()=>{
         set_open(false);
@@ -242,6 +250,29 @@ const Main=()=>{
         console.log(index);
         set_page(index);
     }
+
+    useEffect(()=>{
+        const today=moment().format("ll");
+        const email=auth?.currentUser?.email;
+        if(email==undefined) return;
+        
+        console.log("today is ",today,"and email is ",email);
+        db.collection("psg_bonus")
+        .where("email","==",email)
+        .where("date","==",today)
+        .get().then((res)=>{
+            if(res.docs.length==0){
+                set_open_daily_bonus(true);
+                db.collection("psg_bonus").add({email,date:today});
+            }else{
+                console.log("alerady bonus received");
+                set_open_daily_bonus(false);
+            }
+        });
+
+        
+
+    },[auth])
     return(
 <div  className="main">
     
@@ -294,8 +325,8 @@ display:"none",flexDirection:"column",gap:"1rem"}}>
         <Profile click={close_open_profile}/>
     </BottomSheet>
 
-    <BottomSheet open={open_not_enough}>
-        <NotEnoughCoins click={close_not_enough}/>
+    <BottomSheet open={open_daily_bonus}>
+        <DailyBonusCoins click={close_daily_bonus}/>
     </BottomSheet>
 
     </div>

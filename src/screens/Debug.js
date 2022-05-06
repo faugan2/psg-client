@@ -35,21 +35,17 @@ export default function Debug(props) {
     },[])*/
 
     useEffect(()=>{
-       /* db.collection("psg_challenges").where("parent","==",false).get().then((snap)=>{
+       db.collection("psg_challenges").where("parent","==",false).get().then((snap)=>{
             snap.docs.map((doc)=>{
                 const key=doc.id;
-                const data=doc.data();
-                const date=moment(data.date?.seconds*1000).format("ll");
-                if(date=="Mar 4, 2022"){
-                    console.log("ok");
-                    db.collection("psg_challenges").doc(key).delete();
-                }
+                db.collection("psg_challenges").doc(key).delete();
+                
             })
-        })*/
+        })
        //create_all_main_challenges(t);
 
        
-    },[t])
+    },[])
 
     useEffect(()=>{
        /* console.log("getting...");
@@ -62,7 +58,7 @@ export default function Debug(props) {
     },[])
 
     useEffect(()=>{
-        db.collection("psg_users").get().then((snap)=>{
+        /*db.collection("psg_users").get().then((snap)=>{
             snap.docs.map(async (doc)=>{
                 const key=doc.id;
                 const coins=doc.data().coins;
@@ -71,7 +67,7 @@ export default function Debug(props) {
                 }
 
             })
-        })
+        })*/
     },[])
     return (
         <div>

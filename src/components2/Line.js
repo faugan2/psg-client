@@ -64,7 +64,11 @@ show_btn_view,show_date})=>{
     if(line.entry=="0"){
         set_entry("Free")
     }else{
-        set_entry(line.entry);
+        let e=parseInt(line.entry);
+        if(e>=1000){
+            e/=1000;
+        }
+        set_entry(e);
     }
 
     const res=picks.filter((item)=>{

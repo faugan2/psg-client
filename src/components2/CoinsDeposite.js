@@ -4,26 +4,33 @@ import {useState,useEffect} from "react";
 import GooglePayButton from "@google-pay/button-react";
 
 const CoinsDeposite=({transactions})=>{
-    const [total,set_total]=useState(5);
+    const [total,set_total]=useState(50);
     const [amount,set_amount]=useState(10)
 
     useEffect(()=>{
+        
         if(auth?.currentUser==null) return;
+        console.log("hi");
         if(transactions==undefined || transactions==null || transactions.length==0) return;
         const email=auth?.currentUser?.email;
         const res=transactions.filter((item)=>{
             return item.user==email;
         })
 
-        let t=5;
+
+        let t=50;
+        console.log("the total is ",t);
         res.map((item)=>{
             const el=parseFloat(item.entry);
-            if(isNaN(el)) return;
+            if(isNaN(el)){
+                el=0;
+            };
             t+=el;
         })
+        
         set_total(t);
         
-    },[auth,transactions]);
+    },[auth]);
     return(
         <div className="coins_deposite">
             <div className="top">

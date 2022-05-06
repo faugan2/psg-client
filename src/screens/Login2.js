@@ -182,6 +182,7 @@ const Login=()=>{
                 <div className="top">
                    
                     <p className="brand">ProSport.Guru .Inc</p>
+                    <img src={logo} />
                 </div>
                 <div className="form">
                     <div className="line">
@@ -210,7 +211,7 @@ const Login=()=>{
                         <p>{alerte}</p>
                     </div>
                     <div className="line" >
-                        <button className="btn_forget" onClick={e=>set_open(true)}>Forget your login details?  
+                        <button className="btn_forget" onClick={e=>set_open(true)}>Forgot your login details?  
                             <span> Get help signing in.</span>
                         </button>
                     </div>

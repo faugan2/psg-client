@@ -155,7 +155,7 @@ const Login=()=>{
             password,
             email,
             date:firebase.firestore.FieldValue.serverTimestamp(),
-            coins:"5",
+            coins:"50",
             last_10:"0",
             last_200:"",
             loses:"0",
@@ -198,7 +198,7 @@ const Login=()=>{
                     email,
                     password:email,
                     photo:res.user.photoURL,
-                    coins:"5",
+                    coins:"50",
                     date:firebase.firestore.FieldValue.serverTimestamp(),
                     wins:"0",
                     loses:"0",
@@ -241,6 +241,7 @@ const Login=()=>{
                 <div className="top">
                    
                     <p className="brand">ProSport.Guru .Inc</p>
+                    <img src={logo} />
                 </div>
                 <div className="form">
                     <div className="line">
