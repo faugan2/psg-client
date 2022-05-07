@@ -60,7 +60,12 @@
                     background-color: white;
                     border:none;
                     border-radius: 2px;
-                    font-weight: bold;
+                    display:flex;
+                    flex-direction: column;
+                    >label{
+                        font-weight: bold;
+                    }
+
                 }
             }
 

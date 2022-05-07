@@ -11,15 +11,28 @@ const PagerItem=({index,item})=>{
             <div className="content">
                 <div className="body">
                     <div className="configurations">
-                        <button>baseball</button>
-                        <button>mlb</button>
-                        <button>heads up</button>
-                        <button>most wins</button>
-                        <button>3 games</button>
-                        <button>free</button>
+                        <button>
+                            baseball
+                            <label>sport</label>
+                        </button>
+                        <button>mlb
+                            <label>league</label>
+                        </button>
+                        <button>heads up
+                            <label>type</label>
+                        </button>
+                        <button>most wins
+                            <label>mode</label>
+                        </button>
+                        <button>3
+                            <label>#games</label>
+                        </button>
+                        <button>free
+                            <label>entry</label>
+                        </button>
                     </div>
                     <div className="players">
-                        players {index}
+                        
                     </div>
                 </div>
                 
