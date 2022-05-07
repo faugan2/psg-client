@@ -107,8 +107,8 @@ const Settings=()=>{
                                     />
                                 </div>
                                 <div>
-                                    <p>Private Profile</p>
-                                    <p>Make your profile invisible for other users.</p>
+                                    <p>Membership</p>
+                                    <p>Free</p>
                                 </div>
                             </div>
 

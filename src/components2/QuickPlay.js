@@ -10,6 +10,7 @@ import {setJoin,selectTournaments,selectLeagues,selectSports,selectPicks,selectT
 import Line from "./Line";
 import {auth} from "../firebase_file"
 
+
 import { BottomSheet } from 'react-spring-bottom-sheet'
 import LineJoin from "./LineJoin";
 import SendingPicks from "./SendingPicks";

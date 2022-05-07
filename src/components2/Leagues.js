@@ -53,22 +53,7 @@ const Leagues=()=>{
     return (
         <div className="container">
             
-       {/*} <div className="leagues">
-            {
-                leagues.map((league)=>{
-                    return(
-                        <League 
-                        league={league} 
-                        key={league.key} 
-                        click={go_to_games.bind(this,league)}
-                        go_to_invites={go_to_invites}
-                        go_to_messages={go_to_messages}
-                        />
-                    );
-                })
-            }
-            
-        </div>*/}
+       
 
         <QuickPlay />
 

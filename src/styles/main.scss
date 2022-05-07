@@ -24,5 +24,14 @@
 }
 
 
+.main2{
+    >.content{
+        position:fixed;
+        width:100%;
+        top:100px;
+        min-height:calc(100vh - 120px - 100px);
+    }
+}
+
 
 

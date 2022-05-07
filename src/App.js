@@ -56,6 +56,7 @@ import TermsConditions from "./screens/TermsConditions";
 import PrivatePolicy from "./screens/PrivatePolicy";
 import Help from "./screens/Help";
 import Debug from "./screens/Debug";
+import Main2 from "./screens/Main2";
 
 function App() {
   const [page,setPage]=useState(0);
@@ -156,6 +157,10 @@ function App() {
 
           <Route path="/debug">
             <Debug />
+          </Route>
+
+          <Route path="/main2">
+            <Main2 />
           </Route>
 
           {/*<Route path="/challenge">

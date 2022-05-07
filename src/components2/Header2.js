@@ -138,7 +138,7 @@ const go_to_home=()=>{
 
 
 const go_to_lobby=()=>{
-  //history.push("/lobby");
+  history.push("/main2");
 }
 
 const go_to_friends=()=>{

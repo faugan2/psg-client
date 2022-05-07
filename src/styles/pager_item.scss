@@ -1,0 +1,114 @@
+.pageContainer{
+    color:white;
+    display:flex;
+    >.content{
+        flex:1;
+        
+        display:flex;
+        flex-direction: column;
+        position:relative;
+        margin:0.5rem;
+
+        >.creator{
+
+            >h4{
+                font-size: 0.9rem;
+            }
+            >div{
+                display:flex;
+                align-items: center;
+                margin-top: 0.5rem;
+                padding-top: 0.5rem;
+                border-top: 1px solid dimgray;
+                >img{
+                    width:40px;
+                    height:40px;
+                    border-radius: 50%;
+                    margin-right: 0.5rem;
+                }
+
+                >p{
+                    font-size: 0.8rem;
+                    margin-right: 2rem;
+                }
+                >button{
+                    background-color:indianred;
+                    padding:0.5rem 1rem;
+                    border:none;
+                    color:white;
+                    border-radius: 3px;
+                    font-size: 0.8rem;
+                }
+            }
+        }
+
+        >.body{
+            flex:1;
+            margin-bottom: 1rem;
+            display:flex;
+            flex-direction: column;
+
+            >.configurations{
+                
+                display:grid;
+                grid-template-columns:50% 50%;
+                >button{
+                    padding:0.5rem;
+                    font-size: 0.6rem;
+                    text-transform: uppercase;
+                    margin:0.3rem;
+                    background-color: white;
+                    border:none;
+                    border-radius: 2px;
+                    font-weight: bold;
+                }
+            }
+
+            >.players{
+                flex:1;
+                border:1px solid white;
+            }
+        }
+    }
+    >.actions{
+        width:70px;
+        margin:0.5rem;
+        position:relative;
+        
+        >.top{
+            
+            display:flex;
+            align-items: center;
+            justify-content:center;
+            >button{
+                border:none;
+                background-color:transparent;
+                color:white;
+                >p{
+                    font-size: 0.7rem;
+                }
+            }
+        }
+        >.bottom{
+            display:flex;
+            flex-direction: column;
+            position:absolute;
+            bottom:4rem;
+            width:100%;
+
+            >button{
+                margin-top: 1.5rem;
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+                background-color:transparent;
+                border:none;
+                color:white;
+                >label{
+                    font-size: 0.7rem;
+                }
+            }
+        }
+       
+    }
+}

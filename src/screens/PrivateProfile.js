@@ -15,59 +15,44 @@ const PrivateProfile=()=>{
                 }}>
                     <ArrowBackIcon />
                 </button>
-                <h2>Private profile</h2>
+                <h2>Membership</h2>
             </div>
             <div className="content">
                
 
                 {
-                    private_profile==true && <div className="choix">
+                    true==true && <div className="choix">
                     <button className="line">
-                        <input type="radio" name="choix"  />
+                        <input type="radio" name="choix" checked />
                         <div>
-                            <h2>1 Month</h2>
-                            <p>$10</p>
+                            <h2>Free</h2>
+                            <p></p>
                         </div>
                     </button>
 
                     <button className="line">
                         <input type="radio" name="choix" />
                         <div>
-                            <h2>3 Months</h2>
-                            <p>$29</p>
+                            <h2>Standard</h2>
+                            <p>$4.99 / month</p>
+                            <p>Receive 50 coins monthly</p>
                         </div>
                     </button>
 
                     <button className="line">
                         <input type="radio" name="choix" />
                         <div>
-                            <h2>6 Months</h2>
-                            <p>$50</p>
+                            <h2>Premium</h2>
+                            <p>$14.99</p>
+                            <p>Receive 150 coins monthly</p>
                         </div>
                     </button>
 
-                    <button className="line">
-                        <input type="radio" name="choix" />
-                        <div>
-                            <h2>12 Months</h2>
-                            <p>$100</p>
-                        </div>
-                    </button>
+                   
                 </div>
                 }
 
-                {
-                    private_profile==false && 
-
-                    <div className="public">
-                        <p>
-                            Your profile is currently public. It means that your profile will be 
-                            visible to all users of ProSport.Guru. 
-                        </p>
-                        <h2>Do you want to be invisible to users ?</h2>
-                        <button onClick={e=>set_private_profile(true)}>GO PRIVATE NOW</button>
-                    </div>
-                }
+                
                 
                 
 

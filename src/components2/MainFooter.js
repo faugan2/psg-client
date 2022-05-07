@@ -15,10 +15,12 @@ import {useTransition,animated} from "react-spring";
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 
+import bet365 from "./img/bet365.gif";
+
 const moment=require("moment-timezone");
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-const MainFooter=({click,click_profile,page})=>{
+const MainFooter=({click,click_profile,page,ads})=>{
     const ref=useRef(null);
     const games=useSelector(selectGames);
     const tz=useSelector(selectTimeZone);
@@ -184,6 +186,8 @@ const MainFooter=({click,click_profile,page})=>{
             if(item){
                 return(
                     <animated.div className="main_footer" style={style}>
+
+                        {(ads==undefined) &&<img src={bet365} />}
           
             {data.length>0 && <div className="main_footer_sliding_games">
                 <AutoPlaySwipeableViews enableMouseEvents={true}>
