@@ -9,24 +9,31 @@ import InfoIcon from '@material-ui/icons/Info';
 import PeopleIcon from '@material-ui/icons/People';
 import {useState,useEffect} from "react";
 import {
-    selectSports,selectLeagues
+    selectSports,selectLeagues,selectUsers
 } from "../features/counterSlice";
 
 import {useSelector,useDispatch} from "react-redux";
+import logo from "./img/logo.png";
+
 
 const PagerItem=({index,item,date})=>{
-    const {entry,key,league,mode,name,nb_game,sport,type}=item;
-
+    const {entry,key,league,mode,name,nb_game,sport,type,user}=item;
+    
+    console.log("the user is ",user);
     const [sport_name,set_sport_name]=useState("");
     const [league_name,set_league_name]=useState("");
     const [str_type,set_str_type]=useState("");
     const [str_mode,set_str_mode]=useState("");
     const [str_entry,set_str_entry]=useState("");
     const [total_players,set_total_players]=useState(0);
+    const [creator_name,set_creator_name]=useState("");
+    const [creator_icon,set_creator_icon]=useState(null);
+    const [psg,set_psg]=useState(true);
 
 
     const s=useSelector(selectSports);
     const l=useSelector(selectLeagues);
+    const u=useSelector(selectUsers);
 
     useEffect(()=>{
         const res=l.filter((lg)=>{
@@ -79,6 +86,23 @@ const PagerItem=({index,item,date})=>{
         }
     },[entry]);
 
+    useEffect(()=>{
+        if(user==undefined){
+            set_creator_name("ProSport.Guru Inc.");
+            set_creator_icon(logo);
+            set_psg(true)
+        }else{
+            const res=u.filter((item)=>{
+                return item.email==user;
+            })
+            if(res.length>0){
+                set_creator_name(res[0].username);
+                set_creator_icon(res[0].photo);
+                set_psg(false);
+            }
+        }
+    },[user])
+
     return(
         <div className="pageContainer">
             <div className="content">
@@ -118,15 +142,16 @@ const PagerItem=({index,item,date})=>{
 
                         {mode==1 && <div><i>You must have the most wins to gain coins</i></div>}
                         {mode==2 && <div><i>You must have the longest winnings streak to gain the coins</i></div>}
+                    
                     </div>
                 </div>
                 
                 <div className="creator">
-                    <h4>{name}</h4>
+                   <h4>{name}</h4>
                     <div>
-                        <img src={auth?.currentUser?.photoURL}  />
-                        <p>{auth?.currentUser?.displayName}</p>
-                        <button>Follow</button>
+                        <img src={creator_icon}  />
+                        <p>{creator_name}</p>
+                        {psg==false && <button>Follow</button>}
                     </div>
                 </div>
             </div>
