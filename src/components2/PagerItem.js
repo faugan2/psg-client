@@ -16,7 +16,7 @@ import {
 import {useSelector,useDispatch} from "react-redux";
 import logo from "./img/logo.png";
 import Match from "./Match";
-
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 const moment=require("moment-timezone")
 
 const PagerItem=({index,item,date})=>{
@@ -188,6 +188,8 @@ const PagerItem=({index,item,date})=>{
         players_div.style.minHeight=`${diff}px`;
         players_div.style.maxHeight=`${diff}px`;
         players_div.style.overflow=`auto`;
+        const center=document.querySelector(`#center${index}`);
+        center.style.top=`${configurations_h + 16}px`;
         //document.querySelector(`#diff${index}`)?.innerHTML="augan";
 
     },[])
@@ -282,6 +284,12 @@ const PagerItem=({index,item,date})=>{
                     <button>
                         <FileCopyIcon />
                         <p>Clone</p>
+                    </button>
+                </div>
+                <div className="center" id={`center${index}`}>
+                    <button>
+                        <AutorenewIcon />
+                        <p>Quick Picks</p>
                     </button>
                 </div>
                 <div className="bottom">

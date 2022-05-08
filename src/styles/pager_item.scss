@@ -140,6 +140,21 @@
                 }
             }
         }
+
+        >.center{
+            display:flex;
+            align-items: center;
+            justify-content:center;
+            position:absolute;
+            >button{
+                border:none;
+                background-color:transparent;
+                color:white;
+                >p{
+                    font-size: 0.7rem;
+                }
+            }
+        }
         >.bottom{
             display:flex;
             flex-direction: column;
@@ -166,7 +181,7 @@
                     height:50px;
                     border-radius: 50%;
                     justify-content:center;
-                    background-color:dimgray;
+                   /* background-color:dimgray;*/
                     &.active{
                         background-color:indianred;
                     }
