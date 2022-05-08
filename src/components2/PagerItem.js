@@ -182,12 +182,13 @@ const PagerItem=({index,item,date})=>{
         var body_h = document.getElementById(`body${index}`)?.clientHeight;
         const configurations_h=document.getElementById(`configurations${index}`)?.clientHeight;
         const creator_h=document.getElementById(`creator${index}`)?.clientHeight;
-        const diff=body_h-configurations_h - creator_h;
+        const diff=body_h-configurations_h - creator_h -16;
         console.log(`${index}`,body_h,configurations_h,creator_h,diff)
-        const players_div=document.querySelector(`#players${index}`);
+        const players_div=document.querySelector(`#players${index} >.all_games`);
         players_div.style.minHeight=`${diff}px`;
         players_div.style.maxHeight=`${diff}px`;
         players_div.style.overflow=`auto`;
+        //document.querySelector(`#diff${index}`)?.innerHTML="augan";
 
     },[])
 
@@ -233,7 +234,12 @@ const PagerItem=({index,item,date})=>{
                         </div>}
 
                         */}
-                        <div className="games">
+                        <div className="all_games">
+
+                            {
+                                data.length==0 && 
+                                <p>No matches available yet.</p>
+                            }
                         {
                             data.map((item,i)=>{
                                 const dt=item.date;
