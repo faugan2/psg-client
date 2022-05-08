@@ -22,6 +22,7 @@ const PagerItem=({index,item,date})=>{
     const [str_type,set_str_type]=useState("");
     const [str_mode,set_str_mode]=useState("");
     const [str_entry,set_str_entry]=useState("");
+    const [total_players,set_total_players]=useState(0);
 
 
     const s=useSelector(selectSports);
@@ -49,10 +50,13 @@ const PagerItem=({index,item,date})=>{
     useEffect(()=>{
         if(type==2){
             set_str_type("Heads Up");
+            set_total_players(2);
         }else if(type==3){
             set_str_type("Sports Booth");
+            set_total_players(10);
         }else if(type==4){
             set_str_type("Tournament");
+            set_total_players(10)
         }
         
     },[type])
@@ -103,12 +107,17 @@ const PagerItem=({index,item,date})=>{
                     <div className="players">
                         <div><InfoIcon /></div>
                         <ul>
-                            <li>Join for free</li>
-                            <li>Make your picks </li>
-                            <li>Gain 1 coin if you win</li>
+                            <li>Join this challenge for 
+                                {entry==0 ? " free ": ` ${entry} coin`}
+                                </li>
+                            <li>Make your {nb_game} picks </li>
+                            <li>And win   
+                            {entry==0 ? " 0.1 coin ": ` up to ${parseInt(entry)*total_players} coin`}
+                            </li>
                         </ul>
 
-                        <div>You must have the most wins to gain coins</div>
+                        {mode==1 && <div><i>You must have the most wins to gain coins</i></div>}
+                        {mode==2 && <div><i>You must have the longest winnings streak to gain the coins</i></div>}
                     </div>
                 </div>
                 
