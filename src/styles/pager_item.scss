@@ -15,6 +15,7 @@
             position:absolute;
             bottom:0rem;
             width:100%;
+            
             >h4{
                 font-size: 0.9rem;
             }
@@ -48,9 +49,11 @@
 
         >.body{
             flex:1;
+            
             margin-bottom: 1rem;
             display:flex;
             flex-direction: column;
+           
 
             >.configurations{
                 
@@ -75,7 +78,8 @@
             }
 
             >.players{
-                flex:1;
+                
+                
                 
                 >ul{
                     padding:0;
@@ -91,10 +95,6 @@
                     >div{
                         display:flex;
                         flex-direction: column;
-                        min-height:40vh;
-                        max-height:40vh;
-                        overflow: auto;
-                        border:1px solid red;
                     }
                 }
             }

@@ -178,11 +178,24 @@ const PagerItem=({index,item,date})=>{
 
     },[league_name,games]);
 
+    useEffect(()=>{
+        var body_h = document.getElementById(`body${index}`)?.clientHeight;
+        const configurations_h=document.getElementById(`configurations${index}`)?.clientHeight;
+        const creator_h=document.getElementById(`creator${index}`)?.clientHeight;
+        const diff=body_h-configurations_h - creator_h;
+        console.log(`${index}`,body_h,configurations_h,creator_h,diff)
+        const players_div=document.querySelector(`#players${index}`);
+        players_div.style.minHeight=`${diff}px`;
+        players_div.style.maxHeight=`${diff}px`;
+        players_div.style.overflow=`auto`;
+
+    },[])
+
     return(
         <div className="pageContainer">
             <div className="content">
-                <div className="body">
-                    <div className="configurations">
+                <div className="body" id={`body${index}`}>
+                    <div className="configurations" id={`configurations${index}`}>
                         <button>
                             {sport_name}
                             <label>sport</label>
@@ -203,7 +216,7 @@ const PagerItem=({index,item,date})=>{
                             <label>entry</label>
                         </button>
                     </div>
-                    <div className="players">
+                    <div className="players" id={`players${index}`}>
                         {/*<div><InfoIcon /></div>
                         <ul>
                             <li>Join this challenge for 
@@ -249,7 +262,7 @@ const PagerItem=({index,item,date})=>{
                     </div>
                 </div>
                 
-                <div className="creator">
+                <div className="creator" id={`creator${index}`}>
                    <h4>{name}</h4>
                     <div>
                         <img src={creator_icon}  />
