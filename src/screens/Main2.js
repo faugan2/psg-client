@@ -9,6 +9,10 @@ import { selectActiveTab, selectTournaments, setSport,
     selectChatUnread,
     selectChatTotal,
     selectChatRead,
+    selectLeagues,
+    selectPicks,
+    selectSendingPicks,
+    selectTimeZone,
  } 
 from "../features/counterSlice";
 import { auth,db } from "../firebase_file";
@@ -58,7 +62,18 @@ const Main=()=>{
     
     const history=useHistory();
     const dispatch=useDispatch();
+
+
+    const t=useSelector(selectTournaments);
+    const l=useSelector(selectLeagues);
+    const p=useSelector(selectPicks);
+    const tz=useSelector(selectTimeZone);
+    const sending=useSelector(selectSendingPicks);
+    
+
+
     const [h,setH]=useState(0);
+    const [data,set_data]=useState([]);
     const [user,set_user]=useState(null);
     const [photo,setPhoto]=useState("foo.jpg");
     const u=useSelector(selectUsers);
@@ -75,6 +90,8 @@ const Main=()=>{
     const [open_profile,set_open_profile]=useState(false);
     const [open_not_enough,set_open_not_enough]=useState(false);
     const [open_daily_bonus,set_open_daily_bonus]=useState(false);
+    const [loading,set_loading]=useState(true);
+    const [can_create,set_can_create]=useState(false);
 
 
     const close_not_enough=()=>{
@@ -276,6 +293,82 @@ const Main=()=>{
 
     },[auth])
 
+    useEffect(()=>{
+        if(t==null || t.length==0) return ;
+        
+        
+        set_loading(true);
+        //set_can_create(false);
+        const res=t.filter((item)=>{
+            return item.parent==false;
+        })
+
+        const today=moment().endOf("day");
+        
+        const res2=res.filter((item)=>{
+            const date=moment.tz(item.date?.seconds*1000,tz);
+            const diff=date.diff(today);
+            const type=item.type;
+            let total_players=0;
+            if(type==2){
+                total_players=2;
+            }else if(type==3){
+                total_players=10
+            }
+            const key=item.key;
+            const nb_picks=p.filter((i)=>{
+               
+                return i.id_challenge==key;
+            })
+            if(nb_picks.length==total_players){
+                return false;
+            }
+
+            let part_of_it=false;
+            for(var i=0; i<nb_picks.length; i++){
+                const user=nb_picks[i].user;
+                console.log(user)
+                if(user==auth.currentUser.email){
+                    part_of_it=true;
+                }
+            }
+            if(part_of_it){
+                return false;
+            }
+            
+            return date.format("ll")==today.format("ll") || diff >0;
+        })
+        
+        const dates=[];
+        res2.map((item)=>{
+            const date=moment.tz(item.date?.seconds*1000,tz).format("ll");
+            if(dates.indexOf(date)<0){
+                dates.push(date);
+            }
+        })
+        
+        const res3=dates.map((date)=>{
+            const lines=[];
+            res2.map((item)=>{
+                const d=moment.tz(item.date?.seconds*1000,tz).format("ll");
+                if(d==date){
+                    lines.push(item);
+                }
+
+            })
+            return {date,lines}
+        })
+        console.log(res3)
+        set_data(res3);
+        set_loading(false);
+        if(res3.length==0){
+           // set_can_create(true);
+        }
+        
+        
+        
+    },[t,p])
+
     let pagerMethods = null;
     return(
 <div  className="main2">
@@ -293,14 +386,24 @@ const Main=()=>{
           wrapperStyle={{ 
               width: '100%',
               backgroundColor:"black",
-              height:"calc(100vh - 50px - 150px)" 
+              height:"calc(100%)" 
             }}
         >
           {
-              [1,2,3,4,5,6,7,8,9].map((item,i)=>{
-                  return(
-                    <PagerItem key={i} index={i} item={item} />
-                  )
+              data.map((item,i)=>{
+                  const date=item.date;
+                  const lines=item.lines;
+                  return <>
+                      {
+                        lines.map((line,i2)=>{
+                          return(
+                              <PagerItem key={line.key} index={i2} item={line} date={date} />
+                            )
+                        })
+                      }
+                  </>
+                 
+                  
               })
           }
           
@@ -308,12 +411,12 @@ const Main=()=>{
     </div>
 
 
-    <MainFooter 
+    {/*<MainFooter 
     click={change_page} 
     ads={false}
     page={page} 
     click_profile={open_modal_profile} 
-    />
+    />*/}
 
     
     
