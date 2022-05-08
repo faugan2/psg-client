@@ -14,6 +14,7 @@ import {
     setSport,
     setLine,
     setJoin,
+    selectPicks,
 } from "../features/counterSlice";
 
 import {useSelector,useDispatch} from "react-redux";
@@ -23,7 +24,7 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 const moment=require("moment-timezone")
 
 
-const PagerItem=({index,item,date,quick_picks,pick})=>{
+const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
     const {entry,key,league,mode,name,nb_game,sport,type,user}=item;
     const line=item;
 
@@ -40,6 +41,7 @@ const PagerItem=({index,item,date,quick_picks,pick})=>{
     const [data,set_data]=useState([]);
     const [dates,set_dates]=useState([date])
     const [show_ml_spread,set_ml_spread]=useState(null);
+    const [total_picks,set_total_picks]=useState(0);
 
 
     const s=useSelector(selectSports);
@@ -48,9 +50,20 @@ const PagerItem=({index,item,date,quick_picks,pick})=>{
     const games=useSelector(selectGames);
     const tz=useSelector(selectTimeZone);
     const game_date=useSelector(selectGameDate);
-    const default_values=useSelector(selectDefaultValues)
+    const default_values=useSelector(selectDefaultValues);
+    const picks=useSelector(selectPicks);
 
     const dispatch=useDispatch();
+
+    useEffect(()=>{
+        if(picks==null) return;
+        
+        const res=picks.filter((x)=>{
+            return x.id_challenge==key;
+        })
+        console.log("the result is ",res,"for ",key);
+        set_total_picks(res.length)
+    },[picks])
 
     useEffect(()=>{
         dispatch(setSport(null));
@@ -301,7 +314,7 @@ const PagerItem=({index,item,date,quick_picks,pick})=>{
                         <p>Help</p>
                     </button>
                     {data.length>0 &&<button>
-                        {entry==0 ? " 0.1 coin ": ` ${parseInt(entry)*total_players} coin`}
+                        {entry==0 ? " 0.1 coin ": ` ${parseInt(entry)*total_players} coins`}
                         <p>Winnings</p>
                     </button>}
                 </div>
@@ -314,13 +327,14 @@ const PagerItem=({index,item,date,quick_picks,pick})=>{
                    
                 </div>
                 <div className="bottom">
-                    {data.length>0 &&<button className="join_btn" id={`btn_join${index}`}>
+                    {data.length>0 &&<button className="join_btn" 
+                    onClick={send_picks}
+                    id={`btn_join${index}`}>
                         <NearMeIcon />
-                        <label>Join</label>
                     </button>}
                     <button>
                         <PeopleIcon />
-                        <label>0</label>
+                        <label>{total_picks}/{total_players}</label>
                     </button>
                     <button>
                         <CommentIcon />
@@ -332,7 +346,7 @@ const PagerItem=({index,item,date,quick_picks,pick})=>{
                     </button>
                     <button>
                         <FileCopyIcon />
-                        <p>Clone</p>
+                        <label>Clone</label>
                     </button>
                 </div>
             </div>

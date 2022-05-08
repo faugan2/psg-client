@@ -132,6 +132,7 @@
             align-items: center;
             justify-content:center;
             flex-direction: column;
+            border-bottom: 1px solid dimgray;
             >button{
                 border:none;
                 background-color:transparent;
@@ -139,13 +140,14 @@
                 margin-bottom: 0.5rem;
                 >p{
                     font-size: 0.7rem;
+                    color:gainsboro;
                 }
 
                 &:nth-child(2){
                     color:green;
                     font-weight: bold;
                     >p{
-                        color:white;
+                        color:gainsboro;
                         font-weight: normal;
                     }
                 }
@@ -168,13 +170,14 @@
 
                 >p{
                     font-size: 0.7rem;
+                    color:gainsboro;
                 }
 
                 &:nth-child(2){
                     color:green;
                     font-weight: bold;
                     >p{
-                        color:white;
+                        color:gainsboro;
                         font-weight: normal;
                     }
                 }
@@ -186,6 +189,7 @@
             position:absolute;
             bottom:2rem;
             width:100%;
+            border-top: 1px solid dimgray;
 
             >button{
                 margin-top: 1.5rem;
@@ -197,16 +201,19 @@
                 color:white;
                 >label{
                     font-size: 0.7rem;
+                    color:gainsboro;
                 }
 
                 &.join_btn{
                     
-                    width:50px;
+                    width:40px;
                     margin:auto;
-                    height:50px;
+                    height:40px;
                     border-radius: 50%;
                     justify-content:center;
+                    margin-top: 0.2rem;
                    /* background-color:dimgray;*/
+                   z-index: 999999999999999999;
                     &.active{
                         background-color:indianred;
                     }

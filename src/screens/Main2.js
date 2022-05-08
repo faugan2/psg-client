@@ -17,7 +17,10 @@ import { selectActiveTab, selectTournaments, setSport,
     selectJoin,
     setLine,
     setJoin,
-    
+    setJoinSuccess,
+    selectGameDate,
+    selectTransactions,
+    setSendingPicks
     
  } 
 from "../features/counterSlice";
@@ -61,6 +64,8 @@ import 'prevent-pull-refresh';
 import {useTransition,animated} from "react-spring";
 import Pager from 'react-js-pager';
 import PagerItem from "../components2/PagerItem";
+import firebase from "firebase";
+import {user_coins} from "../components2/data";
 
 const moment=require("moment-timezone");
 let id_inter=0;
@@ -76,8 +81,8 @@ const Main=()=>{
     const p=useSelector(selectPicks);
     const tz=useSelector(selectTimeZone);
     const sending=useSelector(selectSendingPicks);
-    
-
+    const game_date=useSelector(selectGameDate);
+    const all_transactions=useSelector(selectTransactions);
 
     const [h,setH]=useState(0);
     const [data,set_data]=useState([]);
@@ -537,6 +542,81 @@ const Main=()=>{
         }
    },[picks])
 
+
+   //####################################
+
+   const send_picks=(e)=>{
+
+    
+    dispatch(setJoinSuccess(false));
+    if(picks.length!=parseInt(join?.number_game)){
+        alert("You must pick "+join.number_game+" games before submit");
+        return;
+    }
+    
+    let d=game_date._d;
+    if(d==undefined){
+        d=game_date;
+    }
+    const obj={
+        user:auth?.currentUser?.email,
+        picks,
+        id_challenge:join?.key,
+        type_challenge:join?.type,
+        date:new firebase.firestore.Timestamp.fromDate(d)
+    };
+   
+   
+
+    const entry=parseFloat(join?.entry);
+    const my_coins=user_coins(auth?.currentUser?.email,all_transactions);
+   
+    
+    if((entry+0.100)>my_coins && entry>0){
+        //click();
+        dispatch(setNotEnoughCoins(true))
+        return;
+    }
+    
+    dispatch(setSendingPicks(true))
+
+    db.collection("psg_picks").add(obj).then(async ()=>{
+
+      
+        let new_entry=0;
+        if(join?.entry!="0"){
+            new_entry=parseInt(join?.entry)+0.1;
+        }
+        const coins_info={
+            user:auth?.currentUser?.email,
+            id_challenge:join?.key,
+            picks,
+            entry:"-"+new_entry,
+            date:firebase.firestore.FieldValue.serverTimestamp()
+        };
+
+        await db.collection("psg_users_coins").add(coins_info);
+        dispatch(setJoinSuccess(true))
+        setTimeout(()=>{
+            dispatch(setSendingPicks(false))
+        },200)
+
+        /*if(from_main==true){
+            create_new_challenge(join?.key);
+        }*/
+
+
+        console.log("also coins removed from user account")
+    }).catch((err)=>{
+        console.log("something bad happened")
+        dispatch(setSendingPicks(false))
+    })
+
+    
+   }
+
+   //###################################
+
     let pagerMethods = null;
     return(
 <div  className="main2">
@@ -571,6 +651,7 @@ const Main=()=>{
                               date={date} 
                               quick_picks={quick_picks}
                               pick={pick}
+                              send_picks={send_picks}
                               />
                             )
                         })
