@@ -82,7 +82,7 @@ const LineJoin=({click,from_main})=>{
     useEffect(()=>{
         console.log("the dates are ",dates);
     },[dates])
-    
+
 
     useEffect(()=>{
         if(league==null) return;
@@ -129,14 +129,9 @@ const LineJoin=({click,from_main})=>{
             }
            
         }
-        console.log(res_final)
        
-        
-        //set_data(res2);
         set_data(res_final);
         set_loading(false);
-
-        console.log("the results are ",res_final)
 
     },[league,games]);
 

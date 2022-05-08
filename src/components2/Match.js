@@ -4,7 +4,7 @@ import {useSelector,useDispatch} from "react-redux";
 import {selectTimeZone} from "../features/counterSlice";
 const moment=require("moment-timezone");
 
-const Match=({match,show_ml_spread,click})=>{
+const Match=({match,show_ml_spread,click,line,index})=>{
     const tz=useSelector(selectTimeZone);
 
     
@@ -47,10 +47,12 @@ const Match=({match,show_ml_spread,click})=>{
                 <p>{home}</p>
             </div>
 
-            {(show_ml_spread?.default_show=="1" || show_ml_spread.default_show=="0") && <div>
+            {(show_ml_spread?.default_show=="1" || show_ml_spread?.default_show=="0") && <div>
                 <p>ML</p>
                 <button 
-                    onClick={click} 
+                    onClick={e=>{
+                        click(e,line,index);
+                    }} 
                     data-key={key} 
                     data-type={1} 
                     data-team={1} 
@@ -59,7 +61,9 @@ const Match=({match,show_ml_spread,click})=>{
                     data-home={home}
                     >{away_moneyline}</button>
                 <button 
-                     onClick={click} 
+                      onClick={e=>{
+                        click(e,line,index);
+                    }} 
                      data-key={key} 
                      data-type={1} 
                      data-team={2} 
@@ -70,10 +74,12 @@ const Match=({match,show_ml_spread,click})=>{
             </div>
             }
 
-            {(show_ml_spread?.default_show=="2"  || show_ml_spread.default_show=="0") && <div>
+            {(show_ml_spread?.default_show=="2"  || show_ml_spread?.default_show=="0") && <div>
                 <p>Spread</p>
                 <button 
-                     onClick={click} 
+                      onClick={e=>{
+                        click(e,line,index);
+                    }} 
                      data-key={key} 
                      data-type={2} 
                      data-team={1} 
@@ -82,7 +88,9 @@ const Match=({match,show_ml_spread,click})=>{
                      data-home={home}
                 >{away_spread}</button>
                 <button
-                onClick={click} 
+                 onClick={e=>{
+                    click(e,line,index);
+                }} 
                 data-key={key} 
                 data-type={2} 
                 data-team={2} 
@@ -99,7 +107,9 @@ const Match=({match,show_ml_spread,click})=>{
             <div>
                 <p>O/U</p>
                 <button 
-                     onClick={click} 
+                     onClick={e=>{
+                        click(e,line,index);
+                    }} 
                      data-key={key} 
                      data-type={3} 
                      data-team={1} 
@@ -108,7 +118,9 @@ const Match=({match,show_ml_spread,click})=>{
                      data-home={home}
                 >O {total}</button>
                 <button 
-                     onClick={click} 
+                      onClick={e=>{
+                        click(e,line,index);
+                    }} 
                      data-key={key} 
                      data-type={3} 
                      data-team={2} 

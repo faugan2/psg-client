@@ -13,6 +13,12 @@ import { selectActiveTab, selectTournaments, setSport,
     selectPicks,
     selectSendingPicks,
     selectTimeZone,
+    setSelectedPicks,
+    selectJoin,
+    setLine,
+    setJoin,
+    
+    
  } 
 from "../features/counterSlice";
 import { auth,db } from "../firebase_file";
@@ -57,6 +63,7 @@ import Pager from 'react-js-pager';
 import PagerItem from "../components2/PagerItem";
 
 const moment=require("moment-timezone");
+let id_inter=0;
 
 const Main=()=>{
     
@@ -82,6 +89,7 @@ const Main=()=>{
     const [chat_unread,set_chat_unread]=useState(0);
     const chat_total=useSelector(selectChatTotal);
     const chat_read=useSelector(selectChatRead);
+    const join=useSelector(selectJoin);
 
     console.log("thechat unrea d is ",chat_unread);
 
@@ -92,6 +100,7 @@ const Main=()=>{
     const [open_daily_bonus,set_open_daily_bonus]=useState(false);
     const [loading,set_loading]=useState(true);
     const [can_create,set_can_create]=useState(false);
+    const [picks,set_picks]=useState([]);
 
 
     const close_not_enough=()=>{
@@ -171,6 +180,7 @@ const Main=()=>{
     
     const tab_index=useSelector(selectTab);
     const [index,setIndex]=useState(0);
+    const [game_index,set_game_index]=useState(0);
 
     useEffect(()=>{
         setIndex(tab_index);
@@ -369,6 +379,164 @@ const Main=()=>{
         
     },[t,p])
 
+
+    const quick_picks=(i,item)=>{
+        
+        set_game_index(i);
+        
+       const sport=item.sport;
+       const date=moment.tz(item.date?.seconds*1000,tz);
+       dispatch(setGameDate(date));
+       
+      const res=s.filter((sp)=>{
+          return sp.id==sport;
+      })
+      if(res.length>0){
+          dispatch(setSport(res[0]));
+      }
+      dispatch(setLine(item));
+      dispatch(setJoin(item))
+    
+    dispatch(setSelectedPicks([]));
+    set_picks([]);
+       const btns=document.querySelectorAll(`#all_games${i}>div>.match  button`);
+       for(var i=0; i<btns.length; i++){
+           btns[i].classList.remove("active");
+       }
+       
+      id_inter= setInterval(()=>{
+        var index=Math.floor(Math.random()*btns.length);
+        btns[index].click();
+       },100)
+   }
+
+
+   //######################################
+
+   const pick=(e,line,index)=>{
+       set_game_index(index);
+    const sport=line.sport;
+       const date=moment.tz(line.date?.seconds*1000,tz);
+       dispatch(setGameDate(date));
+       
+      const res0=s.filter((sp)=>{
+          return sp.id==sport;
+      })
+      if(res0.length>0){
+          dispatch(setSport(res0[0]));
+      }
+      dispatch(setLine(line));
+      dispatch(setJoin(line))
+
+    const btn=e.target;
+    const id_game=btn.dataset.key;
+    const type_pick=btn.dataset.type;
+    const team_picked=btn.dataset.team;
+    const pickdata=btn.dataset.pickdata;
+    const away=btn.dataset.away;
+    const home=btn.dataset.home;
+    const teams=[away,home];
+
+    
+
+
+    const a_pick={
+        id_game,
+        type_pick,
+        team_picked,
+        pickdata,
+        teams,
+        league:join?.league,
+        sport:join?.sport,
+        entry:join?.entry,
+        user:auth?.currentUser?.email
+    }
+
+    //switch team if clic on the other team of the same type of odds
+
+    const res1=picks.filter((item)=>{
+        return item.id_game==id_game && item.type_pick==type_pick;
+    })
+    if(res1.length>0){
+        const tp=res1[0].team_picked;
+        if(tp!=team_picked){
+            const res2=picks.map((item)=>{
+                if(item.id_game==id_game && item.type_pick==type_pick){
+                    return {...item,team_picked}
+                }
+                return item;
+            })
+
+            set_picks(res2);
+            dispatch(setSelectedPicks(res2));
+
+           const new_btn=document.querySelector(`button[data-type='${type_pick}'][data-team='${team_picked}'][data-key='${id_game}']`);
+           new_btn.classList.add("active");
+
+           const old_btn=document.querySelector(`button[data-type='${type_pick}'][data-team='${tp}'][data-key='${id_game}']`);
+           old_btn.classList.remove("active");
+           
+            return;
+        }
+    }
+
+
+
+   const res=picks.filter((item,i)=>{
+       return item.id_game==id_game && item.type_pick==type_pick && item.team_picked==team_picked
+   })
+
+   let new_picks=[];
+   if(res.length>0){
+       //already picked
+        new_picks=picks.map((item,i)=>{
+            if(item.id_game==id_game && item.type_pick==type_pick && item.team_picked==team_picked){
+                return null;
+            }
+            return item;
+        })
+
+
+        set_picks(new_picks.filter((item)=>{
+            return item!=null;
+        }));
+   }else{
+       //not picked yet
+       if(join?.number_game==picks.length){
+            console.log("enougth");
+            clearInterval(id_inter);
+            return;
+        }else{
+            console.log("not enougth",join?.number_game,picks.length);
+        }
+        new_picks=[...picks,a_pick];
+        set_picks(new_picks);
+   }
+
+   btn.classList.toggle("active");
+
+    
+    
+    dispatch(setSelectedPicks(new_picks));
+    
+}
+   //#####################################""
+
+
+   useEffect(()=>{
+        
+       
+
+        if(picks.length==join?.number_game){
+            console.log("ok we are good")
+            const btn=document.querySelector(`#btn_join${game_index}`);
+            btn?.classList.add("active");
+        }else{
+            const btn=document.querySelector(`#btn_join${game_index}`);
+            btn?.classList.remove("active");
+        }
+   },[picks])
+
     let pagerMethods = null;
     return(
 <div  className="main2">
@@ -397,7 +565,13 @@ const Main=()=>{
                       {
                         lines.map((line,i2)=>{
                           return(
-                              <PagerItem key={line.key} index={i2} item={line} date={date} />
+                              <PagerItem 
+                              key={line.key} 
+                              index={i2} item={line} 
+                              date={date} 
+                              quick_picks={quick_picks}
+                              pick={pick}
+                              />
                             )
                         })
                       }

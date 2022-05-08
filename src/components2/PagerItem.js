@@ -10,7 +10,10 @@ import PeopleIcon from '@material-ui/icons/People';
 import {useState,useEffect} from "react";
 import {
     selectSports,selectLeagues,selectUsers,selectGames,selectTimeZone,selectGameDate,
-    selectDefaultValues
+    selectDefaultValues,
+    setSport,
+    setLine,
+    setJoin,
 } from "../features/counterSlice";
 
 import {useSelector,useDispatch} from "react-redux";
@@ -19,9 +22,11 @@ import Match from "./Match";
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 const moment=require("moment-timezone")
 
-const PagerItem=({index,item,date})=>{
+
+const PagerItem=({index,item,date,quick_picks,pick})=>{
     const {entry,key,league,mode,name,nb_game,sport,type,user}=item;
-    
+    const line=item;
+
     console.log("the user is ",user);
     const [sport_name,set_sport_name]=useState("");
     const [league_name,set_league_name]=useState("");
@@ -44,6 +49,14 @@ const PagerItem=({index,item,date})=>{
     const tz=useSelector(selectTimeZone);
     const game_date=useSelector(selectGameDate);
     const default_values=useSelector(selectDefaultValues)
+
+    const dispatch=useDispatch();
+
+    useEffect(()=>{
+        dispatch(setSport(null));
+        dispatch(setLine(null));
+        dispatch(setJoin(null));
+    },[])
 
     useEffect(()=>{
         const res2=default_values.filter((item)=>{
@@ -236,7 +249,7 @@ const PagerItem=({index,item,date})=>{
                         </div>}
 
                         */}
-                        <div className="all_games">
+                        <div className="all_games" id={`all_games${index}`}>
 
                             {
                                 data.length==0 && 
@@ -256,7 +269,9 @@ const PagerItem=({index,item,date})=>{
                                                         key={match.key} 
                                                         match={match}
                                                         show_ml_spread={show_ml_spread}
-                                                        click={()=>alert("ok going to select u")}
+                                                        click={pick}
+                                                        line={line}
+                                                        index={index}
                                                     />
                                                 )
                                             })
@@ -287,16 +302,16 @@ const PagerItem=({index,item,date})=>{
                     </button>
                 </div>
                 <div className="center" id={`center${index}`}>
-                    <button>
+                    {data.length>0 &&<button onClick={quick_picks.bind(this,index,item)}>
                         <AutorenewIcon />
                         <p>Quick Picks</p>
-                    </button>
+                    </button>}
                 </div>
                 <div className="bottom">
-                    <button className="join_btn">
+                    {data.length>0 &&<button className="join_btn" id={`btn_join${index}`}>
                         <NearMeIcon />
                         <label>Join</label>
-                    </button>
+                    </button>}
                     <button>
                         <PeopleIcon />
                         <label>0</label>
