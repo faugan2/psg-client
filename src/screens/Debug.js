@@ -69,6 +69,20 @@ export default function Debug(props) {
             })
         })*/
     },[])
+
+    useEffect(()=>{
+        db.collection("psg_challenges").where("parent","==",true).get().then((snap)=>{
+            snap.docs.map((doc)=>{
+                const key=doc.id;
+                let entry=parseInt(doc.data().entry);
+                if(entry>=1000){
+                    entry/=1000;
+                }
+                db.collection("psg_challenges").doc(key).update({entry},{merge:true});
+                
+            })
+        })
+    },[])
     return (
         <div>
          debug page {status}

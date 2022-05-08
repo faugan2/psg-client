@@ -68,6 +68,11 @@ const PagerItem=({index,item,date})=>{
 
     useEffect(()=>{
         set_str_entry(entry);
+        if(entry=="0"){
+            set_str_entry("Free");
+        }else{
+            set_str_entry(entry+" coin");
+        }
     },[entry]);
 
     return(
