@@ -138,7 +138,7 @@ const PagerItem=({index,item,date})=>{
                     </button>
                 </div>
                 <div className="bottom">
-                    <button>
+                    <button className="join_btn">
                         <NearMeIcon />
                         <label>Join</label>
                     </button>

@@ -134,6 +134,16 @@
                 >label{
                     font-size: 0.7rem;
                 }
+
+                &.join_btn{
+                    border:1px solid indianred;
+                    width:50px;
+                    margin:auto;
+                    height:50px;
+                    border-radius: 50%;
+                    justify-content:center;
+                    background-color:indianred;
+                }
             }
         }
        
