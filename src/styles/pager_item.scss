@@ -131,18 +131,31 @@
             display:flex;
             align-items: center;
             justify-content:center;
+            flex-direction: column;
             >button{
                 border:none;
                 background-color:transparent;
                 color:white;
+                margin-bottom: 0.5rem;
                 >p{
                     font-size: 0.7rem;
+                }
+
+                &:nth-child(2){
+                    color:green;
+                    font-weight: bold;
+                    >p{
+                        color:white;
+                        font-weight: normal;
+                    }
                 }
             }
         }
 
         >.center{
             display:flex;
+            flex-direction: column;
+
             align-items: center;
             justify-content:center;
             position:absolute;
@@ -151,8 +164,19 @@
                 border:none;
                 background-color:transparent;
                 color:white;
+                margin-bottom: 0.5rem;
+
                 >p{
                     font-size: 0.7rem;
+                }
+
+                &:nth-child(2){
+                    color:green;
+                    font-weight: bold;
+                    >p{
+                        color:white;
+                        font-weight: normal;
+                    }
                 }
             }
         }

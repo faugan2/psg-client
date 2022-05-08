@@ -297,15 +297,21 @@ const PagerItem=({index,item,date,quick_picks,pick})=>{
             <div className="actions">
                 <div className="top">
                     <button>
-                        <FileCopyIcon />
-                        <p>Clone</p>
+                        <InfoIcon />
+                        <p>Help</p>
                     </button>
+                    {data.length>0 &&<button>
+                        {entry==0 ? " 0.1 coin ": ` ${parseInt(entry)*total_players} coin`}
+                        <p>Winnings</p>
+                    </button>}
                 </div>
                 <div className="center" id={`center${index}`}>
                     {data.length>0 &&<button onClick={quick_picks.bind(this,index,item)}>
                         <AutorenewIcon />
                         <p>Quick Picks</p>
                     </button>}
+
+                   
                 </div>
                 <div className="bottom">
                     {data.length>0 &&<button className="join_btn" id={`btn_join${index}`}>
@@ -322,7 +328,11 @@ const PagerItem=({index,item,date,quick_picks,pick})=>{
                     </button>
                     <button>
                         <ReplyIcon />
-                        <label>Share</label>
+                        <label>Invite</label>
+                    </button>
+                    <button>
+                        <FileCopyIcon />
+                        <p>Clone</p>
                     </button>
                 </div>
             </div>
