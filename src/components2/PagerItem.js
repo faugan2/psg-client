@@ -9,12 +9,15 @@ import InfoIcon from '@material-ui/icons/Info';
 import PeopleIcon from '@material-ui/icons/People';
 import {useState,useEffect} from "react";
 import {
-    selectSports,selectLeagues,selectUsers
+    selectSports,selectLeagues,selectUsers,selectGames,selectTimeZone,selectGameDate,
+    selectDefaultValues
 } from "../features/counterSlice";
 
 import {useSelector,useDispatch} from "react-redux";
 import logo from "./img/logo.png";
+import Match from "./Match";
 
+const moment=require("moment-timezone")
 
 const PagerItem=({index,item,date})=>{
     const {entry,key,league,mode,name,nb_game,sport,type,user}=item;
@@ -29,11 +32,28 @@ const PagerItem=({index,item,date})=>{
     const [creator_name,set_creator_name]=useState("");
     const [creator_icon,set_creator_icon]=useState(null);
     const [psg,set_psg]=useState(true);
+    const [data,set_data]=useState([]);
+    const [dates,set_dates]=useState([date])
+    const [show_ml_spread,set_ml_spread]=useState(null);
 
 
     const s=useSelector(selectSports);
     const l=useSelector(selectLeagues);
     const u=useSelector(selectUsers);
+    const games=useSelector(selectGames);
+    const tz=useSelector(selectTimeZone);
+    const game_date=useSelector(selectGameDate);
+    const default_values=useSelector(selectDefaultValues)
+
+    useEffect(()=>{
+        const res2=default_values.filter((item)=>{
+            return item.key==league;
+        })
+        
+        if(res2.length>0){
+            set_ml_spread(res2[0]);
+        }
+    },[default_values,league])
 
     useEffect(()=>{
         const res=l.filter((lg)=>{
@@ -103,6 +123,61 @@ const PagerItem=({index,item,date})=>{
         }
     },[user])
 
+
+
+    useEffect(()=>{
+        if(league_name==null) return;
+        if(games==null || games.length==0) return;
+
+        
+        const res=games.filter((item)=>{
+            return item.league==league_name;
+        })
+
+        const res2=res.filter((item)=>{
+            const commence=item.commence
+            let d=game_date._d;
+            if(d==undefined){
+                d=game_date;
+            }
+            const start=moment.tz(commence,tz);
+            const today=moment.tz(d,tz);
+            const end=moment().endOf("day");
+            
+            const diff=start.diff(today,"seconds");
+           
+            const str_start=start.format("ll");
+            const str_today=today.format("ll");
+           
+            if(dates.indexOf(str_start)<0){
+                return false;
+            }
+
+            return true;
+          
+        })
+        
+        const res_final=[];
+        for(var i=0; i<dates.length; i++){
+            const dt=dates[i];
+            const res3=res2.filter((item)=>{
+                const a_start=moment.tz(item.commence,tz);
+                return a_start.format("ll")==dt;
+
+            })
+            if(res3.length>0){
+                res_final.push({date:dt,data:res3})
+            }
+           
+        }
+       
+        set_data(res_final);
+        
+       
+        
+
+    },[league_name,games]);
+
     return(
         <div className="pageContainer">
             <div className="content">
@@ -129,7 +204,7 @@ const PagerItem=({index,item,date})=>{
                         </button>
                     </div>
                     <div className="players">
-                        <div><InfoIcon /></div>
+                        {/*<div><InfoIcon /></div>
                         <ul>
                             <li>Join this challenge for 
                                 {entry==0 ? " free ": ` ${entry} coin`}
@@ -141,7 +216,35 @@ const PagerItem=({index,item,date})=>{
                         </ul>
 
                         {mode==1 && <div><i>You must have the most wins to gain coins</i></div>}
-                        {mode==2 && <div><i>You must have the longest winnings streak to gain the coins</i></div>}
+                        {mode==2 && <div><i>You must have the longest winnings streak to gain the coins</i>
+                        </div>}
+
+                        */}
+                        <div className="games">
+                        {
+                            data.map((item,i)=>{
+                                const dt=item.date;
+                                const matches=item.data;
+                                return(
+                                    <div key={i}>
+                                        <p>{dt}</p>
+                                        {
+                                            matches.map((match,j)=>{
+                                                return(
+                                                    <Match 
+                                                        key={match.key} 
+                                                        match={match}
+                                                        show_ml_spread={show_ml_spread}
+                                                        click={()=>alert("ok going to select u")}
+                                                    />
+                                                )
+                                            })
+                                        }
+                                    </div>
+                                )
+                            })
+                        }
+                        </div>
                     
                     </div>
                 </div>

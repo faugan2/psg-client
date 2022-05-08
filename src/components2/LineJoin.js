@@ -82,6 +82,7 @@ const LineJoin=({click,from_main})=>{
     useEffect(()=>{
         console.log("the dates are ",dates);
     },[dates])
+    
 
     useEffect(()=>{
         if(league==null) return;

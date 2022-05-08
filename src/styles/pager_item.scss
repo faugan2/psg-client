@@ -76,6 +76,7 @@
 
             >.players{
                 flex:1;
+                
                 >ul{
                     padding:0;
                     margin-left:1rem;
@@ -85,14 +86,16 @@
                     }
                 }
 
-                >div{
-                    font-size: 0.8rem;
-                    text-align: justify;
-                    margin:0.5rem;
-                    margin-top: 1rem;
-                    display:flex;
-                    justify-content:center;
-                    
+                >.games{
+                    background-color:transparent;
+                    >div{
+                        display:flex;
+                        flex-direction: column;
+                        min-height:40vh;
+                        max-height:40vh;
+                        overflow: auto;
+                        border:1px solid red;
+                    }
                 }
             }
         }
