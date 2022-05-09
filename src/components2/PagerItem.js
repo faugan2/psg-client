@@ -307,7 +307,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                 </div>
                 
                 <div className="creator" id={`creator${index}`}>
-                   <h4>Created by</h4>
+                   <h4>Created By :</h4>
                     <div>
                         <img src={creator_icon}  />
                         <p>{creator_name}</p>
