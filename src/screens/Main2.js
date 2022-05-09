@@ -201,20 +201,14 @@ const Main=()=>{
         set_games_Drawer(!games_drawer);
     }
 
-    useEffect(()=>{
+   /* useEffect(()=>{
         if(auth.currentUser==null){
             history.replace("/");
             return;
         }
 
         const email=auth?.currentUser?.email;
-        //console.log(email);
-        /*if(info.photo=="foo.jpg"){
-            up=<Avatar onClick={handleClickOpen}>{info.username[0].toLowerCase() }</Avatar>;
-        }else{
-            up=<img src={info.photo}  onClick={handleClickOpen}/>
-        }*/
-    },[auth]);
+    },[auth]);*/
 
 
     useEffect(()=>{
