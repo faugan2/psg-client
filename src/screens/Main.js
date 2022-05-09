@@ -300,7 +300,7 @@ display:"none",flexDirection:"column",gap:"1rem"}}>
     
     </div>
 
-    <MainFooter click={change_page} page={page} click_profile={open_modal_profile} />
+    {/*<MainFooter click={change_page} page={page} click_profile={open_modal_profile} />*/}
 
     {
         transition((style,item)=>{

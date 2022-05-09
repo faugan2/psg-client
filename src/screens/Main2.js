@@ -214,7 +214,7 @@ const Main=()=>{
     useEffect(()=>{
        
         if(auth?.currentUser==null){
-            history.push("/");
+            //history.push("/");
             return;
         }
         const res=u.filter((user)=>{
@@ -337,7 +337,7 @@ const Main=()=>{
             for(var i=0; i<nb_picks.length; i++){
                 const user=nb_picks[i].user;
                 console.log(user)
-                if(user==auth.currentUser.email){
+                if(user==auth.currentUser?.email){
                     part_of_it=true;
                 }
             }
@@ -367,8 +367,9 @@ const Main=()=>{
             })
             return {date,lines}
         })
-        console.log(res3)
+        console.log("the final data is ",res3)
         set_data(res3);
+
         set_loading(false);
         if(res3.length==0){
            // set_can_create(true);
@@ -527,13 +528,16 @@ const Main=()=>{
        
 
         if(picks.length==join?.number_game){
-            console.log("ok we are good")
+            console.log("ok we are good",`#btn_join${game_index}`)
             const btn=document.querySelector(`#btn_join${game_index}`);
+            console.log("the btn is ",btn);
             btn?.classList.add("active");
         }else{
             const btn=document.querySelector(`#btn_join${game_index}`);
             btn?.classList.remove("active");
         }
+
+        console.log("the btn picks is ",picks);
    },[picks])
 
 
@@ -630,6 +634,7 @@ const Main=()=>{
           ref={node => (pagerMethods = node)}
           orientation='vertical'
           animationStyle='scroll'
+          
           wrapperStyle={{ 
               width: '100%',
               backgroundColor:"black",
@@ -645,8 +650,9 @@ const Main=()=>{
                         lines.map((line,i2)=>{
                           return(
                               <PagerItem 
-                              key={line.key} 
-                              index={i2} item={line} 
+                              key={`${i2}${i}`} 
+                              index={`${i2}${i}`} 
+                              item={line} 
                               date={date} 
                               quick_picks={quick_picks}
                               pick={pick}

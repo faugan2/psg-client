@@ -25,6 +25,7 @@ const moment=require("moment-timezone")
 
 
 const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
+    console.log("tour de ",index,item.key);
     const {entry,key,league,mode,name,nb_game,sport,type,user}=item;
     const line=item;
 
@@ -317,14 +318,24 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
             </div>
             <div className="actions">
                 <div className="top">
+                   
+
                     <button>
-                        <InfoIcon />
-                        <p>Help</p>
+                    {entry==0 ? " Free ": ` ${parseInt(entry)*total_players} coins`}
+                        <p>Entry</p>
                     </button>
+
                     {data.length>0 &&<button>
                         {entry==0 ? " 0.1 coin ": ` ${parseInt(entry)*total_players} coins`}
                         <p>Winnings</p>
                     </button>}
+
+                    <button>
+                        <InfoIcon />
+                        <p>Help</p>
+                    </button>
+
+
                     {data.length>0 &&<button onClick={quick_picks.bind(this,index,item)}>
                         <AutorenewIcon />
                         <p>Quick Picks</p>
@@ -333,6 +344,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                     onClick={send_picks}
                     id={`btn_join${index}`}>
                         <NearMeIcon />
+                        <p>Join</p>
                     </button>}
                     <button>
                         <PeopleIcon />

@@ -53,22 +53,25 @@ const Splash=()=>{
             setTimeout(async ()=>{
                 if(user==null){
                     //go to login
-                   /* dispatch(setPage(1));
+                  
                     
-                    await load_sports();  // DONE
-                    await load_leagues();// DONE
+                   await load_sports(); // DONE
+                    await load_leagues(); //DONE 
                     await load_users(); // DONE
                     await load_picks();
                     await load_tournaments();// DONE
-                    await load_bought_picks(); // DONE
-					await load_follow(); // DONE
+					await load_follow();// DONE
+					await load_bought_picks();// DONE
                     await load_today_time();
                     await load_games();
-                    await load_default_values(); // DONE
-                    await load_users_coins() // DONE
-                    await load_main_challenges();
-                    await load_time_zone(); // DONE*/
-                    history.replace("/login2")
+                    await load_default_values();// DONE
+                    await load_users_coins();// DONE
+                   // await load_main_challenges();
+                    await load_time_zone();// DONE
+                    await load_chat();
+                    //dispatch(setPageName("Lobby"));
+                    //dispatch(setActiveTab(4));
+                    history.replace("/main2");
     
                 }else{
 
@@ -89,7 +92,7 @@ const Splash=()=>{
                     await load_chat();
                     //dispatch(setPageName("Lobby"));
                     //dispatch(setActiveTab(4));
-                    history.replace("/main");
+                    history.replace("/main2");
                 }  
             },500);
 

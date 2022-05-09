@@ -116,7 +116,7 @@ export default function ProminentAppBar({onGames_drawer_closed,index,click_profi
     history.push("/bought-picks");
   }
   const go_to_profile=()=>{
-    const email=auth.currentUser.email;
+    const email=auth.currentUser?.email;
     const res=u.filter((user)=>{
        return user.email==email;
     })
@@ -163,17 +163,17 @@ useEffect(()=>{
       const friend=doc.data()?.friend;
       //console.log("freinds are ",friend);
       const user=doc.data()?.user;
-      if(friend?.indexOf(auth?.currentUser.email)>=0 || user==auth?.currentUser.email){
+      if(friend?.indexOf(auth?.currentUser?.email)>=0 || user==auth?.currentUser?.email){
         total_invite.push(id_challenge);
       }
     });
     let i=0;
     console.log("total is now ",total_invite);
-    total_invite.map((ch)=>{
+   /* total_invite.map((ch)=>{
       
       const res=db.collection("psg_picks")
       .where("id_challenge","==",ch)
-      .where("user","==",auth?.currentUser.email)
+      .where("user","==",auth?.currentUser?.email)
       .onSnapshot((snap)=>{
         if(snap.docs.length==0){
           i++;
@@ -181,7 +181,7 @@ useEffect(()=>{
         }
       })
       
-    })
+    })*/
   })
 
   return unsub;
