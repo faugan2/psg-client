@@ -191,6 +191,7 @@
                     font-weight: bold;
                     >p{
                         font-weight: normal;
+                        font-size: 0.6rem;
                     }
                 }
 
@@ -213,8 +214,12 @@
                     }
                 }
 
+                >svg{
+                    font-size: 1rem;
+                }
+
                 >p,label{
-                    font-size: 0.7rem;
+                    font-size: 0.6rem;
                     color:rgb(158, 154, 154);
                 }
 
