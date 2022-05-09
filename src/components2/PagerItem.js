@@ -225,14 +225,22 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
             <div className="content">
                 <div className="body" id={`body${index}`}>
                     <div className="configurations" id={`configurations${index}`}>
-                        <button>
+                        <h4>{name}</h4>
+                        <div>
+                            <p>{league_name}</p>
+                            <p>{str_type}</p>
+                            <p>{str_mode}</p>
+                            <p>{nb_game} Games</p>
+                        </div>
+                        {/*<button>
                             {sport_name}
                             <label>sport</label>
                         </button>
                         <button>{league_name}
                             <label>league</label>
                         </button>
-                        <button>{str_type}
+                        <button >
+                            {str_type}
                             <label>type</label>
                         </button>
                         <button>{str_mode}
@@ -241,9 +249,9 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                         <button>{nb_game}
                             <label>#games</label>
                         </button>
-                        <button>{str_entry}
+                        <button className="entry">{str_entry}
                             <label>entry</label>
-                        </button>
+                        </button>*/}
                     </div>
                     <div className="players" id={`players${index}`}>
                         {/*<div><InfoIcon /></div>
@@ -299,7 +307,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                 </div>
                 
                 <div className="creator" id={`creator${index}`}>
-                   <h4>{name}</h4>
+                   <h4>Created by</h4>
                     <div>
                         <img src={creator_icon}  />
                         <p>{creator_name}</p>
@@ -317,16 +325,10 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                         {entry==0 ? " 0.1 coin ": ` ${parseInt(entry)*total_players} coins`}
                         <p>Winnings</p>
                     </button>}
-                </div>
-                <div className="center" id={`center${index}`}>
                     {data.length>0 &&<button onClick={quick_picks.bind(this,index,item)}>
                         <AutorenewIcon />
                         <p>Quick Picks</p>
                     </button>}
-
-                   
-                </div>
-                <div className="bottom">
                     {data.length>0 &&<button className="join_btn" 
                     onClick={send_picks}
                     id={`btn_join${index}`}>
@@ -348,6 +350,14 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                         <FileCopyIcon />
                         <label>Clone</label>
                     </button>
+                </div>
+                <div className="center" id={`center${index}`}>
+                    
+
+                   
+                </div>
+                <div className="bottom">
+                    
                 </div>
             </div>
         </div>

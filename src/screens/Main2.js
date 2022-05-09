@@ -547,6 +547,10 @@ const Main=()=>{
 
    const send_picks=(e)=>{
 
+    if(join==null){
+        alert("You must pick  games before submit");
+        return;
+    }
     
     dispatch(setJoinSuccess(false));
     if(picks.length!=parseInt(join?.number_game)){
@@ -625,6 +629,7 @@ const Main=()=>{
         onGames_drawer_closed={onGames_drawer_closed} 
         index={index}
         click_profile={open_modal_profile}
+        show_leagues={false}
     />
     <div className="content">
         <Pager

@@ -57,8 +57,21 @@
 
             >.configurations{
                 
-                display:grid;
-                grid-template-columns:50% 50%;
+               /*display:grid;
+                grid-template-columns:50% 50%;*/
+                display:flex;
+                flex-direction: column;
+                margin-top: 0.5rem;
+                border-bottom: 1px solid dimgray;
+                padding-bottom: 1rem;
+
+                >div{
+                    display:flex;
+                    font-size: 0.8rem;
+                    color:gray;
+                    justify-content:space-between;
+                    margin-top: 0.5rem;
+                }
                 >button{
                     padding:0.3rem;
                     font-size: 0.6rem;
@@ -70,8 +83,15 @@
                     display:flex;
                     flex-direction: column;
                     align-items: center;
+                    
+
+                    &.entry{
+                        color:indianred;
+                        font-weight: bold;
+                    }
                     >label{
                         font-weight: bold;
+                        color:black;
                     }
 
                 }
@@ -79,7 +99,7 @@
 
             >.players{
                 
-                
+                margin-top: 1rem;
                 
                 >ul{
                     padding:0;
@@ -102,7 +122,8 @@
                         display:flex;
                         flex-direction: column;
                         >p{
-                            color:indianred;
+                            color:white;
+                            margin-top: 0.5rem;
                             margin-left: 0.5rem;
                             font-size: 0.7rem;
                             font-weight: bold;
@@ -132,12 +153,16 @@
             align-items: center;
             justify-content:center;
             flex-direction: column;
-            border-bottom: 1px solid dimgray;
+            
             >button{
                 border:none;
                 background-color:transparent;
                 color:white;
-                margin-bottom: 0.5rem;
+                margin-bottom: 1rem;
+                display:flex;
+                flex-direction: column;
+                align-items: center;
+
                 >p{
                     font-size: 0.7rem;
                     color:gainsboro;
@@ -189,10 +214,10 @@
             position:absolute;
             bottom:2rem;
             width:100%;
-            border-top: 1px solid dimgray;
+            
 
             >button{
-                margin-top: 1.5rem;
+                margin-top: 0.75rem;
                 display:flex;
                 flex-direction: column;
                 align-items: center;

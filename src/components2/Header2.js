@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function ProminentAppBar({onGames_drawer_closed,index,click_profile}) {
+export default function ProminentAppBar({onGames_drawer_closed,index,click_profile,show_leagues}) {
 
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -369,7 +369,7 @@ const transition_right_menu=useTransition(show_right_menu,{
 
         </Toolbar>
 
-        <TopLeagues />
+       {show_leagues==false ? <TopLeagues /> :<TopLeagues />} 
        
       </AppBar>
     </div>
