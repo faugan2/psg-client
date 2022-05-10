@@ -240,12 +240,12 @@
 
                 &.help{
                     position:absolute;
-                    top:0rem;
+                    top:1rem;
 
                 }
 
                 &:last-child{
-                    margin-bottom: 0.5rem;
+                    margin-bottom: 1rem;
                 }
 
                 
@@ -329,7 +329,7 @@
             color:var(--green) !important;
             border-radius:2px;
             &.active{
-                border:2px solid indianred !important;
+                border:2px solid whitesmoke !important;
             }
         }
     }
