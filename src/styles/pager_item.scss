@@ -323,7 +323,8 @@
 }
 
 .match{
-    border-bottom:none;
+    border-bottom:1px dotted dimgray;
+    padding-bottom: 0.5rem;
     >div{
         >button{
             color:var(--green) !important;
