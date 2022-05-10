@@ -16,6 +16,7 @@
             bottom:0rem;
             width:100%;
             margin-left: 0.5rem;
+            display:none;
             
             >h4{
                 font-size: 0.7rem;
@@ -51,7 +52,6 @@
 
         >.body{
             flex:1;
-            
             margin-bottom: 1rem;
             display:flex;
             flex-direction: column;
@@ -137,7 +137,7 @@
 
             >.players{
                 
-                margin-top: 2rem;
+                margin-top: 1rem;
                 
                 >ul{
                     padding:0;
@@ -323,7 +323,8 @@
 }
 
 .match{
-    border-bottom:1px dotted dimgray;
+    /*border-bottom:1px dotted dimgray;*/
+    border-bottom:none;
     padding-bottom: 0.5rem;
     >div{
         >button{

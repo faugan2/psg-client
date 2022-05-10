@@ -210,7 +210,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
         var body_h = document.getElementById(`body${index}`)?.clientHeight;
         const configurations_h=document.getElementById(`configurations${index}`)?.clientHeight;
         const creator_h=document.getElementById(`creator${index}`)?.clientHeight;
-        const diff=body_h-configurations_h - creator_h -16;
+        const diff=body_h-configurations_h  -16;
         console.log(`${index}`,body_h,configurations_h,creator_h,diff)
         const players_div=document.querySelector(`#players${index} >.all_games`);
         players_div.style.minHeight=`${diff}px`;
@@ -295,6 +295,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                                 data.length==0 && 
                                 <p>No matches available yet.</p>
                             }
+                           
                         {
                             data.map((item,i)=>{
                                 const dt=item.date;
@@ -326,7 +327,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                 </div>
                 
                 <div className="creator" id={`creator${index}`}>
-                   <h4>Created By :</h4>
+                   <h4>Challenge created by :</h4>
                     <div>
                         <img src={creator_icon}  />
                         <p>{creator_name}</p>
