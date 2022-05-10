@@ -21,6 +21,7 @@ import {useSelector,useDispatch} from "react-redux";
 import logo from "./img/logo.png";
 import Match from "./Match";
 import AutorenewIcon from '@material-ui/icons/Autorenew';
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 const moment=require("moment-timezone")
 
 
@@ -233,6 +234,23 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                             <p>{str_mode}</p>
                             <p>{nb_game} Games</p>
                         </div>
+                        <div className="options">
+                            <div>
+                                <p className="entry_fees">
+                                {entry==0 ? " Free ": ` ${parseInt(entry)} coins`}
+                                </p>
+                                <p>Entry</p>
+                            </div>
+                            <div>
+                                <ArrowRightAltIcon />
+                            </div>
+                            <div>
+                                <p className="winnings_coins"> 
+                                {entry==0 ? " 0.1 coin ": ` ${parseInt(entry)*total_players} coins`}
+                                </p>
+                                <p>winnings</p>
+                            </div>
+                        </div>
                         {/*<button>
                             {sport_name}
                             <label>sport</label>
@@ -283,7 +301,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                                 const matches=item.data;
                                 return(
                                     <div key={i}>
-                                        <p>{dt}</p>
+                                        {/*<p>{dt}</p>*/}
                                         {
                                             matches.map((match,j)=>{
                                                 return(
@@ -319,16 +337,6 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
             <div className="actions">
                 <div className="top">
                    
-
-                    <button>
-                    {entry==0 ? " Free ": ` ${parseInt(entry)*total_players} coins`}
-                        <p>Entry</p>
-                    </button>
-
-                    {data.length>0 &&<button>
-                        {entry==0 ? " 0.1 coin ": ` ${parseInt(entry)*total_players} coins`}
-                        <p>Winnings</p>
-                    </button>}
 
                     <button>
                         <InfoIcon />

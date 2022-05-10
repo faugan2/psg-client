@@ -85,6 +85,30 @@
                             border:none;
                         }
                     }
+
+                    &.options{
+                       
+                        >div{
+                            display:flex;
+                            flex-direction: column;
+                            justify-content:center;
+                            >p{
+                                font-size: 0.6rem;
+                                &.entry_fees{
+                                    color:indianred;
+                                    font-weight: bold;
+                                }
+
+                                &.winnings_coins{
+                                    color:var(--green);
+                                    font-weight: bold;
+                                }
+                            }
+                            >svg{
+                                font-size: 1.2rem;
+                            }
+                        }
+                    }
                 }
                 >button{
                     padding:0.3rem;
@@ -172,7 +196,8 @@
             
             display:flex;
             align-items: center;
-            justify-content:space-between;
+            justify-content:flex-end;
+            gap:1rem;
             flex-direction: column;
            
             height:100%;
@@ -184,30 +209,9 @@
                 flex-direction: column;
                 align-items: center;
 
-                &:nth-child(1){
-                    
-                    font-size: 0.7rem;
-                    color:indianred;
-                    font-weight: bold;
-                    >p{
-                        font-weight: normal;
-                        font-size: 0.6rem;
-                    }
-                }
-
-                
-
-                
-
+               
                 &.join_btn{
                     
-                   // width:40px;
-                    //margin:auto;
-                   // height:40px;
-                  //  border-radius: 50%;
-                  //  justify-content:center;
-                   // margin-top: 0.2rem;
-                   /* background-color:dimgray;*/
                    z-index: 999999999999999999;
                     &.active{
                         background-color:indianred;
@@ -215,7 +219,8 @@
                 }
 
                 >svg{
-                    font-size: 1rem;
+                    font-size: 1.2rem;
+                    color:var(--green);
                 }
 
                 >p,label{
@@ -223,14 +228,7 @@
                     color:rgb(158, 154, 154);
                 }
 
-                &:nth-child(2){
-                    color:green;
-                    font-weight: bold;
-                    >p{
-                        color:gainsboro;
-                        font-weight: normal;
-                    }
-                }
+                
             }
         }
 
@@ -254,7 +252,7 @@
                 }
 
                 &:nth-child(2){
-                    color:green;
+                    color:var(--green);
                     font-weight: bold;
                     >p{
                         color:gainsboro;
