@@ -16,7 +16,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { auth, db } from '../firebase_file';
 import { useHistory } from 'react-router';
 import { Badge } from '@material-ui/core';
-import logo from "./img/psg2.png";
+import logo from "./img/psg3.png";
 import DatePicker from "react-horizontal-datepicker";
 import "../styles/header2.scss";
 import TopLeagues from "./TopLeagues";
