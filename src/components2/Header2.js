@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     
     alignItems: 'center',
-    backgroundColor:"#474f4f",
+    backgroundColor:"var(--green)",
     color:"white"
     
   },
@@ -238,7 +238,6 @@ const transition_right_menu=useTransition(show_right_menu,{
     <div className={classes.root} id="header">
       <AppBar position="static">
         <Toolbar className={classes.toolbar} >
-          
           {
             transition_logo((style,item)=>{
               if(item){
