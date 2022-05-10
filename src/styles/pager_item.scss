@@ -199,6 +199,7 @@
             justify-content:flex-end;
             gap:1rem;
             flex-direction: column;
+            position:relative;
            
             height:100%;
             >button{
@@ -211,21 +212,40 @@
 
                
                 &.join_btn{
-                    
-                   z-index: 999999999999999999;
+                    border-radius: 50%;
+                    width:25px;
+                    height: 25px;
+                    z-index: 999999999999999999;
+                    transition: 1s;
                     &.active{
-                        background-color:indianred;
+                        
+                        background-color:var(--green);
+                       
+                        display:flex;
+                        align-items: center;
+                        justify-content:center;
+                        transition: 1s;
                     }
                 }
 
                 >svg{
                     font-size: 1.2rem;
-                    color:var(--green);
+                    /*color:var(--green);*/
                 }
 
                 >p,label{
                     font-size: 0.6rem;
                     color:rgb(158, 154, 154);
+                }
+
+                &.help{
+                    position:absolute;
+                    top:0rem;
+
+                }
+
+                &:last-child{
+                    margin-bottom: 0.5rem;
                 }
 
                 
@@ -293,7 +313,7 @@
                    /* background-color:dimgray;*/
                    z-index: 999999999999999999;
                     &.active{
-                        background-color:indianred;
+                        background-color:var(--green);
                     }
                 }
             }
@@ -304,4 +324,13 @@
 
 .match{
     border-bottom:none;
+    >div{
+        >button{
+            color:var(--green) !important;
+            border-radius:2px;
+            &.active{
+                border:2px solid var(--green) !important;
+            }
+        }
+    }
 }

@@ -338,7 +338,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                 <div className="top">
                    
 
-                    <button>
+                    <button className="help">
                         <InfoIcon />
                         <p>Help</p>
                     </button>
@@ -352,7 +352,6 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                     onClick={send_picks}
                     id={`btn_join${index}`}>
                         <NearMeIcon />
-                        <p>Join</p>
                     </button>}
                     <button>
                         <PeopleIcon />
