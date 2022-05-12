@@ -15,6 +15,7 @@ import {auth, db,storage} from "../../firebase_file";
 import firebase from "firebase";
 
 import { ToastContainer } from 'react-toastify';
+import RefreshIcon from '@material-ui/icons/Refresh';
 
 import {set_toast} from "../data";
 
@@ -85,6 +86,10 @@ export default function Login({close}) {
         
         
         
+    }
+
+    const re_send_code=()=>{
+        set_toast("well here we go",1);
     }
 
     const login=()=>{
@@ -221,7 +226,9 @@ export default function Login({close}) {
 
                     <div className="line">
                          
-                        <button id="login" onClick={show_register}>Re-send the code</button>
+                        <button id="btn_resend" onClick={re_send_code}>
+                            <RefreshIcon />
+                            Re-send the code</button>
                     </div>
                 </div>
             }
