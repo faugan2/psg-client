@@ -5,9 +5,6 @@ import { useHistory } from 'react-router-dom';
 
 export default function Login({close}) {
     const history=useHistory();
-    const go_back=()=>{
-        history.goBack();
-    }
 
   return (
     <div className="new_login">
