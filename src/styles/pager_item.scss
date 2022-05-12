@@ -66,7 +66,8 @@
                 padding-bottom: 1rem;
                 margin-left: 0.5rem;
                 padding:0.5rem;
-                background-color:var(--sub_black);
+                /*background-color:var(--sub_black);*/
+                border:1px solid var(--sub_black);
                 border-radius: 2px;
 
                 >h4{
@@ -75,7 +76,7 @@
 
                 >div{
                     display:flex;
-                    font-size: 0.7rem;
+                    font-size: 0.6rem;
                     color:gray;
                     justify-content:space-between;
                     margin-top: 0.5rem;
@@ -203,6 +204,7 @@
             position:relative;
            
             height:100%;
+        
             >button{
                 border:none;
                 background-color:transparent;
@@ -210,8 +212,8 @@
                 display:flex;
                 flex-direction: column;
                 align-items: center;
-
                
+
                 &.join_btn{
                     border-radius: 50%;
                     width:25px;
@@ -242,6 +244,7 @@
                 &.help{
                     position:absolute;
                     top:1rem;
+                    height:40px;
 
                 }
 

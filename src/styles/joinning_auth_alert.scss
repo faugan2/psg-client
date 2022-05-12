@@ -1,0 +1,32 @@
+.joinning_auth_alert{
+   display:flex;
+   align-items: center;
+   justify-content:center;
+   width:100vw;
+
+   >div{
+       display:flex;
+       flex-direction: column;
+       align-items: center;
+       >svg{
+           font-size: 5rem;
+           color:whitesmoke;
+       }
+
+       >p{
+           font-size: 0.8rem;
+           margin-top: 1rem;
+           color:whitesmoke;
+       }
+
+       >button{
+           padding:0.6rem 1rem;
+           width:120px;
+           border:none;
+           margin-top: 1rem;
+           background-color:var(--green);
+           color:whitesmoke;
+           font-weight: 600;
+       }
+   }
+}

@@ -56,7 +56,7 @@ import { BottomSheet } from 'react-spring-bottom-sheet'
 import Profile from "../components2/UserProfile";
 import NotEnoughCoins from "../components2/NotEnoughCoins";
 import DailyBonusCoins from "../components2/DailyBonusCoins";
-
+import 'react-spring-bottom-sheet/dist/style.css'
 import Badge from '@material-ui/core/Badge';
 import "../styles/main.scss";
 import 'prevent-pull-refresh';
@@ -66,6 +66,8 @@ import Pager from 'react-js-pager';
 import PagerItem from "../components2/PagerItem";
 import firebase from "firebase";
 import {user_coins} from "../components2/data";
+import Joinning from "../components2/modals/Joinning";
+
 
 const moment=require("moment-timezone");
 let id_inter=0;
@@ -95,6 +97,7 @@ const Main=()=>{
     const chat_total=useSelector(selectChatTotal);
     const chat_read=useSelector(selectChatRead);
     const join=useSelector(selectJoin);
+    const [joinning,set_joinning]=useState(false);
 
     console.log("thechat unrea d is ",chat_unread);
 
@@ -108,8 +111,10 @@ const Main=()=>{
     const [picks,set_picks]=useState([]);
 
 
+    const close_joinning=()=>{
+        set_joinning(false);
+    }
     const close_not_enough=()=>{
-        //set_open_not_enough(false);
         dispatch(setNotEnoughCoins(false))
     }
 
@@ -120,9 +125,7 @@ const Main=()=>{
         set_open(false);
     }
     const close_open_profile=()=>{
-        
         set_open_profile(false);
-
     }
 
     const open_modal_profile=(email)=>{
@@ -311,6 +314,7 @@ const Main=()=>{
         const res=t.filter((item)=>{
             return item.parent==false;
         })
+        console.log("the final res",res);
 
         const today=moment().endOf("day");
         
@@ -326,7 +330,6 @@ const Main=()=>{
             }
             const key=item.key;
             const nb_picks=p.filter((i)=>{
-               
                 return i.id_challenge==key;
             })
             if(nb_picks.length==total_players){
@@ -344,7 +347,7 @@ const Main=()=>{
             if(part_of_it){
                 return false;
             }
-            
+           // return true;
             return date.format("ll")==today.format("ll") || diff >0;
         })
         
@@ -355,6 +358,8 @@ const Main=()=>{
                 dates.push(date);
             }
         })
+
+        console.log("the final res2",res2);
         
         const res3=dates.map((date)=>{
             const lines=[];
@@ -382,7 +387,10 @@ const Main=()=>{
 
     const quick_picks=(i,item)=>{
         
+        
         set_game_index(i);
+        console.log("the final i",i);
+        document.querySelector(`#btn_quick_picks_text${i}`).textContent="processing..."
         
        const sport=item.sport;
        const date=moment.tz(item.date?.seconds*1000,tz);
@@ -531,6 +539,8 @@ const Main=()=>{
             console.log("ok we are good",`#btn_join${game_index}`)
             const btn=document.querySelector(`#btn_join${game_index}`);
             console.log("the btn is ",btn);
+            clearInterval(id_inter);
+            document.querySelector(`#btn_quick_picks_text${game_index}`).textContent="Quick picks"
             btn?.classList.add("active");
         }else{
             const btn=document.querySelector(`#btn_join${game_index}`);
@@ -545,10 +555,15 @@ const Main=()=>{
 
    const send_picks=(e)=>{
 
+    set_joinning(true);
+    return;
+
     if(join==null){
         alert("You must pick  games before submit");
         return;
     }
+
+
     
     dispatch(setJoinSuccess(false));
     if(picks.length!=parseInt(join?.number_game)){
@@ -630,6 +645,7 @@ const Main=()=>{
         show_leagues={false}
     />
     <div className="content">
+       
         <Pager
           ref={node => (pagerMethods = node)}
           orientation='vertical'
@@ -645,6 +661,7 @@ const Main=()=>{
               data.map((item,i)=>{
                   const date=item.date;
                   const lines=item.lines;
+                  console.log("tour de ",date);
                   return <>
                       {
                         lines.map((line,i2)=>{
@@ -690,6 +707,10 @@ const Main=()=>{
 
     <BottomSheet open={open_daily_bonus}>
         <DailyBonusCoins click={close_daily_bonus}/>
+    </BottomSheet>
+
+    <BottomSheet  open={joinning}>
+        <Joinning close={close_joinning} />
     </BottomSheet>
 
     </div>

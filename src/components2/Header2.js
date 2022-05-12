@@ -77,6 +77,9 @@ export default function ProminentAppBar({onGames_drawer_closed,index,click_profi
     const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
+    if(auth?.currentUser==null){
+      return;
+    }
     setAnchorEl(event.currentTarget);
   };
 
@@ -269,7 +272,7 @@ const transition_right_menu=useTransition(show_right_menu,{
             padding:"0.3rem",
             }}
             
-            onClick={go_to_friends}>
+            onClick2={go_to_friends}>
               <SearchIcon style={{color:"silver",fontSize:"1.2rem"}} 
               
               />

@@ -345,9 +345,9 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                     </button>
 
 
-                    {data.length>0 &&<button onClick={quick_picks.bind(this,index,item)}>
+                    {data.length>0 &&<button onClick={quick_picks.bind(this,index,item)} id={`btn_quick_picks${index}`}>
                         <AutorenewIcon />
-                        <p>Quick Picks</p>
+                        <p id={`btn_quick_picks_text${index}`}>Quick Picks</p>
                     </button>}
                     {data.length>0 &&<button className="join_btn" 
                     onClick={send_picks}
