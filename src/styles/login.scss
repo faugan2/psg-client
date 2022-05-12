@@ -1,0 +1,32 @@
+.new_login{
+    height:95vh;
+
+    >.top{
+        
+        position:fixed;
+        top:0;
+        width:100%;
+        height:50px;
+        color:whitesmoke;
+        display:flex;
+        align-items: center;
+        border-bottom: 1px solid dimgray;
+        >button{
+            padding:0.3rem 0.5rem;
+            background-color:transparent;
+            border:none;
+            color:whitesmoke;
+        }
+        >h2{
+            font-size: 1rem;
+        }
+        
+    }
+
+    >.body{
+        position:fixed;
+        top:50px;
+        width:100%;
+        color:white;
+    }
+}
