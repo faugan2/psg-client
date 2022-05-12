@@ -55,6 +55,10 @@
             display:flex;
             flex-direction: column;
             align-items: center;
+            >p{
+                text-align: center;
+                font-size: 0.8rem;
+            }
 
             >.line{
                 display:flex;
@@ -83,6 +87,12 @@
                         outline:none;
                         border:none;
                         color:white;
+
+                        &.six_digits{
+                            margin-top: 1rem;
+                            text-align: center;
+                            font-size: 1.2rem;
+                        }
                     }
                 }
 

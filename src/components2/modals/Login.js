@@ -11,6 +11,8 @@ import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import GoogleIcon from "../GoogleIcon";
+import {auth, db,storage} from "../../firebase_file";
+import firebase from "firebase";
 
 import { ToastContainer } from 'react-toastify';
 
@@ -22,6 +24,7 @@ export default function Login({close}) {
     const [show_pw,set_show_pw]=useState(false);
     const [title,set_title]=useState("Sign up");
     const [state,set_state]=useState(0);
+    const [user_email,set_user_email]=useState("");
 
     const show_login=()=>{
         set_state(1);
@@ -34,7 +37,7 @@ export default function Login({close}) {
     }
 
 
-    const register=()=>{
+    const register=async ()=>{
         const name=document.querySelector("#r_name").value;
         const email=document.querySelector("#r_email").value;
         const password=document.querySelector("#r_password").value;
@@ -51,6 +54,35 @@ export default function Login({close}) {
             set_toast("please create a password",0);
             return;
         }
+
+        set_user_email(email);
+
+        //await auth.createUserWithEmailAndPassword(email,password);
+        const user={
+            coins:"50",
+            date:firebase.firestore.FieldValue.serverTimestamp(),
+            email,
+            last_10:"0",
+            last_200:"0",
+            loses:"0",
+            password,
+            photo:null,
+            status:"Clown",
+            streak:"0",
+            ties:"0",
+            username:name,
+            win_per:"0.00",
+            wins:"0"
+        }
+
+        db.collection("psg_users").add(user).then(()=>{
+            set_toast("account well created",1);
+            set_state(2);
+        }).catch((err)=>{
+            set_toast(err.message,0);
+        })
+        
+        
         
         
     }
@@ -172,6 +204,27 @@ export default function Login({close}) {
                         <button id="login" onClick={show_register}>Sign Up</button>
                     </div>
             </div>}
+
+            {
+                state==2 && 
+                <div className="form">
+
+                    <p>Please enter the 6-digits code sent to {user_email} </p>
+                    
+                    <div className="line">
+                        <div>
+                            <input type="tel" 
+                            maxLength={6}
+                            className="six_digits" />
+                        </div>
+                    </div>
+
+                    <div className="line">
+                         
+                        <button id="login" onClick={show_register}>Re-send the code</button>
+                    </div>
+                </div>
+            }
             
         </div>
 

@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-import {db} from "../firebase_file";
+import {db,auth} from "../firebase_file";
 import {create_all_main_challenges} from "../components2/data";
 
 import {useSelector,useDispatch} from "react-redux";
@@ -71,7 +71,7 @@ export default function Debug(props) {
     },[])
 
     useEffect(()=>{
-        db.collection("psg_challenges").where("parent","==",true).get().then((snap)=>{
+        /*db.collection("psg_challenges").where("parent","==",true).get().then((snap)=>{
             snap.docs.map((doc)=>{
                 const key=doc.id;
                 let entry=parseInt(doc.data().entry);
@@ -81,7 +81,11 @@ export default function Debug(props) {
                 db.collection("psg_challenges").doc(key).update({entry},{merge:true});
                 
             })
-        })
+        })*/
+    },[])
+
+    useEffect(()=>{
+        auth.signOut();
     },[])
     return (
         <div>
