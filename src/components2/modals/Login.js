@@ -26,6 +26,15 @@ export default function Login({close}) {
     const [title,set_title]=useState("Sign up");
     const [state,set_state]=useState(0);
     const [user_email,set_user_email]=useState("");
+    const [code,set_code]=useState("");
+
+    useEffect(()=>{
+        let c="";
+        for(var i=0; i<6;i++){
+            c+=Math.round(Math.random()*9);
+        }
+        set_code(c);
+    },[])
 
     const show_login=()=>{
         set_state(1);
@@ -73,11 +82,14 @@ export default function Login({close}) {
             ties:"0",
             username:name,
             win_per:"0.00",
-            wins:"0"
+            wins:"0",
+            code,
+            verify:false,
         }
 
-        db.collection("psg_users").add(user).then(()=>{
-            set_toast("account well created",1);
+        db.collection("psg_users").add(user).then(async ()=>{
+            //set_toast("account well created",1);
+            await re_send_code();
             set_state(2);
             set_title("Verification")
         }).catch((err)=>{
@@ -89,8 +101,20 @@ export default function Login({close}) {
         
     }
 
-    const re_send_code=()=>{
-        set_toast("well here we go",1);
+
+    const send_code=async ()=>{
+        fetch(`https://assitchape.com/api/psg/send_code.php?code=${code}&email=${user_email}`).then(()=>{
+            
+       }).catch((err)=>{
+            set_toast("error "+err.message,0)
+       });
+    }
+
+    const re_send_code=async ()=>{
+        
+        await send_code();
+        set_toast("Code resent",1)
+
     }
 
     const login=()=>{
