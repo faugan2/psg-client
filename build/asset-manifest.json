@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.dcf9462d.chunk.css",
-    "main.js": "/static/js/main.3dde7fa2.chunk.js",
-    "main.js.map": "/static/js/main.3dde7fa2.chunk.js.map",
+    "main.css": "/static/css/main.57f9bc7e.chunk.css",
+    "main.js": "/static/js/main.ba77e711.chunk.js",
+    "main.js.map": "/static/js/main.ba77e711.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.7545a8a1.js",
     "runtime-main.js.map": "/static/js/runtime-main.7545a8a1.js.map",
     "static/css/2.1571d44e.chunk.css": "/static/css/2.1571d44e.chunk.css",
-    "static/js/2.b2ced62a.chunk.js": "/static/js/2.b2ced62a.chunk.js",
-    "static/js/2.b2ced62a.chunk.js.map": "/static/js/2.b2ced62a.chunk.js.map",
+    "static/js/2.c9a960ff.chunk.js": "/static/js/2.c9a960ff.chunk.js",
+    "static/js/2.c9a960ff.chunk.js.map": "/static/js/2.c9a960ff.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.1571d44e.chunk.css.map": "/static/css/2.1571d44e.chunk.css.map",
-    "static/css/main.dcf9462d.chunk.css.map": "/static/css/main.dcf9462d.chunk.css.map",
-    "static/js/2.b2ced62a.chunk.js.LICENSE.txt": "/static/js/2.b2ced62a.chunk.js.LICENSE.txt",
+    "static/css/main.57f9bc7e.chunk.css.map": "/static/css/main.57f9bc7e.chunk.css.map",
+    "static/js/2.c9a960ff.chunk.js.LICENSE.txt": "/static/js/2.c9a960ff.chunk.js.LICENSE.txt",
     "static/media/baseball.e8ec0703.png": "/static/media/baseball.e8ec0703.png",
     "static/media/basketball.10dd6782.png": "/static/media/basketball.10dd6782.png",
     "static/media/bet365.f086be08.gif": "/static/media/bet365.f086be08.gif",
@@ -30,8 +30,8 @@
   "entrypoints": [
     "static/js/runtime-main.7545a8a1.js",
     "static/css/2.1571d44e.chunk.css",
-    "static/js/2.b2ced62a.chunk.js",
-    "static/css/main.dcf9462d.chunk.css",
-    "static/js/main.3dde7fa2.chunk.js"
+    "static/js/2.c9a960ff.chunk.js",
+    "static/css/main.57f9bc7e.chunk.css",
+    "static/js/main.ba77e711.chunk.js"
   ]
 }

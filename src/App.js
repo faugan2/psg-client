@@ -58,6 +58,8 @@ import Help from "./screens/Help";
 import Debug from "./screens/Debug";
 import Main2 from "./screens/Main2";
 
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const [page,setPage]=useState(0);
 

@@ -29,5 +29,81 @@
         top:50px;
         width:100%;
         color:white;
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+
+        >.top{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            >h2{
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            >img{
+                
+            }
+        }
+
+        >.form{
+            
+            width:min(400px,70%);
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+
+            >.line{
+                display:flex;
+                flex-direction: column;
+                width:100%;
+                margin-bottom: 2rem;
+
+                &.line_last{
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content:center;
+                    font-size: 0.8rem;
+                }
+                >label{
+                    font-size: 0.8rem;
+                    color:gray;
+                }
+                >div{
+                    display:flex;
+                    align-items: center;
+                    border-bottom:1px solid gray;
+                    >input{
+                        flex:1;
+                        padding:0.1rem 0.3rem;
+                        background-color:transparent;
+                        outline:none;
+                        border:none;
+                        color:white;
+                    }
+                }
+
+                >button{
+                    padding:0.6rem 1rem;
+                    border:none;
+                    background-color:var(--green);
+                    color:whitesmoke;
+                    font-weight: 600;
+                    border-radius: 3px;
+                    display:flex;
+                    align-items: center;
+                    justify-content:center;
+                    gap:1rem;
+
+                    &#login{
+                        background-color:transparent;
+
+                    }
+                }
+            }
+        }
     }
 }

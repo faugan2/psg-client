@@ -12,7 +12,7 @@ import overwatch from "./img/overwatch.png";
 import ufc from "./img/ufc.png";
 import {db} from "../firebase_file";
 import firebase from "firebase";
-
+import {  toast } from 'react-toastify';
 
 const user_stats=(user_email,all_stats)=>{
     let loses=0;
@@ -248,6 +248,32 @@ const create_challenge=async (i,challenge)=>{
 }
 
 
+const set_toast=(msg,type)=>{
+    if(type==0){
+        toast.error(msg, {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }else if(type==1){
+        toast.success(msg, {
+            position: "bottom-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+    
+}
+
+
 export {
     baseball,
     basketball,
@@ -264,5 +290,6 @@ export {
     user_stats,
     user_matches_picks,
     user_coins,
-    create_all_main_challenges
+    create_all_main_challenges,
+    set_toast
 };
