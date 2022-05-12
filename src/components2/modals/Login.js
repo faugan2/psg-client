@@ -79,6 +79,7 @@ export default function Login({close}) {
         db.collection("psg_users").add(user).then(()=>{
             set_toast("account well created",1);
             set_state(2);
+            set_title("Verification")
         }).catch((err)=>{
             set_toast(err.message,0);
         })
@@ -220,7 +221,7 @@ export default function Login({close}) {
                         <div>
                             <input type="tel" 
                             maxLength={6}
-                            className="six_digits" />
+                            className="six_digits" autoFocus />
                         </div>
                     </div>
 
