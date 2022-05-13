@@ -19,6 +19,7 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 
 
 
+
 import {set_toast} from "../data";
 
 export default function Login({close}) {
@@ -31,6 +32,8 @@ export default function Login({close}) {
     const [code,set_code]=useState("");
     const [sending_code,set_sending_code]=useState(false);
     const [checking_code,set_checking_code]=useState(false);
+    const [registration_progressing,set_registration_progressing]=useState(false);
+    const [registration,set_registration]=useState(true);
 
     useEffect(()=>{
         let c="";
@@ -77,6 +80,8 @@ export default function Login({close}) {
         }
 
         set_user_email(email);
+        set_registration_progressing(true);
+        set_registration(true);
 
 
         let user_name=name[0]+last_name+code;
@@ -111,9 +116,11 @@ export default function Login({close}) {
             //set_toast("account well created",1);
             await send_code();
             set_state(2);
+            set_registration_progressing(false);
             set_title("Verification")
         }).catch((err)=>{
             set_toast(err.message,0);
+            set_registration_progressing(false);
         })
         
         
@@ -131,19 +138,68 @@ export default function Login({close}) {
     }
 
     const re_send_code=async ()=>{
+        set_checking_code(false);
         set_sending_code(true);
         await send_code();
         set_toast("Code resent",1)
         set_sending_code(false);
+        set_checking_code(false);
+        document.querySelector(".six_digits").disabled=false;
+        document.querySelector(".six_digits").value="";
+        
     }   
 
     const login=()=>{
-        
+        set_registration_progressing(false);
+        set_registration(false);
+        const email=document.querySelector("#l_email").value;
+        const password=document.querySelector("#l_password").value;
+
+        if(email==""){
+            set_toast("Please enter your email address",0);
+            return;
+        }
+        if(password==""){
+            set_toast("Please enter your password",0);
+            return;
+        }
+        if(password.length<6){
+            set_toast("Your password is too short",0);
+            return;
+        }
+
+        set_user_email(email);
+        set_registration_progressing(true);
+
+        db.collection("psg_users")
+        .where("email","==",email)
+        .where("password","==",password)
+        .get()
+        .then(async (snap)=>{
+            if(snap.docs.length==0){
+                set_toast("Your login details are not correct",0);
+                return;
+            }
+
+            const key=snap.docs[0].id;
+            const verify=snap.docs[0].verify;
+
+            if(verify==undefined || verify==false){
+                await send_code()
+                set_state(2);
+            }
+            
+
+        }).catch((err)=>{
+            set_toast(err.message,0);
+        })
+        console.log(email,password);
     }
 
 
     const handle_code_change=(e)=>{
         const v=e.target.value;
+        
         set_checking_code(false);
         if(v.length==6){
            e.target.disabled=true;
@@ -152,11 +208,15 @@ export default function Login({close}) {
             
             if(v!=code){
                 set_toast("Invalid code",0);
+                e.target.disabled=false;
+                set_checking_code(false);
                 return;
             }
             
             if(user_email==""){
                 set_toast("No email address is found",0);
+                e.target.disabled=false;
+                set_checking_code(false);
                 return;
             }
 
@@ -171,10 +231,27 @@ export default function Login({close}) {
                     const un=snap.docs[0].data().username;
                     db.collection("psg_users").doc(key).update({verify:true,code},{merge:true}).then(()=>{
                         
-                        auth.createUserWithEmailAndPassword(user_email,pw).then(()=>{
-                            auth.currentUser.updateProfile({
-                                displayName:un
-                            }).then(()=>{
+                        if(registration==true){
+                            auth.createUserWithEmailAndPassword(user_email,pw).then(()=>{
+                                auth.currentUser.updateProfile({
+                                    displayName:un
+                                }).then(()=>{
+                                    close();
+                                }).catch((err)=>{
+                                    auth.signOut();
+                                    set_toast(err.message,0);
+                                    set_checking_code(false);
+                                    e.target.disabled=false;
+                                    
+                                })
+                                
+                            }).catch((err)=>{
+                                set_toast(err.message,0);
+                                set_checking_code(false);
+                                e.target.disabled=false;
+                            })
+                        }else{
+                            auth.signInWithEmailAndPassword(user_email,pw).then(()=>{
                                 close();
                             }).catch((err)=>{
                                 auth.signOut();
@@ -182,12 +259,9 @@ export default function Login({close}) {
                                 set_checking_code(false);
                                 e.target.disabled=false;
                             })
-                            
-                        }).catch((err)=>{
-                            set_toast(err.message,0);
-                            set_checking_code(false);
-                            e.target.disabled=false;
-                        })
+                        }
+                        
+
                     }).catch((err)=>{
                         set_toast(err.message,0);
                         set_checking_code(false);
@@ -266,7 +340,8 @@ export default function Login({close}) {
 
                     <div className="line">
                         <button  id="btn_register" onClick={register}>
-                            <DoneIcon style={{color:"whitesmoke",fontSize:"1.2rem"}}/>
+                            {registration_progressing==false &&<DoneIcon style={{color:"whitesmoke",fontSize:"1.2rem"}}/>}
+                            {registration_progressing==true && <CircularProgress size={15} color="secondary" />}
                                 Sing Up 
                         </button>
                     </div>
@@ -314,7 +389,8 @@ export default function Login({close}) {
 
                     <div className="line">
                         <button  id="btn_login" onClick={login}>
-                            <DoneIcon style={{color:"whitesmoke",fontSize:"1.2rem"}}/>
+                            {registration_progressing==false && <DoneIcon style={{color:"whitesmoke",fontSize:"1.2rem"}}/>}
+                            {registration_progressing==true && <CircularProgress size={15} color="secondary" />}
                                 Login 
                         </button>
                     </div>

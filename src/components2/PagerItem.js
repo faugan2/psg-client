@@ -178,7 +178,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
             const str_today=today.format("ll");
            
             if(dates.indexOf(str_start)<0){
-                return false;
+                return true;
             }
 
             return true;
@@ -190,6 +190,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
             const dt=dates[i];
             const res3=res2.filter((item)=>{
                 const a_start=moment.tz(item.commence,tz);
+                return true;
                 return a_start.format("ll")==dt;
 
             })

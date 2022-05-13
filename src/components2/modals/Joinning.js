@@ -21,12 +21,30 @@ const Joinning=({close})=>{
 
 
     useEffect(()=>{
+        const sub=auth.onAuthStateChanged((user)=>{
+            if(user==null){
+                set_state(0);
+            }else{
+                const c=user_coins(auth.currentUser?.email,transactions);
+                set_coins(c);
+                if(c<parseInt(challenge?.entry)){
+                    set_state(1);   
+                    return ;
+                }
+
+                set_state(2);
+            }
+        })
+
+        return sub;
+    },[])
+    
+    /*useEffect(()=>{
         set_entry(challenge?.entry);
         if(auth?.currentUser==null){
             set_state(0); // not logged
             return;
         } 
-
         const c=user_coins(auth.currentUser?.email,transactions);
         set_coins(c);
         if(c<parseInt(challenge.entry)){
@@ -37,7 +55,7 @@ const Joinning=({close})=>{
         set_state(2);
 
            
-    },[auth,challenge])
+    },[auth,challenge])*/
 
     useEffect(()=>{
         if(state!=2) return;
