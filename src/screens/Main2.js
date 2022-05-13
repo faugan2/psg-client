@@ -67,7 +67,8 @@ import PagerItem from "../components2/PagerItem";
 import firebase from "firebase";
 import {user_coins} from "../components2/data";
 import Joinning from "../components2/modals/Joinning";
-
+import { ToastContainer } from 'react-toastify';
+import {set_toast} from "../components2/data";
 
 const moment=require("moment-timezone");
 let id_inter=0;
@@ -555,6 +556,20 @@ const Main=()=>{
 
    const send_picks=(e)=>{
 
+    if(join==null){
+        set_toast("Please make your picks before submitting",0);
+        return;
+    }
+
+    if(picks.length==0){
+        set_toast("Please make your picks before submitting",0);
+        return;
+    }
+
+    if(picks.length != join?.number_game){
+        set_toast(`You should make ${join?.number_game} picks before submitting`,0);
+        return;
+    }
     set_joinning(true);
     return;
 
@@ -712,6 +727,18 @@ const Main=()=>{
     <BottomSheet  open={joinning}>
         <Joinning close={close_joinning} />
     </BottomSheet>
+
+    <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            />
 
     </div>
     );

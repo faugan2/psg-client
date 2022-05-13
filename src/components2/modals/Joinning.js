@@ -17,27 +17,16 @@ const Joinning=({close})=>{
 
 
     useEffect(()=>{
-        console.log("picks=",picks,challenge);
+        console.log("picks=",picks,challenge,auth.currentUser);
         set_entry(challenge?.entry);
         if(auth?.currentUser==null){
             set_state(0); // not logged
             return;
-        }
-
-        if(challenge==null){
-            set_state(1) // no challenge selected 
-            return;
-        }
-
-        if(challenge.number_game!=picks.length){
-            set_state(2); // number picks does not match
-            return;
-        }
-
-        
+        } 
+        set_state(1);       
 
 
-    },[picks,challenge])
+    },[auth])
     return(
         <div className="joinning">
             <div className="top">
