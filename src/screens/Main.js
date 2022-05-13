@@ -66,7 +66,7 @@ const Main=()=>{
     const chat_total=useSelector(selectChatTotal);
     const chat_read=useSelector(selectChatRead);
 
-    console.log("thechat unrea d is ",chat_unread);
+    //console.log("thechat unrea d is ",chat_unread);
 
     const [page,set_page]=useState(0);
     const [open,set_open]=useState(false);
@@ -120,7 +120,7 @@ const Main=()=>{
    
 
     useEffect(()=>{
-        //console.log("ok for this")
+        ////console.log("ok for this")
         const height=window.screen.height
         const header=document.querySelector("#header")?.clientHeight;
         const dif=height-header;
@@ -135,7 +135,7 @@ const Main=()=>{
     useEffect(()=>{
         window.addEventListener('resize', handle_resize_window, true);
         return ()=>{
-            //console.log("ok")
+            ////console.log("ok")
             window.removeEventListener("resize",handle_resize_window);
         }
     },[])
@@ -147,7 +147,7 @@ const Main=()=>{
         const dif=height-header;
         dispatch(setHeaderHeight(header))
         setH(dif);
-        //console.log("resize is now ",dif);
+        ////console.log("resize is now ",dif);
     }
     
     const tab_index=useSelector(selectTab);
@@ -174,7 +174,7 @@ const Main=()=>{
         }
 
         const email=auth?.currentUser?.email;
-        //console.log(email);
+        ////console.log(email);
         /*if(info.photo=="foo.jpg"){
             up=<Avatar onClick={handleClickOpen}>{info.username[0].toLowerCase() }</Avatar>;
         }else{
@@ -230,7 +230,7 @@ const Main=()=>{
         set_page(index);
     }
 
-    //console.log("here we go then h");
+    ////console.log("here we go then h");
 
     useEffect(()=>{
         dispatch(setSport(null))
@@ -247,7 +247,7 @@ const Main=()=>{
     })
 
     const tab_changed=(index)=>{
-        console.log(index);
+        //console.log(index);
         set_page(index);
     }
 
@@ -256,7 +256,7 @@ const Main=()=>{
         const email=auth?.currentUser?.email;
         if(email==undefined) return;
         
-        console.log("today is ",today,"and email is ",email);
+        //console.log("today is ",today,"and email is ",email);
         db.collection("psg_bonus")
         .where("email","==",email)
         .where("date","==",today)
@@ -265,7 +265,7 @@ const Main=()=>{
                 set_open_daily_bonus(true);
                 db.collection("psg_bonus").add({email,date:today});
             }else{
-                console.log("alerady bonus received");
+                //console.log("alerady bonus received");
                 set_open_daily_bonus(false);
             }
         });

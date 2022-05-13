@@ -82,13 +82,13 @@ const GameLines=()=>{
             
             const str_start=start.format("ll");
             const str_today=today.format("ll");
-            console.log("today is ",str_today);
-            //console.log(str_start,str_today);
+            //console.log("today is ",str_today);
+            ////console.log(str_start,str_today);
             return diff >=0 && str_start==str_today;
 
         })
 
-        console.log("RES",res2);
+        //console.log("RES",res2);
         if(res2.length==0){
             set_no_games(true);
         }else{
@@ -103,7 +103,7 @@ const GameLines=()=>{
     },[game_date])
     
     useEffect(()=>{
-        //console.log(line);
+        ////console.log(line);
         if(line==null) {
             history.replace("/");
             return;
@@ -154,7 +154,7 @@ const GameLines=()=>{
             
 
             const diff=line_date.diff(moment.tz(date,tz),"days");
-            console.log(str_line_date," and ",str_selected_date,diff);
+            //console.log(str_line_date," and ",str_selected_date,diff);
 
             return item.type==game_type && 
                 item.mode==game_mode && 
@@ -174,7 +174,7 @@ const GameLines=()=>{
         
         
 
-        console.log("the res is ",res);
+        //console.log("the res is ",res);
         const res2=res.map((item)=>{
             const id_challenge=item.key;
             const r=picks.filter((i)=>{
@@ -191,7 +191,7 @@ const GameLines=()=>{
             return item!=null;
         })
 
-        console.log("the res3",res3);
+        //console.log("the res3",res3);
 
         const res4=res.map((item)=>{
             const r2=picks.filter((i)=>{
@@ -218,8 +218,8 @@ const GameLines=()=>{
 
         
 
-       // console.log("element with no picks",res4);
-        //console.log("element with picks",res5);
+       // //console.log("element with no picks",res4);
+        ////console.log("element with picks",res5);
         const res6=[...res4,...res5];
         
         set_data(res6);
@@ -261,8 +261,8 @@ const GameLines=()=>{
         if(date==undefined){
             return;
         }
-        console.log("the date is ",date);
-        console.log("the date is 2",date._d);
+        //console.log("the date is ",date);
+        //console.log("the date is 2",date._d);
         let new_date=date;
         if(date._d!=undefined){
             new_date=date._d;
@@ -272,20 +272,20 @@ const GameLines=()=>{
             date:firebase.firestore.Timestamp.fromDate(new_date),
             parent:false,
         };
-        console.log("the new line is ",new_line);
+        //console.log("the new line is ",new_line);
         delete new_line.key;
         delete new_line.wins;
         delete new_line.winners;
         delete new_line.fee;
-        console.log("creating...");
+        //console.log("creating...");
         set_creating(true);
         
         db.collection("psg_challenges").add(new_line).then(()=>{
-            console.log("created");
+            //console.log("created");
             set_create(false);
             set_creating(false);
         }).catch((err)=>{
-            console.log("error while creating");
+            //console.log("error while creating");
             set_creating(false);
             set_create(true);
         })
@@ -308,7 +308,7 @@ const GameLines=()=>{
           set_open_joined(false);
       }
       const join=(joined,line)=>{
-        console.log(joined)
+        //console.log(joined)
         
         if(joined==true){
             dispatch(setViewChallenge(line.key))

@@ -84,12 +84,12 @@ const FavoriteGames=()=>{
             const mode=item.mode;
             const number_game=item.number_game;
 
-           // console.log({entry,league,type,mode,number_game});
+           // //console.log({entry,league,type,mode,number_game});
             const res_ch=challenges.map((id)=>{
                 const ch_content=t.filter((j)=>{
                     return j.key==id;
                 })[0];
-                //console.log(ch_content);
+                ////console.log(ch_content);
                 if(ch_content==undefined) return undefined;
                 
                 if(ch_content?.entry==entry && 
@@ -113,7 +113,7 @@ const FavoriteGames=()=>{
         set_favorites(res5);
 
         res5.map((item)=>{
-            console.log(item);
+            //console.log(item);
         })
         /*if(res4.length>5){
             const res5=res4.slice(0,res4.length);
@@ -144,7 +144,7 @@ const FavoriteGames=()=>{
             item.league==favorite.league
             
         })
-        console.log("the res is ",res2);
+        //console.log("the res is ",res2);
         if(res2.length>0){
             dispatch(setLine(res2[0]));
         }

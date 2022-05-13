@@ -87,7 +87,7 @@ const JoinedConfiguration=()=>{
             }else{
                 set_winning(line.entry+" x #players");
             }
-            //console.log(line);
+            ////console.log(line);
             if(line.single!=undefined){
                 set_single(line.single);
                 set_date(line.dates.join(" ; "));
@@ -102,7 +102,7 @@ const JoinedConfiguration=()=>{
                 const all_users=u.filter((item)=>{
                     return users.indexOf(item.key)>=0;
                 })
-                console.log("all users are ",all_users);
+                //console.log("all users are ",all_users);
                 set_invites(all_users);
 
             }
@@ -124,7 +124,7 @@ const JoinedConfiguration=()=>{
             })
 
             set_joined_users(res5)
-            console.log(res5);
+            //console.log(res5);
             
 
             

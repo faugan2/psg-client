@@ -7,7 +7,7 @@ const Chat=({click})=>{
 
     const saisie=(e)=>{
         const v=e.target.value;
-        console.log(v);
+        //console.log(v);
     }
     return (
         <div className="chat">

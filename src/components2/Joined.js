@@ -64,7 +64,7 @@ const Joined=({click})=>{
         
         set_users(res_users);
 
-        console.log("the challenge is ",challenge);
+        //console.log("the challenge is ",challenge);
         if(challenge==null){
             return;
         }

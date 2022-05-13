@@ -25,7 +25,7 @@ const JoinInviteUser=({click})=>{
             return old_invites.indexOf(item.key)<0 && item.email != line.user && 
             item.email!=auth?.currentUser.email;
         })
-        console.log("now all is now ",res)
+        //console.log("now all is now ",res)
         set_invites(res);
     },[line,users,t])
 

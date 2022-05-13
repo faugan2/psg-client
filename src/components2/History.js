@@ -80,7 +80,7 @@ const Live=()=>{
       for(var i=0; i<dates.length; i++){
           const d=dates[i];
           const res4=res2.filter((item)=>{
-               // console.log("the item is ",item);
+               // //console.log("the item is ",item);
                 const date=moment.tz(item.date*1000,tz).format("ll");
                 return date==d;
           })

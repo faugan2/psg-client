@@ -14,7 +14,7 @@ const GameItem=({game,click})=>{
     const [entry,set_entry]=useState("Free");
     const [mode,set_mode]=useState("Most Wins");
 
-    console.log(game.url);
+    //console.log(game.url);
 
     useEffect(()=>{
         if(game==null || s==null || l==null) return;

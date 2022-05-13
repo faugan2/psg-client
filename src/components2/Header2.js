@@ -101,18 +101,18 @@ export default function ProminentAppBar({onGames_drawer_closed,index,click_profi
     btns.forEach((btn)=>{
         btn.classList.remove("active");
     })
-    //console.log("the real index is ",tab_index)
+    ////console.log("the real index is ",tab_index)
     btns[tab_index]?.classList.add("active");
   },[tab_index]);
 
   const handle_set_tab=(index)=>{
-      //console.log(index);
+      ////console.log(index);
       if(index==undefined){
           return;
       }
       dispatch(setTab(index));
      // set_tab(index);
-     //console.log("here we go",index)
+     ////console.log("here we go",index)
   }
 
   const go_to_bought_picks=()=>{
@@ -164,14 +164,14 @@ useEffect(()=>{
     snap.docs.map((doc)=>{
       const id_challenge=doc.id;
       const friend=doc.data()?.friend;
-      //console.log("freinds are ",friend);
+      ////console.log("freinds are ",friend);
       const user=doc.data()?.user;
       if(friend?.indexOf(auth?.currentUser?.email)>=0 || user==auth?.currentUser?.email){
         total_invite.push(id_challenge);
       }
     });
     let i=0;
-    console.log("total is now ",total_invite);
+    //console.log("total is now ",total_invite);
    /* total_invite.map((ch)=>{
       
       const res=db.collection("psg_picks")

@@ -30,7 +30,7 @@ const GameListe=()=>{
         dispatch(setLine(line));
         history.push("/game-lines");
     }
-   // console.log("all t",t);
+   // //console.log("all t",t);
     return (
         <div className="game_liste">
             {games.length==0 && 

@@ -77,7 +77,7 @@ const LeaguePage=()=>{
             return;
         }
         const t=league_options.type;
-        console.log("the type is ",t);
+        //console.log("the type is ",t);
         if(t==1){
             set_type("All type");
         }else if(t==2){
@@ -98,7 +98,7 @@ const LeaguePage=()=>{
         }
 
         const e=league_options.entry;
-        console.log("the entry is ",e);
+        //console.log("the entry is ",e);
         if(e==1){
             set_entry("All entry");
         }else if(e==2){

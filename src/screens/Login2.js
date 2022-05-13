@@ -52,7 +52,7 @@ const Login=()=>{
     },[])
       
 
-    console.log("the new obj",firebaseui);
+    //console.log("the new obj",firebaseui);
     const ref_email=useRef(null);
     const ref_pw=useRef(null);
     const [open,set_open]=useState(false)
@@ -73,7 +73,7 @@ const Login=()=>{
         if(ref_email.current==null){
             return;
         }
-        console.log("the ref is ",ref_email.current);
+        //console.log("the ref is ",ref_email.current);
         ref_email.current.addEventListener("focus",focused);
         ref_email.current.addEventListener("blur",blured);
         return()=>{

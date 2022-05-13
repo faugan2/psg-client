@@ -60,7 +60,7 @@ const PickItem=({pick,date})=>{
     }
     
 
-    console.log("pick daa ",new_pick_data)
+    //console.log("pick daa ",new_pick_data)
 
     
     

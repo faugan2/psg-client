@@ -42,7 +42,7 @@ const LeaguePageContent=()=>{
     const [no_games,set_no_games]=useState(false);
 
     const join=(joined,line)=>{
-        console.log(joined,line)
+        //console.log(joined,line)
         const id_ch=line.key;
         const type_ch=line.type;
         let total_players=0;
@@ -217,8 +217,8 @@ const LeaguePageContent=()=>{
 
         
 
-       // console.log("element with no picks",res4);
-        //console.log("element with picks",res5);
+       // //console.log("element with no picks",res4);
+        ////console.log("element with picks",res5);
         const res6=[...res4,...res5];
         
         let not_in=true;
@@ -239,7 +239,7 @@ const LeaguePageContent=()=>{
            }
             
         })
-        console.log("the not in is",not_in);
+        //console.log("the not in is",not_in);
         
 
         set_data(res6);
@@ -255,10 +255,10 @@ const LeaguePageContent=()=>{
 
 
     useEffect(()=>{
-        console.log("create is ",create, "and creating is ",creating)
+        //console.log("create is ",create, "and creating is ",creating)
         if(create==false) return;
         if(creating==true) return;
-        console.log("picks we have to create it",create,creating);
+        //console.log("picks we have to create it",create,creating);
         
        if(game_date==undefined){
             return;
@@ -273,7 +273,7 @@ const LeaguePageContent=()=>{
             date:firebase.firestore.Timestamp.fromDate(new_date),
             parent:false,
         };
-        console.log("the new line is ",new_line);
+        //console.log("the new line is ",new_line);
         delete new_line.key;
         delete new_line.wins;
         delete new_line.winners;
@@ -283,18 +283,18 @@ const LeaguePageContent=()=>{
         delete new_line.user;
         delete new_line.single;
 
-        console.log("creating...");
+        //console.log("creating...");
 
-        console.log("the new line");
-        console.log(new_line);
+        //console.log("the new line");
+        //console.log(new_line);
         set_creating(true);
         
         db.collection("psg_challenges").add(new_line).then(()=>{
-            console.log("created");
+            //console.log("created");
             set_create(false);
             set_creating(false);
         }).catch((err)=>{
-            console.log("error while creating");
+            //console.log("error while creating");
             set_creating(false);
             set_create(true);
         })
@@ -305,7 +305,7 @@ const LeaguePageContent=()=>{
         <div className="league_page_content">
             {
                 data.map((item)=>{
-                    console.log(item)
+                    //console.log(item)
                     return(
                         <Line key={item.key} line={item} click={join} no_games={false} />
                     );

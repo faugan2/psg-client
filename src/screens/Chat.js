@@ -102,7 +102,7 @@ const Chat=()=>{
             new_data=[new_line]
         }
 
-        console.log(new_data,global_chats)
+        //console.log(new_data,global_chats)
         dispatch(setChat(new_data));
        
         /*set_data(new_data);*/
@@ -186,7 +186,7 @@ const Chat=()=>{
                             ref_btn.current.style.backgroundColor="rgba(0,0,0,0.2)"
                            ref_btn.current.style.color="silver"
                        }else{
-                           console.log("not null");
+                           //console.log("not null");
                            ref_btn.current.style.backgroundColor="whitesmoke"
                            ref_btn.current.style.color="indianred"
                        }

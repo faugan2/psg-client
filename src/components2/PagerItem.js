@@ -26,11 +26,11 @@ const moment=require("moment-timezone")
 
 
 const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
-    console.log("tour de ",index,item.key);
+    //console.log("tour de ",index,item.key);
     const {entry,key,league,mode,name,nb_game,sport,type,user}=item;
     const line=item;
 
-    console.log("the user is ",user);
+    //console.log("the user is ",user);
     const [sport_name,set_sport_name]=useState("");
     const [league_name,set_league_name]=useState("");
     const [str_type,set_str_type]=useState("");
@@ -63,7 +63,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
         const res=picks.filter((x)=>{
             return x.id_challenge==key;
         })
-        console.log("the result is ",res,"for ",key);
+        //console.log("the result is ",res,"for ",key);
         set_total_picks(res.length)
     },[picks])
 
@@ -212,7 +212,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
         const configurations_h=document.getElementById(`configurations${index}`)?.clientHeight;
         const creator_h=document.getElementById(`creator${index}`)?.clientHeight;
         const diff=body_h-configurations_h  -16;
-        console.log(`${index}`,body_h,configurations_h,creator_h,diff)
+        //console.log(`${index}`,body_h,configurations_h,creator_h,diff)
         const players_div=document.querySelector(`#players${index} >.all_games`);
         players_div.style.minHeight=`${diff}px`;
         players_div.style.maxHeight=`${diff}px`;

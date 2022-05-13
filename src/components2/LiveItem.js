@@ -8,7 +8,7 @@ import {useTransition,animated} from "react-spring";
 const LiveItem=({pick,click})=>{
 
   const {id_challenge}=pick;
-  console.log("the id challenge is ",id_challenge);
+  //console.log("the id challenge is ",id_challenge);
 
   const t=useSelector(selectTournaments);
   const leagues=useSelector(selectLeagues);
@@ -77,7 +77,7 @@ const LiveItem=({pick,click})=>{
     let e=live.entry
     
     e=parseInt(e);
-    console.log(tp,e)
+    //console.log(tp,e)
     set_winning(tp*e);
   },[live,total_players,entry]);
 

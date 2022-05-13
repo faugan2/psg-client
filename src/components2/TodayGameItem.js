@@ -18,8 +18,8 @@ const TodayGameItem=({item,show_scores,games,show})=>{
    
     const {id_game,type_pick,team_picked,pickdata,league}=item;
     let pick_data=pickdata.split(",");
-    //console.log("scores",show_scores);
-    console.log(id_game,type_pick,show)
+    ////console.log("scores",show_scores);
+    //console.log(id_game,type_pick,show)
 
     let str_type_pick="";
     let odds="";

@@ -185,7 +185,7 @@ export default function Login({close}) {
             const verify=snap.docs[0].verify;
 
             if(verify==undefined || verify==false){
-                await send_code()
+                await re_send_code()
                 set_state(2);
             }
             
@@ -193,7 +193,7 @@ export default function Login({close}) {
         }).catch((err)=>{
             set_toast(err.message,0);
         })
-        console.log(email,password);
+        //console.log(email,password);
     }
 
 
@@ -203,7 +203,7 @@ export default function Login({close}) {
         set_checking_code(false);
         if(v.length==6){
            e.target.disabled=true;
-           console.log("the code is ",code);
+           //console.log("the code is ",code);
             set_checking_code(true);
             
             if(v!=code){

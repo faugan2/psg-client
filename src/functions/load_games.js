@@ -15,7 +15,7 @@ const load_games=async ()=>{
         const g=[];
         
        //dispatch(setTodayTime(today_time));
-        //console.log("we load ",today_time)
+        ////console.log("we load ",today_time)
         snap.docs.map((doc)=>{
             const id=doc.id; 
             const data=doc.data();
@@ -27,7 +27,7 @@ const load_games=async ()=>{
            
             data.diff=diff;
             const heur=diff*0.00000027777777777778
-            //console.log("reading from data ",data);
+            ////console.log("reading from data ",data);
             data.heur=heur.toFixed(2);
 
             let start_date=new Date(time).toUTCString();
@@ -52,17 +52,17 @@ const load_games=async ()=>{
 
                 if(start_date==today_date){
                    // data.today=true;
-                   //console.log("comp of diff=",diff);
-                   //console.log("comp of data=",data);
+                   ////console.log("comp of diff=",diff);
+                   ////console.log("comp of data=",data);
                     if(diff>=0){
-                        //console.log("comp of >0",start_date,today_date,diff,heur);
+                        ////console.log("comp of >0",start_date,today_date,diff,heur);
                         data.date=date;
                         data.key=id;
                         data.started=false;
                         data.today=true;
                     }else{
                         data.started=true;
-                        //console.log("comp of<0",start_date,today_date,diff,heur);
+                        ////console.log("comp of<0",start_date,today_date,diff,heur);
                         
                     }
                     
@@ -77,7 +77,7 @@ const load_games=async ()=>{
         })
        return g;
       //  dispatch(setGames(g));
-        //console.log("comp of dispatch",g);
+        ////console.log("comp of dispatch",g);
     })
 
 

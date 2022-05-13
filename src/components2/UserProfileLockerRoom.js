@@ -32,7 +32,7 @@ const UserProfileLockerRoom=({nb_matches_picks})=>{
                 for(var i=0;i<res2.length; i++){
                     const user=res2[i].user;
                     if(user==email){
-                        console.log("found in ",key)
+                        //console.log("found in ",key)
                         i_have_made_picks=true;
                     }
                 }

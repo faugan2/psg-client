@@ -100,7 +100,7 @@ const Main=()=>{
     const join=useSelector(selectJoin);
     const [joinning,set_joinning]=useState(false);
 
-    console.log("thechat unrea d is ",chat_unread);
+    //console.log("thechat unrea d is ",chat_unread);
 
     const [page,set_page]=useState(0);
     const [open,set_open]=useState(false);
@@ -157,7 +157,7 @@ const Main=()=>{
    
 
     useEffect(()=>{
-        //console.log("ok for this")
+        ////console.log("ok for this")
         const height=window.screen.height
         const header=document.querySelector("#header")?.clientHeight;
         const dif=height-header;
@@ -172,7 +172,7 @@ const Main=()=>{
     useEffect(()=>{
         window.addEventListener('resize', handle_resize_window, true);
         return ()=>{
-            //console.log("ok")
+            ////console.log("ok")
             window.removeEventListener("resize",handle_resize_window);
         }
     },[])
@@ -184,7 +184,7 @@ const Main=()=>{
         const dif=height-header;
         dispatch(setHeaderHeight(header))
         setH(dif);
-        //console.log("resize is now ",dif);
+        ////console.log("resize is now ",dif);
     }
     
     const tab_index=useSelector(selectTab);
@@ -262,7 +262,7 @@ const Main=()=>{
         set_page(index);
     }
 
-    //console.log("here we go then h");
+    ////console.log("here we go then h");
 
     useEffect(()=>{
         dispatch(setSport(null))
@@ -279,7 +279,7 @@ const Main=()=>{
     })
 
     const tab_changed=(index)=>{
-        console.log(index);
+        //console.log(index);
         set_page(index);
     }
 
@@ -288,7 +288,7 @@ const Main=()=>{
         const email=auth?.currentUser?.email;
         if(email==undefined) return;
         
-        console.log("today is ",today,"and email is ",email);
+        //console.log("today is ",today,"and email is ",email);
         db.collection("psg_bonus")
         .where("email","==",email)
         .where("date","==",today)
@@ -297,7 +297,7 @@ const Main=()=>{
                 set_open_daily_bonus(true);
                 db.collection("psg_bonus").add({email,date:today});
             }else{
-                console.log("alerady bonus received");
+                //console.log("alerady bonus received");
                 set_open_daily_bonus(false);
             }
         });
@@ -315,7 +315,7 @@ const Main=()=>{
         const res=t.filter((item)=>{
             return item.parent==false;
         })
-        console.log("the final res",res);
+        //console.log("the final res",res);
 
         const today=moment().endOf("day");
         
@@ -340,7 +340,7 @@ const Main=()=>{
             let part_of_it=false;
             for(var i=0; i<nb_picks.length; i++){
                 const user=nb_picks[i].user;
-                console.log(user)
+                //console.log(user)
                 if(user==auth.currentUser?.email){
                     part_of_it=true;
                 }
@@ -360,7 +360,7 @@ const Main=()=>{
             }
         })
 
-        console.log("the final res2",res2);
+        //console.log("the final res2",res2);
         
         const res3=dates.map((date)=>{
             const lines=[];
@@ -373,7 +373,7 @@ const Main=()=>{
             })
             return {date,lines}
         })
-        console.log("the final data is ",res3)
+        //console.log("the final data is ",res3)
         set_data(res3);
 
         set_loading(false);
@@ -390,7 +390,7 @@ const Main=()=>{
         
         
         set_game_index(i);
-        console.log("the final i",i);
+        //console.log("the final i",i);
         document.querySelector(`#btn_quick_picks_text${i}`).textContent="processing..."
         
        const sport=item.sport;
@@ -512,11 +512,11 @@ const Main=()=>{
    }else{
        //not picked yet
        if(join?.number_game==picks.length){
-            console.log("enougth");
+            //console.log("enougth");
             clearInterval(id_inter);
             return;
         }else{
-            console.log("not enougth",join?.number_game,picks.length);
+            //console.log("not enougth",join?.number_game,picks.length);
         }
         new_picks=[...picks,a_pick];
         set_picks(new_picks);
@@ -537,9 +537,9 @@ const Main=()=>{
        
 
         if(picks.length==join?.number_game){
-            console.log("ok we are good",`#btn_join${game_index}`)
+            //console.log("ok we are good",`#btn_join${game_index}`)
             const btn=document.querySelector(`#btn_join${game_index}`);
-            console.log("the btn is ",btn);
+            //console.log("the btn is ",btn);
             clearInterval(id_inter);
             document.querySelector(`#btn_quick_picks_text${game_index}`).textContent="Quick picks"
             btn?.classList.add("active");
@@ -548,7 +548,7 @@ const Main=()=>{
             btn?.classList.remove("active");
         }
 
-        console.log("the btn picks is ",picks);
+        //console.log("the btn picks is ",picks);
    },[picks])
 
 
@@ -638,9 +638,9 @@ const Main=()=>{
         }*/
 
 
-        console.log("also coins removed from user account")
+        //console.log("also coins removed from user account")
     }).catch((err)=>{
-        console.log("something bad happened")
+        //console.log("something bad happened")
         dispatch(setSendingPicks(false))
     })
 
@@ -676,7 +676,7 @@ const Main=()=>{
               data.map((item,i)=>{
                   const date=item.date;
                   const lines=item.lines;
-                  console.log("tour de ",date);
+                  //console.log("tour de ",date);
                   return <>
                       {
                         lines.map((line,i2)=>{

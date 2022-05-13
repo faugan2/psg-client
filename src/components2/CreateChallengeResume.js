@@ -176,7 +176,7 @@ const CreateChallengeResume=({click,open_create_modal,open_join})=>{
             name:auth?.currentUser?.displayName+" | "+league_name
             
         }
-        console.log("the new challenge is ",challenge)
+        //console.log("the new challenge is ",challenge)
         set_creating(true);
         click();
         dispatch(setSendingPicks(true));
@@ -189,7 +189,7 @@ const CreateChallengeResume=({click,open_create_modal,open_join})=>{
             //set_open(true);
 
         }).catch((err)=>{
-            console.log("une erreur",err.message);
+            //console.log("une erreur",err.message);
             set_creating(false);
         })
     }

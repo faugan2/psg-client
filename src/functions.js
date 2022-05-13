@@ -52,7 +52,7 @@ const challenged_closed=(key,type,nb_player,res,gm )=>{
     res.forEach((item)=>{
         
         const a_user_picks=item?.picks;
-        ////console.log("picks of ",key,a_user_picks)
+        //////console.log("picks of ",key,a_user_picks)
         a_user_picks.forEach((pick_line)=>{
             const id_game_picked=pick_line.id_game;
             all_games.push(id_game_picked);

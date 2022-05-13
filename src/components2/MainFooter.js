@@ -81,7 +81,7 @@ const MainFooter=({click,click_profile,page,ads})=>{
        const res_picks=picks.filter((i)=>{
            return i.id_challenge==key;
        })
-       console.log("for ",key)
+       //console.log("for ",key)
        const all_players=res_picks.map((i)=>{
            const user=i.user;
            return user;
@@ -116,7 +116,7 @@ const MainFooter=({click,click_profile,page,ads})=>{
    
    
 
-  // console.log(res3)
+  // //console.log(res3)
     dispatch(setMyInvites(res5));
     set_invite(res5);
    },[t,picks]);
@@ -147,7 +147,7 @@ const MainFooter=({click,click_profile,page,ads})=>{
    useEffect(()=>{
     /*slide();
     return()=>{
-        console.log("clearing id_inter")
+        //console.log("clearing id_inter")
         clearTimeout(id_inter);
     }*/
    },[id_inter])
@@ -193,7 +193,7 @@ const MainFooter=({click,click_profile,page,ads})=>{
                 <AutoPlaySwipeableViews enableMouseEvents={true}>
                 {
                     data.map((item,i)=>{
-                        console.log("the game line ",i)
+                        //console.log("the game line ",i)
                         return(
                             <GameSlide key={i} id={i}  item={item} />
                         )

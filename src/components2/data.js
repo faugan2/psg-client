@@ -29,7 +29,7 @@ const user_stats=(user_email,all_stats)=>{
         return item.user==user_email
     })
 
-    console.log("the stats is ",res)
+    //console.log("the stats is ",res)
     if(res.length>0){
         
        loses=res[0].user_loses;
@@ -61,7 +61,7 @@ const user_stats=(user_email,all_stats)=>{
        let streak_copy=res_streak.filter((item)=>{
            return !isNaN(parseInt(item))
        });
-       console.log("str result filter is ",streak_copy)
+       //console.log("str result filter is ",streak_copy)
        streak_copy.reverse();
 
        let last_ten_wins=0;
@@ -198,11 +198,11 @@ const create_all_main_challenges=(tournaments)=>{
             }
           
         })
-       // console.log("mains",mains);
+       // //console.log("mains",mains);
 
         mains.map(async (line,i)=>{
             const [league,type,entry,number_game,mode]=line.split("-");
-            console.log(tournaments);
+            //console.log(tournaments);
            const res=tournaments.filter((item)=>{
                return item.league==league && 
                item.type==type &&
@@ -225,16 +225,16 @@ const create_all_main_challenges=(tournaments)=>{
 
                await create_challenge(i,challenge);
                /*(async ()=>{
-                console.log("creating f or",i)
+                //console.log("creating f or",i)
                 await db.collection("psg_challenges").add(challenge);
-                console.log("done for ",i)
+                //console.log("done for ",i)
                })()*/
 
                
               
                
                 /*db.collection("psg_challenges").add(challenge).then(()=>{
-                    console.log("created for ",i,line)
+                    //console.log("created for ",i,line)
                 });*/
                
            }
@@ -244,7 +244,7 @@ const create_all_main_challenges=(tournaments)=>{
 
 const create_challenge=async (i,challenge)=>{
    await db.collection("psg_challenges").add(challenge);
-   console.log("creating for ",i)
+   //console.log("creating for ",i)
 }
 
 

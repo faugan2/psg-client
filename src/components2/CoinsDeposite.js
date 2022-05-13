@@ -10,7 +10,7 @@ const CoinsDeposite=({transactions})=>{
     useEffect(()=>{
         
         if(auth?.currentUser==null) return;
-        console.log("hi");
+        //console.log("hi");
         if(transactions==undefined || transactions==null || transactions.length==0) return;
         const email=auth?.currentUser?.email;
         const res=transactions.filter((item)=>{
@@ -19,7 +19,7 @@ const CoinsDeposite=({transactions})=>{
 
 
         let t=50;
-        console.log("the total is ",t);
+        //console.log("the total is ",t);
         res.map((item)=>{
             const el=parseFloat(item.entry);
             if(isNaN(el)){
@@ -88,7 +88,7 @@ const CoinsDeposite=({transactions})=>{
                         },
                     }}
                     onLoadPaymentData={paymentRequest => {
-                        console.log('load payment data', paymentRequest);
+                        //console.log('load payment data', paymentRequest);
                     }}
                     />
 

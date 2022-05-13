@@ -50,11 +50,11 @@ const Live=()=>{
 
     useEffect(()=>{
         if(invites==null) return;
-        console.log("the invites is ",invites);
+        //console.log("the invites is ",invites);
         const dates=invites.map((item)=>{
             const str_date=moment(item.date?.seconds*1000).endOf("day");
             const diff=str_date.diff(moment().endOf("day"),"seconds");
-			console.log("the diff is ",diff);
+			//console.log("the diff is ",diff);
             if(diff>=0){
                 return str_date.format("ll");
             }
@@ -62,7 +62,7 @@ const Live=()=>{
         }).filter((item)=>{
             return item!=undefined;
         })
-        console.log("the dates is ",dates);
+        //console.log("the dates is ",dates);
 
         const d=[];
         for(var i=0; i<dates.length; i++){
@@ -102,7 +102,7 @@ const Live=()=>{
          });
      }
 
-     console.log("all leagues are ",all_leagues);
+     //console.log("all leagues are ",all_leagues);
 
       
       
@@ -119,7 +119,7 @@ const Live=()=>{
            
            if(challenge_info.length>0){
                const challenge_league=challenge_info[0].league;
-               console.log(challenge_league);
+               //console.log(challenge_league);
                
                return all_leagues.indexOf(challenge_league)>=0;
            }else{
@@ -141,7 +141,7 @@ const Live=()=>{
       for(var i=0; i<dates.length; i++){
           const d=dates[i];
           const res4=res2.filter((item)=>{
-               // console.log("the item is ",item);
+               // //console.log("the item is ",item);
                 const date=moment.tz(item.date*1000,tz).format("ll");
                 return date==d;
           })
@@ -164,16 +164,16 @@ const Live=()=>{
     }
 
     const click_to_join=(line)=>{
-        console.log("the line is ",line);
+        //console.log("the line is ",line);
         const line_sport=line.sport;
         const sport=s.filter((item)=>{
             return item.id==line_sport;
         })[0];
        
         dispatch(setSport(sport));
-        console.log("the sport is ",sport)
+        //console.log("the sport is ",sport)
         const date=moment.tz(line.date?.seconds*1000,tz);
-        console.log("the date is ",date);
+        //console.log("the date is ",date);
         dispatch(setGameDate(date))
        dispatch(setLine(line));
         dispatch(setJoin(line))

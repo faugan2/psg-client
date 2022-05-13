@@ -49,7 +49,7 @@ const TopLeagues=()=>{
                 return {...res2_1[i]}
             }
         })
-        console.log("the result is= ",res2)
+        //console.log("the result is= ",res2)
         set_data(res2)
 
         set_data(leagues)
@@ -67,7 +67,7 @@ const TopLeagues=()=>{
            return item.id==id_sport;
        })[0];
 
-       console.log(res2);
+       //console.log(res2);
 
        const options={id_sport,id_league:id,entry:1,type:1,mode:1,date:[game_date]};
        dispatch(setLeaguePageOptions(options));

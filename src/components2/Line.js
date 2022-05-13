@@ -136,14 +136,14 @@ show_btn_view,show_date})=>{
         set_status("Closed");
         
         if(joined==false){
-            console.log("oh here we go",ref.current);
+            //console.log("oh here we go",ref.current);
             //ref.current.disabled=true; 
            // btn[1].style.border="1px solid red";
         }
         
     }
    },[joined,no_games])*/
-   console.log("league is ",line.league);
+   //console.log("league is ",line.league);
 
   const visit_user_profile=(email)=>{
     if(email=="") return;

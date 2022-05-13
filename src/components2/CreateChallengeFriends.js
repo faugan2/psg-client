@@ -17,10 +17,10 @@ const CreateChallengeFriends=()=>{
 
 
     useEffect(()=>{
-        console.log("here we go ")
+        //console.log("here we go ")
         if(users==null ) return;
         const res=users.filter((item)=>{
-            console.log("the email",item.email)
+            //console.log("the email",item.email)
             return item.email!=auth?.currentUser.email;
         })
         set_data(res);
@@ -39,14 +39,14 @@ const CreateChallengeFriends=()=>{
 
         set_data_show(res);
 
-        console.log("the search is ",search);
+        //console.log("the search is ",search);
     },[search])
 
     const pick_user=(key)=>{
         const input=document.getElementById(`${key}`);
         const btn=document.getElementById("btn_"+key);
         
-        console.log(btn);
+        //console.log(btn);
         if(input.checked==true){
             input.checked=false;
             if(btn!=null && btn!=undefined){
@@ -68,12 +68,12 @@ const CreateChallengeFriends=()=>{
         }
         
         if(input.checked){
-            console.log("checked");
+            //console.log("checked");
             
             old_users.push(key);
             dispatch(setCreateChallengeOptions({...options,users:old_users}))
         }else{
-            console.log("unchecked")
+            //console.log("unchecked")
             
             const res=old_users.filter((u)=>{
                 return u!=key;

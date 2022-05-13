@@ -34,7 +34,7 @@ const Splash=()=>{
     useEffect(()=>{
         window.addEventListener('popstate', function (e) {
             var state = e.state;
-            //console.log("oh you want to go back");
+            ////console.log("oh you want to go back");
             return false;
         });
     },[]);
@@ -103,7 +103,7 @@ const Splash=()=>{
    
     const load_sports=async ()=>{
         //const start=moment();
-        //console.log("sport start....");
+        ////console.log("sport start....");
         const res=await db.collection("psg_sports").get();
         const sports=[];
         
@@ -116,8 +116,8 @@ const Splash=()=>{
         dispatch(setSports(sports));
         /*const end=moment();
         const diff=end.diff(start,"seconds");
-        console.log("sport start we get snap of ",res.docs.length,"documents","diff is ",diff);
-        console.log("sport start end")*/
+        //console.log("sport start we get snap of ",res.docs.length,"documents","diff is ",diff);
+        //console.log("sport start end")*/
     }
 
     const load_leagues=async ()=>{
@@ -183,7 +183,7 @@ const Splash=()=>{
             return result_exist;
         })
         
-        ////console.log("picks with",picks_res)
+        //////console.log("picks with",picks_res)
         const users_results_stats=[];
         const users_stats=[];
         all_user.map((item)=>{
@@ -212,7 +212,7 @@ const Splash=()=>{
                 const results=item3.results;
                 const picks=item3.picks;
                 let challenge_type=item3.type_challenge;
-                ////console.log("the challenge type is ",challenge_type);
+                //////console.log("the challenge type is ",challenge_type);
                 
 
                 picks.map((item4,index)=>{
@@ -225,7 +225,7 @@ const Splash=()=>{
                     if(user_games_picks.indexOf(pick_uniq_key)<0){
                         user_games_picks.push(pick_uniq_key);
                         const res_pick=results[index];
-                        ////console.log("picks with",res_pick);
+                        //////console.log("picks with",res_pick);
                         if(pick_type_pick==1 || pick_type_pick==2){
                             
                             //ML or Spread pick
@@ -242,7 +242,7 @@ const Splash=()=>{
                                     user_wins_h2h++;
                                 }else if(challenge_type=="3"){
                                     user_wins_sb++;
-                                    //console.log("the challenge type is ",challenge_type,item);
+                                    ////console.log("the challenge type is ",challenge_type,item);
 
                                 }
                             }else if(res_pick==2){
@@ -251,7 +251,7 @@ const Splash=()=>{
                                     user_tie_h2h++;
                                 }else if(challenge_type=="3"){
                                     user_tie_sb++;
-                                    //console.log("the challenge type is ",challenge_type,item);
+                                    ////console.log("the challenge type is ",challenge_type,item);
                                 }
                             }
                             results_streak.push(res_pick);
@@ -324,7 +324,7 @@ const Splash=()=>{
             users_stats.push(user_stats);
             
         })
-        //console.log("picks with",users_stats);
+        ////console.log("picks with",users_stats);
         dispatch(setUsersStats(users_stats))
 
 
@@ -344,19 +344,19 @@ const Splash=()=>{
            });
            const nb_player=challenge_picks.length;
            //key,type,nb_player,res,gm 
-           //console.log("res=key=",key);
-           //console.log("res=type=",type);
-           //console.log("res=nb_player=",nb_player);
-           //console.log("res=",challenge_picks);
+           ////console.log("res=key=",key);
+           ////console.log("res=type=",type);
+           ////console.log("res=nb_player=",nb_player);
+           ////console.log("res=",challenge_picks);
 
            const snap_league=await db.collection("psg_leagues").where("id","==",id_league).get();
            const league=snap_league.docs[0].data().name;
-           //console.log("res= league=",league);
+           ////console.log("res= league=",league);
 
            await db.collection("psg_today").doc("date").update({date:firebase.firestore.FieldValue.serverTimestamp()});
            const doc=await db.collection("psg_today").doc("date").get();
            const today=doc.data()?.date?.seconds*1000;
-           //console.log("res today=",today,new Date(today).toUTCString());
+           ////console.log("res today=",today,new Date(today).toUTCString());
 
            const snap_games=await db.collection("psg_games")
            .where("league","==",league)
@@ -368,7 +368,7 @@ const Splash=()=>{
                const game_id=doc.id;
                game_data.key=game_id;
                gm.push(game_data);
-               ////console.log("res to time=",time,new Date(time).toUTCString());
+               //////console.log("res to time=",time,new Date(time).toUTCString());
            })
 
            let {closed,game_started}= challenged_closed(key,type,nb_player,challenge_picks,gm )
@@ -400,12 +400,12 @@ const Splash=()=>{
 
             }
 			
-			console.log("the new challenge is ",new_line);
+			//console.log("the new challenge is ",new_line);
 
                if(snap_search.docs.length==0){
                    // no new challenges
                   
-                   //console.log("the search ...",entry,league,mode,number_game,type);
+                   ////console.log("the search ...",entry,league,mode,number_game,type);
                   // await db.collection("psg_challenges").add(new_line);
                }else{
                    let can_create=true;
@@ -424,7 +424,7 @@ const Splash=()=>{
                    if(can_create==true){
                    // await db.collection("psg_challenges").add(new_line);
                    }else{
-                       //console.log("the search, we can not create")
+                       ////console.log("the search, we can not create")
                    }
                }
 
@@ -439,7 +439,7 @@ const Splash=()=>{
        .orderBy("date","asc")
        .onSnapshot((snap)=>{
            const t=[];
-           ////console.log("total challenges is ",snap.docs.length)
+           //////console.log("total challenges is ",snap.docs.length)
            snap.docs.map((doc)=>{
                const key=doc.id;
                const data=doc.data();
@@ -467,7 +467,7 @@ const Splash=()=>{
 				data.date=date;
                 data.key=id;
                 g.push(data);
-                //console.log("i bought ",id);
+                ////console.log("i bought ",id);
             })
 			dispatch(setPicksBought(g));
 
@@ -485,7 +485,7 @@ const Splash=()=>{
 			data.key=id;
 			g.push(data);
 		})
-		//console.log(g);
+		////console.log(g);
 		dispatch(setFollow(g));
 	   });
    }
@@ -503,7 +503,7 @@ const Splash=()=>{
         const g=[];
         
         dispatch(setTodayTime(today_time));
-        //console.log("we load ",today_time)
+        ////console.log("we load ",today_time)
         snap.docs.map((doc)=>{
             const id=doc.id; 
             const data=doc.data();
@@ -515,7 +515,7 @@ const Splash=()=>{
            
             data.diff=diff;
             const heur=diff*0.00000027777777777778
-            //console.log("reading from data ",data);
+            ////console.log("reading from data ",data);
             data.heur=heur.toFixed(2);
 
             let start_date=new Date(time).toUTCString();
@@ -540,17 +540,17 @@ const Splash=()=>{
 
                 if(start_date==today_date){
                    // data.today=true;
-                   //console.log("comp of diff=",diff);
-                   //console.log("comp of data=",data);
+                   ////console.log("comp of diff=",diff);
+                   ////console.log("comp of data=",data);
                     if(diff>=0){
-                        //console.log("comp of >0",start_date,today_date,diff,heur);
+                        ////console.log("comp of >0",start_date,today_date,diff,heur);
                         data.date=date;
                         data.key=id;
                         data.started=false;
                         data.today=true;
                     }else{
                         data.started=true;
-                        //console.log("comp of<0",start_date,today_date,diff,heur);
+                        ////console.log("comp of<0",start_date,today_date,diff,heur);
                         
                     }
                     
@@ -564,7 +564,7 @@ const Splash=()=>{
          
         })
         dispatch(setGames(g));
-        //console.log("comp of dispatch",g);
+        ////console.log("comp of dispatch",g);
     })
 
 
@@ -617,7 +617,7 @@ const load_chat=async ()=>{
        
         dispatch(setChat(d))
         dispatch(setChatTotal(d.length))
-        console.log("total is",d.length);
+        //console.log("total is",d.length);
     })
 }
 
@@ -655,11 +655,11 @@ const load_main_challenges=async ()=>{
 
             main.push(line);
             if(index==snap.docs.length-1){
-                //console.log("main chall",index,"/",snap.docs.length,"Ends");
-                //console.log("main chall",main);
+                ////console.log("main chall",index,"/",snap.docs.length,"Ends");
+                ////console.log("main chall",main);
                 dispatch(setMainChallenges(main));
             }else{
-                //console.log("main chall",index,"/",snap.docs.length);
+                ////console.log("main chall",index,"/",snap.docs.length);
             }
             
         })

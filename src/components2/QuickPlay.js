@@ -116,7 +116,7 @@ const QuickPlay=()=>{
             let part_of_it=false;
             for(var i=0; i<nb_picks.length; i++){
                 const user=nb_picks[i].user;
-                console.log(user)
+                //console.log(user)
                 if(user==auth.currentUser.email){
                     part_of_it=true;
                 }
@@ -147,7 +147,7 @@ const QuickPlay=()=>{
             })
             return {date,lines}
         })
-        console.log(res3)
+        //console.log(res3)
         set_data(res3);
         set_loading(false);
         if(res3.length==0){

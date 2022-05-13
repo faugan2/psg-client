@@ -71,7 +71,7 @@ const LineJoin=({click,from_main})=>{
             d=game_date;
         }
         d=moment(d,tz).format("ll");
-        console.log("the new date is ",d);
+        //console.log("the new date is ",d);
         if(join.dates!=undefined){
             set_dates(join.dates);
         }else{
@@ -80,7 +80,7 @@ const LineJoin=({click,from_main})=>{
     },[join])
 
     useEffect(()=>{
-        console.log("the dates are ",dates);
+        //console.log("the dates are ",dates);
     },[dates])
 
 
@@ -214,7 +214,7 @@ const LineJoin=({click,from_main})=>{
        }else{
            //not picked yet
            if(join?.number_game==picks.length){
-                console.log("enougth");
+                //console.log("enougth");
                 clearInterval(id_inter);
                 return;
             }
@@ -292,9 +292,9 @@ const LineJoin=({click,from_main})=>{
         }
 
 
-        console.log("also coins removed from user account")
+        //console.log("also coins removed from user account")
     }).catch((err)=>{
-        console.log("something bad happened")
+        //console.log("something bad happened")
         dispatch(setSendingPicks(false))
     })
 
@@ -313,9 +313,9 @@ const LineJoin=({click,from_main})=>{
            delete challenge.challenge_results;
 
           db.collection("psg_challenges").add(challenge).then(()=>{
-              console.log("the new challenge created")
+              //console.log("the new challenge created")
           }).catch((err)=>{
-              console.log("the new erreur",err.message);
+              //console.log("the new erreur",err.message);
           });
            
        }
@@ -348,7 +348,7 @@ const LineJoin=({click,from_main})=>{
            })
 
            dispatch(setGames(g));
-           //console.log("all games are now ",g.length);
+           ////console.log("all games are now ",g.length);
            btn_loading_games.current.disabled=false;
            set_game_loading("");
        })

@@ -48,11 +48,11 @@ export default function Debug(props) {
     },[])
 
     useEffect(()=>{
-       /* console.log("getting...");
+       /* //console.log("getting...");
         db.collection("psg_challenges").get().then((snap)=>{
             snap.docs.map((doc, i)=>{
                 const id=doc.id;
-                console.log(i,"id=",id);
+                //console.log(i,"id=",id);
             })
         })*/
     },[])

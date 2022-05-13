@@ -28,7 +28,7 @@ const Leagues=()=>{
     },[s]);
 
     const go_to_games=(sport)=>{
-        console.log(sport);
+        //console.log(sport);
         dispatch(setSport(sport));
         history.push("/games");
     }
@@ -43,12 +43,12 @@ const Leagues=()=>{
 
     const go_to_invites=(e)=>{
         e.stopPropagation();
-        console.log("going to invites")
+        //console.log("going to invites")
     }
 
     const go_to_messages=(e)=>{
         e.stopPropagation();
-        console.log("going to messages");
+        //console.log("going to messages");
     }
     return (
         <div className="container">

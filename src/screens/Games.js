@@ -73,7 +73,7 @@ const Games=()=>{
     }
 
     const set_open_modal_profile=(user)=>{
-        console.log("the user is ",user.email);
+        //console.log("the user is ",user.email);
         set_open_profile(true);
     }
     
