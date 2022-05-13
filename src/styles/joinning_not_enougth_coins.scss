@@ -1,0 +1,23 @@
+.joinning_not_enougth_coins{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding:1rem;
+
+    >p{
+        text-align: center;
+        font-size: 1rem;
+        color:white;
+    }
+
+    >button{
+        padding:0.6rem 1rem;
+        border:none;
+        background-color:var(--green);
+        margin-top: 1rem;
+        border-radius: 3px;
+        width:200px;
+        color:white;
+        font-weight: 600;
+    }
+}

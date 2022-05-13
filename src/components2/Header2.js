@@ -315,9 +315,9 @@ const transition_right_menu=useTransition(show_right_menu,{
                  <animated.div style={style}>
                     <IconButton aria-label="display more actions" edge="end" color="inherit" 
                       onClick={handleClick}>
-                        {photo =="foo.jpg" && <Avatar style={{width:"30px",height:"30px",borderRadius:"50%"}}>
+                        {(photo =="foo.jpg" || photo==null) && <Avatar style={{width:"30px",height:"30px",borderRadius:"50%"}}>
                           {auth?.currentUser?.displayName[0].toLowerCase() }</Avatar>}
-                        {photo != "foo.jpg" && <img src={photo}
+                        {(photo != "foo.jpg" && photo!=null) && <img src={photo}
                         style={{width:"30px",height:"30px",borderRadius:"50%",
                         border:"1px solid gray",
                         }} />}

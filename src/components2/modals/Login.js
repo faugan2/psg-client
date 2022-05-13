@@ -107,7 +107,7 @@ export default function Login({close}) {
             verify:false,
         }
 
-        db.collection("psg_users_test").add(user).then(async ()=>{
+        db.collection("psg_users").add(user).then(async ()=>{
             //set_toast("account well created",1);
             await send_code();
             set_state(2);
@@ -146,7 +146,7 @@ export default function Login({close}) {
         const v=e.target.value;
         set_checking_code(false);
         if(v.length==6){
-           // e.target.disabled=true;
+           e.target.disabled=true;
            console.log("the code is ",code);
             set_checking_code(true);
             
@@ -160,14 +160,16 @@ export default function Login({close}) {
                 return;
             }
 
-            db.collection("psg_users_test").where("email","==",user_email).get().then((snap)=>{
+            db.collection("psg_users").where("email","==",user_email).get().then((snap)=>{
                 if(snap.docs.length==0){
                     set_toast("No email address is found",0);
+                    set_checking_code(false);
+                    e.target.disabled=false;
                 }else{
                     const key=snap.docs[0].id;
                     const pw=snap.docs[0].data().password;
                     const un=snap.docs[0].data().username;
-                    db.collection("psg_users_test").doc(key).update({verify:true,code},{merge:true}).then(()=>{
+                    db.collection("psg_users").doc(key).update({verify:true,code},{merge:true}).then(()=>{
                         
                         auth.createUserWithEmailAndPassword(user_email,pw).then(()=>{
                             auth.currentUser.updateProfile({
@@ -177,17 +179,25 @@ export default function Login({close}) {
                             }).catch((err)=>{
                                 auth.signOut();
                                 set_toast(err.message,0);
+                                set_checking_code(false);
+                                e.target.disabled=false;
                             })
                             
                         }).catch((err)=>{
                             set_toast(err.message,0);
+                            set_checking_code(false);
+                            e.target.disabled=false;
                         })
                     }).catch((err)=>{
                         set_toast(err.message,0);
+                        set_checking_code(false);
+                        e.target.disabled=false;
                     });
                 }
             }).catch((err)=>{
                 set_toast(err.message,0);
+                set_checking_code(false);
+                e.target.disabled=false;
             })
 
 
