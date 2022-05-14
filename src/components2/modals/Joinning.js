@@ -3,7 +3,8 @@ import {auth,db} from "../../firebase_file";
 import CloseIcon from '@material-ui/icons/Close';
 import {useState,useEffect} from "react";
 import {useSelector,useDispatch} from "react-redux";
-import {selectJoin,selectSelectedPicks,selectTransactions,selectGameDate} from "../../features/counterSlice";
+import {selectJoin,selectSelectedPicks,selectTransactions,selectGameDate,
+setJoin,setSelectedPicks} from "../../features/counterSlice";
 
 import JoinningAuthAlert from "../JoinningAuthAlert";
 import {user_coins} from "../data";
@@ -25,6 +26,8 @@ const Joinning=({close})=>{
     const challenge=useSelector(selectJoin);
     const transactions=useSelector(selectTransactions);
     const game_date=useSelector(selectGameDate);
+
+    const dispatch=useDispatch();
 
     useEffect(()=>{
         const sub=auth.onAuthStateChanged((user)=>{
@@ -68,21 +71,28 @@ const Joinning=({close})=>{
         //console.log("ok we can make the picks now");
         //console.log(picks);
 
+        if(challenge==null || picks.length==0) return;
+
+        console.log("on passe kan meme")
+
         let d=game_date._d;
         if(d==undefined){
             d=game_date;
         }
+
+        console.log("the date is ",d);
 
         const obj={
             user:auth?.currentUser?.email,
             picks,
             id_challenge:challenge?.key,
             type_challenge:challenge?.type,
-            date:new firebase.firestore.Timestamp.fromDate(d)
+            date:firebase.firestore.FieldValue.serverTimestamp()
         };
 
+        //picks,
 
-        //console.log(obj);
+        console.log(obj);
 
         db.collection("psg_picks").add(obj).then(async ()=>{
 
@@ -99,19 +109,23 @@ const Joinning=({close})=>{
                 date:firebase.firestore.FieldValue.serverTimestamp()
             };
     
-            db.collection("psg_users_coins").add(coins_info).then(()=>{
+           db.collection("psg_users_coins").add(coins_info).then(()=>{
                 set_sent(true);
                 set_success(true);
+                dispatch(setJoin(null));
+                dispatch(setSelectedPicks(null));
             }).catch((err)=>{
                 set_sent(true);
                 set_success(false)
+                set_toast(err.message,0);
+                console.log("picks from psg_users_coins",picks);
             });
             
-           
-    
         }).catch((err)=>{
+            console.log("picks=",picks);
             set_sent(true);
             set_success(false)
+            set_toast(err.message,0);
         })
 
 

@@ -455,9 +455,9 @@ const Main=()=>{
         team_picked,
         pickdata,
         teams,
-        league:join?.league,
-        sport:join?.sport,
-        entry:join?.entry,
+        league:line?.league,
+        sport:line?.sport,
+        entry:line?.entry,
         user:auth?.currentUser?.email
     }
 
@@ -652,6 +652,9 @@ const Main=()=>{
     let pagerMethods = null;
     return(
 <div  className="main2">
+    <BottomSheet  open={joinning}>
+        <Joinning close={close_joinning} />
+    </BottomSheet>
     
     <Header 
         onGames_drawer_closed={onGames_drawer_closed} 
@@ -724,9 +727,7 @@ const Main=()=>{
         <DailyBonusCoins click={close_daily_bonus}/>
     </BottomSheet>
 
-    <BottomSheet  open={joinning}>
-        <Joinning close={close_joinning} />
-    </BottomSheet>
+    
 
     <ToastContainer
             position="bottom-center"
