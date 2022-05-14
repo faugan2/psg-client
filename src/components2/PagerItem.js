@@ -22,6 +22,10 @@ import logo from "./img/logo.png";
 import Match from "./Match";
 import AutorenewIcon from '@material-ui/icons/Autorenew';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import { BottomSheet } from 'react-spring-bottom-sheet'
+import Joinning from "./modals/Joinning";
+
+
 const moment=require("moment-timezone")
 
 
@@ -44,6 +48,8 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
     const [dates,set_dates]=useState([date])
     const [show_ml_spread,set_ml_spread]=useState(null);
     const [total_picks,set_total_picks]=useState(0);
+    const [joinning,set_joinning]=useState(false);
+
 
 
     const s=useSelector(selectSports);
@@ -223,6 +229,10 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
 
     },[])
 
+    const close_joinning=()=>{
+        set_joinning(false);
+    }
+
     return(
         <div className="pageContainer">
             <div className="content">
@@ -351,7 +361,9 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                         <p id={`btn_quick_picks_text${index}`}>Quick Picks</p>
                     </button>}
                     {data.length>0 &&<button className="join_btn" 
-                    onClick={send_picks}
+                    onClick={send_picks.bind(this,()=>{
+                        set_joinning(true)
+                    })}
                     id={`btn_join${index}`}>
                         <NearMeIcon />
                     </button>}
@@ -380,7 +392,12 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                 <div className="bottom">
                     
                 </div>
+
             </div>
+
+            <BottomSheet  open={joinning}>
+                <Joinning close={close_joinning} />
+            </BottomSheet>
         </div>
     );
     

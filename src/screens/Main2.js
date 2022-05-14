@@ -554,7 +554,7 @@ const Main=()=>{
 
    //####################################
 
-   const send_picks=(e)=>{
+   const send_picks=(fallback)=>{
 
     if(join==null){
         set_toast("Please make your picks before submitting",0);
@@ -570,7 +570,7 @@ const Main=()=>{
         set_toast(`You should make ${join?.number_game} picks before submitting`,0);
         return;
     }
-    set_joinning(true);
+    fallback();
     return;
 
     if(join==null){
