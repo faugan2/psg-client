@@ -671,7 +671,7 @@ const Main=()=>{
           
           wrapperStyle={{ 
               width: '100%',
-              backgroundColor:"black",
+              backgroundColor:"var(--ts_color_0)",
               height:"calc(100%)" 
             }}
         >

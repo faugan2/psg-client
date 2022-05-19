@@ -1,6 +1,11 @@
 :root{
 	--sub_black:#474f4f;
 	--green:#2a916b;
+	--ts_color_0:black;
+	--ts_color_1:#101011;
+	--ts_color_2:#252525;
+	--ts_color_3:#5a5b5c;
+	--ts_color_4:#bbbfc4;
 }
 
 *{

@@ -24,6 +24,8 @@ const Splash=()=>{
     const redux_picks=useSelector(selectPicks)
 
     const [all_picks,set_all_picks]=useState([]);
+    const [unsub,set_unsub]=useState([]);
+
 
     useEffect(()=>{
         set_all_picks(redux_picks);
@@ -52,12 +54,10 @@ const Splash=()=>{
         auth.onAuthStateChanged((user)=>{
             setTimeout(async ()=>{
                 if(user==null){
-                    //go to login
-                  
-                    
                    await load_sports(); // DONE
                     await load_leagues(); //DONE 
-                    await load_users(); // DONE
+                    const req_users=await load_users(); // DONE
+                   
                     await load_picks();
                     await load_tournaments();// DONE
 					await load_follow();// DONE
@@ -66,11 +66,9 @@ const Splash=()=>{
                     await load_games();
                     await load_default_values();// DONE
                     await load_users_coins();// DONE
-                   // await load_main_challenges();
                     await load_time_zone();// DONE
                     await load_chat();
-                    //dispatch(setPageName("Lobby"));
-                    //dispatch(setActiveTab(4));
+                    
                     history.replace("/main2");
     
                 }else{
@@ -87,11 +85,8 @@ const Splash=()=>{
                     await load_games();
                     await load_default_values();// DONE
                     await load_users_coins();// DONE
-                   // await load_main_challenges();
                     await load_time_zone();// DONE
                     await load_chat();
-                    //dispatch(setPageName("Lobby"));
-                    //dispatch(setActiveTab(4));
                     history.replace("/main2");
                 }  
             },500);
@@ -99,6 +94,15 @@ const Splash=()=>{
              
         })
     },[auth]);
+
+    useEffect(()=>{
+       for(var i=0; i<unsub.length; i++){
+        return ()=>{
+            console.log("unsubcribe from",i,unsub[i]);
+            unsub[i]();
+        }
+       }
+    },[unsub])
 
    
     const load_sports=async ()=>{
@@ -114,10 +118,6 @@ const Splash=()=>{
             sports.push(data);
         })
         dispatch(setSports(sports));
-        /*const end=moment();
-        const diff=end.diff(start,"seconds");
-        //console.log("sport start we get snap of ",res.docs.length,"documents","diff is ",diff);
-        //console.log("sport start end")*/
     }
 
     const load_leagues=async ()=>{
@@ -133,7 +133,8 @@ const Splash=()=>{
     }
 
     const load_users=async ()=>{
-        db.collection("psg_users").orderBy("date","desc").onSnapshot( (snap)=>{
+        console.log("going to start on users")
+       const req= db.collection("psg_users").orderBy("date","desc").onSnapshot( (snap)=>{
             const users=[];
             snap.docs.map(async (user)=>{
                 const id=user.id;
@@ -145,13 +146,18 @@ const Splash=()=>{
             })
 
             dispatch(setUsers(users));
+            set_unsub([...unsub,req]);
         })
+
+         
+
+       
 
 
     }
 
    const load_picks=async ()=>{
-    db.collection("psg_picks")
+    const req=db.collection("psg_picks")
     .orderBy("date","desc")
     .onSnapshot(async (snap)=>{
         const p=[];
@@ -432,10 +438,12 @@ const Splash=()=>{
 
        })
     })
+
+    set_unsub([...unsub,req])
    }
 
    const load_tournaments=async ()=>{
-       db.collection("psg_challenges")
+      const req= db.collection("psg_challenges")
        .orderBy("date","asc")
        .onSnapshot((snap)=>{
            const t=[];
@@ -453,12 +461,14 @@ const Splash=()=>{
 
            dispatch(setTournaments(t));
 
-           
+           set_unsub([...unsub,req]);
        })
+
+       
    }
 
    const load_bought_picks=async ()=>{
-       db.collection("psg_buy_picks").onSnapshot((snap)=>{
+       const req=db.collection("psg_buy_picks").onSnapshot((snap)=>{
            const g=[];
             snap.docs.map((doc)=>{
                 const id=doc.id;
@@ -470,12 +480,15 @@ const Splash=()=>{
                 ////console.log("i bought ",id);
             })
 			dispatch(setPicksBought(g));
+            set_unsub([...unsub,req])
 
        })
+
+      
    }
    
    const load_follow=async ()=>{
-	   db.collection("psg_follow").onSnapshot((snap)=>{
+	  const req= db.collection("psg_follow").onSnapshot((snap)=>{
 		const g=[];
 		snap.docs.map((doc)=>{
 			const id=doc.id;
@@ -487,16 +500,21 @@ const Splash=()=>{
 		})
 		////console.log(g);
 		dispatch(setFollow(g));
+        set_unsub([...unsub,req])
 	   });
+
+       
    }
 
    const t=useSelector(selectTodayTime);
+
+
    const load_games=async ()=>{
        
     //let today_time=await get_today_time();
     let today_time=moment().valueOf();
    
-    db
+    const req=db
     .collection("psg_games")
     .orderBy("time","desc")
     .onSnapshot(async (snap)=>{
@@ -564,8 +582,11 @@ const Splash=()=>{
          
         })
         dispatch(setGames(g));
+        set_unsub([...unsub,req])
         ////console.log("comp of dispatch",g);
     })
+
+   
 
 
    }
@@ -579,7 +600,7 @@ const load_today_time=async ()=>{
 }
 
 const load_default_values=async ()=>{
-    db.collection("psg_default_values").onSnapshot((snap)=>{
+    const req=db.collection("psg_default_values").onSnapshot((snap)=>{
         const d=[];
         snap.docs.map((doc)=>{
             const key=doc.id;
@@ -588,11 +609,14 @@ const load_default_values=async ()=>{
             d.push(data);
         })
         dispatch(setDefaultValues(d));
+        set_unsub([...unsub,req])
     })
+
+    
 }
 
 const load_users_coins=async ()=>{
-    db.collection("psg_users_coins").onSnapshot((snap)=>{
+    const req=db.collection("psg_users_coins").onSnapshot((snap)=>{
         const d=[];
         snap.docs.map((doc)=>{
             const key=doc.id;
@@ -602,11 +626,14 @@ const load_users_coins=async ()=>{
         })
 
         dispatch(setTransactions(d))
+        set_unsub([...unsub,req])
     })
+
+    
 }
 
 const load_chat=async ()=>{
-    db.collection("psg_chat").orderBy("date","asc").onSnapshot((snap)=>{
+    const req=db.collection("psg_chat").orderBy("date","asc").onSnapshot((snap)=>{
         const d=[];
         snap.docs.map((doc)=>{
             const key=doc.id;
@@ -617,12 +644,15 @@ const load_chat=async ()=>{
        
         dispatch(setChat(d))
         dispatch(setChatTotal(d.length))
+        set_unsub([...unsub,req])
         //console.log("total is",d.length);
     })
+    
+    
 }
 
 const load_main_challenges=async ()=>{
-    db.collection("psg_challenges")
+    const req=db.collection("psg_challenges")
     .where("parent","==",true)
     .onSnapshot((snap)=>{
         const main=[];
@@ -661,10 +691,13 @@ const load_main_challenges=async ()=>{
             }else{
                 ////console.log("main chall",index,"/",snap.docs.length);
             }
+            set_unsub([...unsub,req])
             
         })
 
     })
+
+    
     
 }
 
