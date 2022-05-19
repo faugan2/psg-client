@@ -178,6 +178,7 @@ export default function Login({close}) {
         .then(async (snap)=>{
             if(snap.docs.length==0){
                 set_toast("Your login details are not correct",0);
+                set_registration_progressing(false);
                 return;
             }
 

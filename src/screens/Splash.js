@@ -56,9 +56,9 @@ const Splash=()=>{
                 if(user==null){
                    await load_sports(); // DONE
                     await load_leagues(); //DONE 
-                    const req_users=await load_users(); // DONE
+                    await load_users(); // DONE
                    
-                    await load_picks();
+                    //await load_picks();
                     await load_tournaments();// DONE
 					await load_follow();// DONE
 					await load_bought_picks();// DONE
@@ -77,7 +77,7 @@ const Splash=()=>{
                     await load_sports(); // DONE
                     await load_leagues(); //DONE 
                     await load_users(); // DONE
-                    await load_picks();
+                   // await load_picks();
                     await load_tournaments();// DONE
 					await load_follow();// DONE
 					await load_bought_picks();// DONE
@@ -146,12 +146,9 @@ const Splash=()=>{
             })
 
             dispatch(setUsers(users));
+            console.log("user_loaded");
             set_unsub([...unsub,req]);
         })
-
-         
-
-       
 
 
     }
@@ -332,7 +329,7 @@ const Splash=()=>{
         })
         ////console.log("picks with",users_stats);
         dispatch(setUsersStats(users_stats))
-
+        set_unsub([...unsub,req])
 
 
        const snap_challenge=await db.collection("psg_challenges").where("parent","==",true).get();
@@ -439,7 +436,7 @@ const Splash=()=>{
        })
     })
 
-    set_unsub([...unsub,req])
+    
    }
 
    const load_tournaments=async ()=>{
