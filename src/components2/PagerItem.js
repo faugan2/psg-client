@@ -24,7 +24,7 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import { BottomSheet } from 'react-spring-bottom-sheet'
 import Joinning from "./modals/Joinning";
-
+//import BS from "./BS";
 
 const moment=require("moment-timezone")
 
@@ -312,7 +312,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
                                 const dt=item.date;
                                 const matches=item.data;
                                 return(
-                                    <div key={i}>
+                                    <div key={i} style={{display:"none"}}>
                                         {/*<p>{dt}</p>*/}
                                         {
                                             matches.map((match,j)=>{
@@ -358,7 +358,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
 
                     {data.length>0 &&<button onClick={quick_picks.bind(this,index,item)} id={`btn_quick_picks${index}`}>
                         <AutorenewIcon />
-                        <p id={`btn_quick_picks_text${index}`}>Quick Picks</p>
+                        <p id={`btn_quick_picks_text${index}`}>Quick</p>
                     </button>}
                     {data.length>0 &&<button className="join_btn" 
                     onClick={send_picks.bind(this,()=>{
