@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     
     alignItems: 'center',
-    backgroundColor:"var(--green)",
+    backgroundColor:"var(--ts_color_new_1)",
     color:"white"
     
   },
