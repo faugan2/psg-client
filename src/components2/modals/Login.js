@@ -22,7 +22,7 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 
 import {set_toast} from "../data";
 
-export default function Login({close}) {
+export default function Login({close,done}) {
     const history=useHistory();
 
     const [show_pw,set_show_pw]=useState(false);
@@ -134,6 +134,7 @@ export default function Login({close}) {
             
        }).catch((err)=>{
             set_toast("error "+err.message,0)
+           
        });
     }
 
@@ -183,11 +184,17 @@ export default function Login({close}) {
             }
 
             const key=snap.docs[0].id;
-            const verify=snap.docs[0].verify;
+            const verify=snap.docs[0].data().verify;
 
             if(verify==undefined || verify==false){
-                await re_send_code()
+                console.log("we must send the code cause ",verify)
+                await send_code()
                 set_state(2);
+            }else{
+                await auth.signInWithEmailAndPassword(email,password)
+                close();
+                done();
+                
             }
             
 

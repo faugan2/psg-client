@@ -84,7 +84,7 @@ const Joinning=({close})=>{
 
         const obj={
             user:auth?.currentUser?.email,
-            picks,
+            
             id_challenge:challenge?.key,
             type_challenge:challenge?.type,
             date:firebase.firestore.FieldValue.serverTimestamp()
@@ -104,7 +104,7 @@ const Joinning=({close})=>{
             const coins_info={
                 user:auth?.currentUser?.email,
                 id_challenge:challenge?.key,
-                picks,
+                
                 entry:"-"+new_entry,
                 date:firebase.firestore.FieldValue.serverTimestamp()
             };
@@ -141,7 +141,9 @@ const Joinning=({close})=>{
 
             <div className="body">
                 {
-                    state==0 && <JoinningAuthAlert />
+                    state==0 && <JoinningAuthAlert done={()=>{
+                        set_state(2)
+                    }}/>
                 }
                 {
                     state==1 && <JoinningNotEnougthCoins />

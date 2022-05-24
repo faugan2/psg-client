@@ -6,7 +6,7 @@ import { BottomSheet } from 'react-spring-bottom-sheet'
 import Login from './modals/Login';
 import {useState,useEffect} from "react";
 
-export default function JoinningAuthAlert() {
+export default function JoinningAuthAlert({done}) {
     const [open_login,set_open_login]=useState(false);
 
     const history=useHistory();
@@ -22,7 +22,7 @@ export default function JoinningAuthAlert() {
        </div>
 
        <BottomSheet open={open_login}>
-           <Login close={()=>{set_open_login(false)}} />
+           <Login close={()=>{set_open_login(false)}}  done={done}/>
        </BottomSheet>
     </div>
   )

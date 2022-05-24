@@ -1,28 +1,26 @@
 .joinning{
-    min-height:50vh;
-    max-height:50vh;
-    overflow: scroll;
-
+    min-height:60vh;
+    max-height:60vh;
+    overflow: scroll;    
+    position:relative;
     >.top{
         display:flex;
         align-items: center;
         justify-content:space-between;
-        position:fixed;
+        position:absolute;
         top:0;
         width:100%;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        padding:0 0.5rem;
         border-bottom: 1px solid dimgray;
         height:50px;
 
         >h2{
             font-size: 1rem;
             color:white;
+            padding:0.5rem;
         }
 
         >.actions{
-            margin-right: 1rem;
+           
             display:flex;
             align-items: center;
             >button{
@@ -31,7 +29,6 @@
                 color:whitesmoke;
                 font-size: 1.2rem;
                 cursor:pointer;
-                padding:0.5rem;
                 
                 padding: 0.5rem 1rem;
                 display:flex;

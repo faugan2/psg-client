@@ -24,7 +24,7 @@ import AutorenewIcon from '@material-ui/icons/Autorenew';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import { BottomSheet } from 'react-spring-bottom-sheet'
 import Joinning from "./modals/Joinning";
-//import BS from "./BS";
+import BS from "./BS";
 
 const moment=require("moment-timezone")
 
@@ -235,6 +235,7 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
 
     return(
         <div className="pageContainer">
+            
             <div className="content">
                 <div className="body" id={`body${index}`}>
                     <div className="configurations" id={`configurations${index}`}>
@@ -395,9 +396,17 @@ const PagerItem=({index,item,date,quick_picks,pick,send_picks})=>{
 
             </div>
 
-            <BottomSheet  open={joinning}>
+            {/*<BottomSheet  open={joinning}>
                 <Joinning close={close_joinning} />
-            </BottomSheet>
+            </BottomSheet>*/}
+            {joinning==true && 
+                <BS 
+                    content={<Joinning close={close_joinning} />}  
+                    close={close_joinning}
+                    index={index}
+                    open="open"
+                />
+            }
         </div>
     );
     

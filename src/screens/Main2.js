@@ -70,6 +70,8 @@ import Joinning from "../components2/modals/Joinning";
 import { ToastContainer } from 'react-toastify';
 import {set_toast} from "../components2/data";
 
+import BS from "../components2/BS";
+
 const moment=require("moment-timezone");
 let id_inter=0;
 
@@ -726,6 +728,7 @@ const Main=()=>{
     <BottomSheet open={open_daily_bonus}>
         <DailyBonusCoins click={close_daily_bonus}/>
     </BottomSheet>
+
 
     
 
